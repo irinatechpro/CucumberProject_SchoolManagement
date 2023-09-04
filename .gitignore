@@ -10,7 +10,7 @@ hs_err_pid*
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
 *.iml
 ## Directory-based project format:
-.idea/
+.idea/*
 # if you remove the above rule, at least ignore the following:
 # User-specific stuff:
 # .idea/workspace.xml
@@ -91,9 +91,10 @@ buildNumber.properties
 #pdf Reports and Spark Reports
 test-output/
 #Extent properties
-resources/extent.properties
+src/test/resources/extent.properties
 #Extent-config xml file, (it can be personalized)
-resources/extent-config.xml
+src/test/resources/extent-config.xml
 #runner folder will be ignored also because each person need to run with different tag
 runners/
+.DS_Store
 
