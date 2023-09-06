@@ -13,11 +13,11 @@ public class LoginPage {
     @FindBy(xpath = "//*[@href='/login']")
     public WebElement loginLink;
 
-    @FindBy(id = "name")
-    public WebElement name;
+    @FindBy(id = "username")
+    public WebElement userName;
 
-    @FindBy(id = "email")
-    public WebElement email;
+    @FindBy(id = "password")
+    public WebElement password;
 
     @FindBy(xpath = "//button[.='Login']")
     public WebElement loginButton;
