@@ -3,11 +3,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ThreadGuard;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -17,55 +16,51 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Driver {
+    //create a driver instance
+    private static WebDriver driver;
     private static int timeout = 5;
-    //    creating private constructor
-    private Driver(){}
-    //    creating a thread safe variable. type of the variable is WebDriver.So every thread will have its own copy of the variable
-    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
-    //    getDriver method is used to access the class instance that is WebDriver.
-    //    This method will return a copy of the driverThreadLocal for each thread during parallel testing
+    //What?=>It is just to create, initialize the driver instance.(Singleton driver)
+    //Why?=>We don't want to create and initialize the driver when we don't need
+    //We will create and initialize the driver when it is null
+    //We can use Driver class with different browser(chrome,firefox,headless)
+    private Driver() {
+        //we don't want to create another abject. Singleton pattern
+    }
+    //to initialize the driver we create a static method
     public static WebDriver getDriver() {
-        if (driver.get() == null) {
-            initializeDriver();
-        }
-        return driver.get();
-    }
-    //    Creating and instantiating the WebDriver instance
-    private static void initializeDriver() {
-        switch (ConfigReader.getProperty("browser")) {
-            case "chrome":
+        //create the driver if and only if it is null
+        if (driver == null) {
+            String browser = ConfigReader.getProperty("browser");
+            if ("chrome".equals(browser)) {
                 WebDriverManager.chromedriver().setup();
-                driver.set(ThreadGuard.protect(new ChromeDriver()));
-                break;
-            case "firefox":
+                driver = new ChromeDriver();
+            } else if ("firefox".equals(browser)) {
                 WebDriverManager.firefoxdriver().setup();
-                driver.set(new FirefoxDriver());
-                break;
-            case "chrome-headless":
+                driver = new FirefoxDriver();
+            } else if ("ie".equals(browser)) {
+                WebDriverManager.iedriver().setup();
+                driver = new InternetExplorerDriver();
+            } else if ("safari".equals(browser)) {
+                WebDriverManager.getInstance(SafariDriver.class).setup();
+                driver = new SafariDriver();
+            } else if ("chrome-headless".equals(browser)) {
                 WebDriverManager.chromedriver().setup();
-                driver.set(ThreadGuard.protect(new ChromeDriver(new ChromeOptions().setHeadless(true))));
-                break;
-            case "edge":
-                WebDriverManager.edgedriver().setup();
-                driver.set(ThreadGuard.protect(new EdgeDriver()));
-                break;
-            case "safari":
-                WebDriverManager.safaridriver().setup();
-                driver.set(ThreadGuard.protect(new SafariDriver()));
-                break;
+                driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+            }
         }
-        //driver -> getDriver()
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        getDriver().manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+        return driver;
     }
-    //    if driver is pointing any object such as chrome or edge, then quit
     public static void closeDriver() {
-        if (driver.get() != null) {
-            driver.get().quit();
-            driver.remove();
+        if (driver != null) {//if the driver is pointing chrome
+            driver.quit();//quit the driver
+            driver = null;//set it back to null to make sure driver is null
+            // so I can initialize it again
+            //This is important especially you do cross browser testing(testing with
+            // multiple browser like chrome, firefox, ie etc.)
         }
     }
-
     public static void waitAndClick(WebElement element, int timeout) {
         for (int i = 0; i < timeout; i++) {
             try {
@@ -76,7 +71,6 @@ public class Driver {
             }
         }
     }
-
     public static void waitAndClick(WebElement element) {
         for (int i = 0; i < timeout; i++) {
             try {
@@ -87,8 +81,6 @@ public class Driver {
             }
         }
     }
-
-
     public static void waitAndSendText(WebElement element, String text, int timeout) {
         for (int i = 0; i < timeout; i++) {
             try {
@@ -99,7 +91,6 @@ public class Driver {
             }
         }
     }
-
     //    Driver.waitANdSendText(Element , "TEXT");
     public static void waitAndSendText(WebElement element, String text) {
         for (int i = 0; i < timeout; i++) {
@@ -111,7 +102,6 @@ public class Driver {
             }
         }
     }
-
     public static void waitAndSendTextWithDefaultTime(WebElement element, String text) {
         for (int i = 0; i < timeout; i++) {
             try {
@@ -122,7 +112,6 @@ public class Driver {
             }
         }
     }
-
     public static String waitAndGetText(WebElement element, int timeout) {
         String text = "";
         for (int i = 0; i < timeout; i++) {
@@ -135,13 +124,10 @@ public class Driver {
         }
         return null;
     }
-
-
     //Webdriver
     //ChromeDriver
     //Iedriver
     //FirefoxDriver
-
     public static void wait2(int sec) {
         try {
             Thread.sleep(1000 * sec);
@@ -156,26 +142,19 @@ public class Driver {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
     //5 seconds
     public static void waitAndClickElement(WebElement element, int seconds) {
         for (int i = 0; i < seconds; i++) {
-
             try {
                 element.click();
                 break;
             } catch (Exception e) {
                 wait2(1);
             }
-
-
         }
     }
-
     public static void wait(int secs) {
-
         try {
             Thread.sleep(1000 * secs);
         } catch (InterruptedException e) {
@@ -190,32 +169,26 @@ public class Driver {
             e.printStackTrace();
         }
     }
-
     public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
-
     public static WebElement waitForVisibility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
     public static Boolean waitForInVisibility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
-
     public static WebElement waitForClickablility(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
-
     public static WebElement waitForClickablility(By locator, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
-
     public static void waitForPageToLoad(long timeOutInSeconds) {
         ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver driver) {
@@ -229,12 +202,10 @@ public class Driver {
             error.printStackTrace();
         }
     }
-
     public static void executeJScommand(WebElement element, String command) {
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
         jse.executeScript(command, element);
     }
-
     public static void selectAnItemFromDropdown(WebElement item, String selectableItem) {
         wait(5);
         Select select = new Select(item);
@@ -244,9 +215,7 @@ public class Driver {
                 break;
             }
         }
-
     }
-
     /**
      * Clicks on an element using JavaScript
      *
@@ -256,7 +225,6 @@ public class Driver {
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
         ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
     }
-
     /**
      * Clicks on an element using JavaScript
      *
@@ -268,7 +236,6 @@ public class Driver {
             ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", each);
         }
     }
-
     /**
      * Performs double click action on an element
      *
@@ -277,7 +244,6 @@ public class Driver {
     public static void doubleClick(WebElement element) {
         new Actions(Driver.getDriver()).doubleClick(element).build().perform();
     }
-
     //    Parameter1 : WebElement
 //    Parameter2:  String
 //    Driver.selectByVisibleText(dropdown element, "CHECKING-91303-116.98$")
@@ -301,7 +267,6 @@ public class Driver {
         objSelect.selectByValue(value);
         System.out.println("number of elements: " + elementCount.size());
     }
-
     public static void sleep(int timeOut) {
         try {
             Thread.sleep(timeOut);
@@ -309,7 +274,6 @@ public class Driver {
             e.printStackTrace();
         }
     }
-
     public static void waitAndClickLocationText(WebElement element, String value) {
         Driver.getDriver().findElement(By.xpath("//*[text()='" + value + "']")).click();
     }

@@ -3,6 +3,7 @@ package stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import utilities.Driver;
+import utilities.WaitUtils;
 
 public class CommonStepDefs {
 
@@ -15,6 +16,7 @@ public class CommonStepDefs {
 
     @Given("user navigates to {string}")
     public void userNavigatesTo(String url) {
+        WaitUtils.waitFor(2);
         Driver.getDriver().get(url);
 
     }
