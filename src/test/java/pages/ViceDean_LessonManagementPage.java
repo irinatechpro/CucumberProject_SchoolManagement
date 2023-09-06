@@ -105,9 +105,9 @@ public class ViceDean_LessonManagementPage {
 //        }
 //    }
 
-    /**
-     * Below are elements for the Lesson Management area
-     */
+    /************************************************************************
+     * Below are elements for the Lesson Management area - LESSONS PROGRAM TAB
+     ************************************************************************/
 
     //Select input choose lesson
     @FindBy(css = "#react-select-3-placeholder")
