@@ -3,12 +3,12 @@ package stepdefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.Homepage;
+//import pages.Homepage;
 import utilities.ConfigReader;
 import utilities.Driver;
 
 public class US02_StepDefs {
-    Homepage homepage = new Homepage();
+    //Homepage homepage = new Homepage();
 
     @Given("user goes to url")
     public void user_goes_to_url() {
