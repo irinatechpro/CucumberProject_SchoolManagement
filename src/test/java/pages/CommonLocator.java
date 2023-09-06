@@ -23,4 +23,10 @@ public class CommonLocator {
     @FindBy (xpath = "//input[@id='birthDay']")
     public WebElement dateOfBirth;
 
+    @FindBy(linkText = "Student Management")
+    public WebElement studentManagementLink;
+
+    @FindBy(xpath = "//button[(text()='Menu')]")
+    public WebElement menuButton;
+
 }
