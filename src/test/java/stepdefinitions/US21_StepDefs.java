@@ -4,6 +4,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.LoginPage;
 import pages.StudentChooseLessonPage;
+import utilities.ActionUtils;
+import utilities.BrowserUtils;
+import utilities.JSUtils;
 import utilities.WaitUtils;
 
 import static org.junit.Assert.assertTrue;
@@ -16,14 +19,16 @@ public class US21_StepDefs {
     public void user_clicks_on_login_link() {
         loginPage.loginLink.click();
     }
-    @Given("user enters name {string}")
-    public void user_enters_name(String string) {
+
+    @Given("user enters username {string}")
+    public void user_enters_username(String string) {
         WaitUtils.waitFor(2);
-        loginPage.name.sendKeys(string);
+        loginPage.userName.sendKeys(string);
     }
-    @Given("user enters valid email address {string}")
-    public void user_enters_valid_email_address(String string) {
-        loginPage.email.sendKeys(string);
+    @Given("user enters password {string}")
+    public void user_enters_password(String string) {
+
+        loginPage.password.sendKeys(string);
     }
     @Given("user clicks on login button")
     public void user_clicks_on_login_button() {
@@ -35,11 +40,11 @@ public class US21_StepDefs {
     }
     @Then("user selects Java and API")
     public void user_selects_java_and_api() {
-
+        JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.lessonsListColumnEnglish);
     }
     @Then("user clicks on submit button")
     public void user_clicks_on_submit_button() {
-
+        studentChooseLessonPage.submitButton.click();
     }
     @Then("verify lesson added to student message appear")
     public void verify_lesson_added_to_student_message_appear() {

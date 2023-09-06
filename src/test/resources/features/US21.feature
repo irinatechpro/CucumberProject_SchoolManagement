@@ -5,8 +5,8 @@ Feature: student choose lesson management panel
   @US21_TC01
   Scenario Outline: Students choose lesson, grades and announcement successfully
     And user clicks on login link
-    And user enters name "<username>"
-    And user enters valid email address "<password>"
+    And user enters username "<username>"
+    And user enters password "<password>"
     And user clicks on login button
     Then verify Teacher, Day, Start Time and Stop Time are visible
     And user selects Java and API

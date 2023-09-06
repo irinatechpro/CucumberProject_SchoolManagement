@@ -23,13 +23,14 @@ public class StudentChooseLessonPage {
     public WebElement stopTimeHeader;
 
     @FindBy(id= "lessonProgramId")
-    public WebElement lessonPrgramId;
+    public WebElement chooseLessonCheckBox;
 
     @FindBy(xpath = "//button[.='Submit']")
     public WebElement submitButton;
 
     @FindBy(xpath = "(//tbody)[2]/tr/td[1]")
-    public WebElement lessonsListColumn;
+    public WebElement lessonsListColumnEnglish;
+
 
 
 }
