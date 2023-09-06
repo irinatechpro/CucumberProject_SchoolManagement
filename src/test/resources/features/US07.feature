@@ -2,8 +2,11 @@
 Feature: School Management feature
 
   Background: user goes to school management home page
-  Given user navigates to "ms_url"
-    And login as a Dean
+  Given user navigates to "https://managementonschools.com/"
+    And user clicks on login link
+    And user enters username "DeanVena"
+    And user enters password "DeanVena11"
+    And user clicks on login button
     And click Menu button
     And click Contact Get All button
 
