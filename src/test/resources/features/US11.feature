@@ -4,8 +4,9 @@ Feature:Vice Deans should be able to view the lesoon schedule and make updates.
 
 
 
-  Background:go_MS_homepage_and_Login_as_Vice_Dean
+  Background: Login As Vice Dean
     Given user navigates to "https://managementonschools.com/"
+    When
     And user login as Vice Dean
   @US01_TC01
   Scenario: Vice Dean should be able to view the Lesson, Day, Start Time and Stop Time created.
