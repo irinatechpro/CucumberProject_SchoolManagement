@@ -2,7 +2,6 @@ package stepdefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import pages.LoginPage;
 import pages.StudentChooseLessonPage;
 import utilities.ActionUtils;
 import utilities.BrowserUtils;
@@ -13,27 +12,6 @@ import static org.junit.Assert.assertTrue;
 
 public class US21_StepDefs {
     StudentChooseLessonPage studentChooseLessonPage = new StudentChooseLessonPage();
-    LoginPage loginPage = new LoginPage();
-
-    @Given("user clicks on login link")
-    public void user_clicks_on_login_link() {
-        loginPage.loginLink.click();
-    }
-
-    @Given("user enters username {string}")
-    public void user_enters_username(String string) {
-        WaitUtils.waitFor(2);
-        loginPage.userName.sendKeys(string);
-    }
-    @Given("user enters password {string}")
-    public void user_enters_password(String string) {
-
-        loginPage.password.sendKeys(string);
-    }
-    @Given("user clicks on login button")
-    public void user_clicks_on_login_button() {
-        loginPage.loginButton.click();
-    }
     @Then("verify Teacher, Day, Start Time and Stop Time are visible")
     public void verify_teacher_day_start_time_and_stop_time_are_visible() {
         assertTrue(studentChooseLessonPage.teacherHeader.isDisplayed());
