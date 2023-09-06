@@ -35,14 +35,17 @@ public class ViceDean_LessonManagementPage {
     public WebElement selection_educationTerm;
 
     //Select input for start date
+    //send key in this format: dd/mm/yyyy
     @FindBy(css = "#startDate")
     public WebElement selection_startDate;
 
     //Select input for end date
+    //send key in this format: dd/mm/yyyy
     @FindBy(css = "#endDate")
     public WebElement selection_endDate;
 
     //Select input for last registration date
+    //send key in this format: dd/mm/yyyy
     @FindBy(css = "#lastRegistrationDate")
     public WebElement selection_lastRegistrationDate;
 
@@ -63,7 +66,7 @@ public class ViceDean_LessonManagementPage {
     public WebElement checkboxCompulsory;
 
     //Text field input for Credit Score
-    @FindBy(css = "#compulsory")
+    @FindBy(css = "#creditScore")
     public WebElement creditScore;
 
     //Submit Add Lesson in LESSON TAB
@@ -83,6 +86,7 @@ public class ViceDean_LessonManagementPage {
     public WebElement lessonListFinalPage;
 
     //Find the WebElement for lesson from the Lesson List table
+    //Note: this is in trial at the moment. Might not work!
     public WebElement findLessonInLessonList(String lessonNameInTable) {
 
         return Driver.getDriver().findElement(By.cssSelector(
@@ -105,9 +109,9 @@ public class ViceDean_LessonManagementPage {
 //        }
 //    }
 
-    /**
-     * Below are elements for the Lesson Management area
-     */
+    /************************************************************************
+     * Below are elements for the Lesson Management area - LESSONS PROGRAM TAB
+     ************************************************************************/
 
     //Select input choose lesson
     @FindBy(css = "#react-select-3-placeholder")
@@ -124,7 +128,7 @@ public class ViceDean_LessonManagementPage {
     //start time
     //NOTE: must send keys in this format: --:-- -- where the last part is am or pm
                                     //e.g. 21:00 pm
-    @FindBy(css = "#day")
+    @FindBy(css = "#startTime")
     public WebElement startTime;
 
     //Stop Time
