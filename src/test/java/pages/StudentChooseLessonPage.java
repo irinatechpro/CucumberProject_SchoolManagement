@@ -22,15 +22,19 @@ public class StudentChooseLessonPage {
     @FindBy(xpath = "(//th[.='Stop Time'])[1]")
     public WebElement stopTimeHeader;
 
-    @FindBy(id= "lessonProgramId")
-    public WebElement chooseLessonCheckBox;
+    @FindBy(xpath = "//input[@value='130']")
+    public WebElement selectedLessonCheckBox1;
 
     @FindBy(xpath = "//button[.='Submit']")
     public WebElement submitButton;
 
     @FindBy(xpath = "(//tbody)[2]/tr/td[1]")
-    public WebElement lessonsListColumnEnglish;
+    public WebElement lessonsProgramListColumn;
 
+    @FindBy(xpath = "//div[@role='alert']")
+    public WebElement lessonAddedToStudentAlertMessage;
 
+    @FindBy(xpath = "//div[@role='alert']")
+    public WebElement collisionErrorAlertMessage;
 
 }
