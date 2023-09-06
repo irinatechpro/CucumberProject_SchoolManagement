@@ -39,21 +39,22 @@ public class US03_StepDefs {
     public void user_clicks_on_send_message_button() {
         JSUtils.clickWithTimeoutByJS(contactPage.sendMessageButton);
     }
+    //TC01
     @Then("verify contact message created successfully confirmation appear")
     public void verify_contact_message_created_successfully_confirmation_appear() {
-        assertTrue(WaitUtils.waitForVisibility(contactPage.contactCreatedAlertMessage, 2).isDisplayed());
+        WaitUtils.waitForVisibility(contactPage.contactCreatedAlertMessage,5);
+        assertTrue(contactPage.contactCreatedAlertMessage.getText().contains("Contact Message Created Successfully"));
     }
-
+    //TC02
     @Then("verify the required message is visible")
     public void verify_the_required_message_is_visible() {
         assertTrue(contactPage.requiredTextMessage.isDisplayed());
     }
 
-
+    //TC03
     @Then("verify please enter valid email message will appear")
     public void verify_please_enter_valid_email_message_will_appear() {
-      // assertTrue(contactPage.invalidEmailAlertMessage.getText().contains("Please enter valid email"));
-       assertTrue(WaitUtils.waitForVisibility(contactPage.invalidEmailAlertMessage, 2).isDisplayed());
-
+        WaitUtils.waitForVisibility(contactPage.invalidEmailAlertMessage,5);
+        assertTrue(contactPage.invalidEmailAlertMessage.getText().contains("Please enter valid email"));
     }
 }
