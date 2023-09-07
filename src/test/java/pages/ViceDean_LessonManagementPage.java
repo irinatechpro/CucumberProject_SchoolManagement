@@ -141,4 +141,9 @@ public class ViceDean_LessonManagementPage {
     @FindBy(xpath = "(//form)[3]//button")
     public WebElement lessonProgramSubmitButton;
 
+
+    @FindBy(id = "react-select-2-placeholder")
+    public WebElement getSelectionChooseLesson1;
+
+
 }
