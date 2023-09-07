@@ -1,4 +1,5 @@
 package utilities;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -68,5 +69,35 @@ public class JSUtils {
 // For example, I can get the element by id, and use value attribute to get the value of in an input
 // I have to do this, cause getText in this case does not return teh text in an input
 // EG: getValueByJS("hotelDates")
+    }
+
+    //The amount is in pixels (px)
+    //Recommended amount (500), but this may vary
+    //Positive number = scroll down
+    //Negative Number = scroll up
+    /**
+     * This method is useful when locating element to scroll to,
+     * but then something gets in the way and element is not visible on screen
+     * E.g. the navbar comes over on top of the element you scrolled to
+     */
+    public static void scrollToElementThenScrollUpByAmount(WebElement element, int scrollAmount) {
+
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+        WaitUtils.waitFor(2);
+
+        //Scroll up by a certain amount (e.g. 100 pixels)
+        js.executeScript("window.scrollBy(0, arguments[0])", scrollAmount);
+        WaitUtils.waitFor(2);
+    }
+
+
+    public static void scrollByAmount(int scrollAmount) {
+
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+
+        //Scroll up by a certain amount (e.g. 100 pixels)
+        js.executeScript("window.scrollBy(0, arguments[0])", scrollAmount);
+        WaitUtils.waitFor(2);
     }
 }
