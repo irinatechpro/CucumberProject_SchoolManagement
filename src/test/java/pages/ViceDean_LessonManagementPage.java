@@ -87,10 +87,14 @@ public class ViceDean_LessonManagementPage {
 
     //Find the WebElement for lesson from the Lesson List table
     //Note: this is in trial at the moment. Might not work!
+    //UPDATE: THIS METHOD WORKS. USE IT!
+    //CAUTION -- you may need to use JSUtils to scroll element into view first
+    //Try using JSUtil to scroll element into view first
+    //And then use JSUtil to scroll by amount, before using the method below
     public WebElement findLessonInLessonList(String lessonNameInTable) {
 
-        return Driver.getDriver().findElement(By.cssSelector(
-                "(//table)[2]//tbody//td[.='"+lessonName+"']"
+        return Driver.getDriver().findElement(By.xpath(
+                "(//table)[2]//tbody//td[.='"+lessonNameInTable+"']"
         ));
     }
 
