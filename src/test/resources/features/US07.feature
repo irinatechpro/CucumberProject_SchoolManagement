@@ -1,7 +1,7 @@
 @US07
-Feature: School Management feature
+Feature: Deans should be able to see the messages sent by users feature
 
-  Background: user goes to school management home page
+  Background: user goes to school management home page and login as a Dean
   Given user navigates to "https://managementonschools.com/"
     And user clicks on login link
     And user enters username "DeanVena"

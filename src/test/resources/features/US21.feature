@@ -7,7 +7,7 @@ Feature: student choose lesson management panel
     And user enters password "Abc12345"
     And user clicks on login button
   @US21_TC01
-  Scenario : Students choose lesson, grades and announcement successfully
+  Scenario: Students choose lesson, grades and announcement successfully
     Then verify Teacher, Day, Start Time and Stop Time are visible
     And user selects a lesson
     And user clicks on submit button
@@ -17,7 +17,7 @@ Feature: student choose lesson management panel
 
 
   @US21_TC02
-  Scenario : Students choose lesson with same day and time
+  Scenario: Students choose lesson with same day and time
     Then verify Teacher, Day, Start Time and Stop Time are visible
     And user selects a lesson
     And user clicks on submit button
