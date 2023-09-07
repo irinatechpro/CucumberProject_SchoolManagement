@@ -1,19 +1,8 @@
 @US01
-Feature:
-
-  Background:
-    Given
+Feature: register guest user
+  Background: go homepage
+    Given user navigates to "https://managementonschools.com/"
   @US01_TC01
-  Scenario:
-    And
-    And
-    Then
-    And
-
-  @US01_TC02
-  Scenario:
-    And
-    And
-    Then
-    And
-    And
+  Scenario: test12
+    And user clicks on register link
+    And user enters name "Hakan"
