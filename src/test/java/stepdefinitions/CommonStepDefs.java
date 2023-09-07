@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import pages.CommonLocator;
 import pages.LoginPage;
 import utilities.Driver;
+import utilities.JSUtils;
 import utilities.WaitUtils;
 
 import static org.junit.Assert.assertTrue;
@@ -50,7 +51,7 @@ public class CommonStepDefs {
 
     @Given("user clicks on login button")
     public void user_clicks_on_login_button() {
-        loginPage.loginButton.click();
+        JSUtils.clickWithTimeoutByJS(loginPage.loginButton);
     }
 
     @Then("enter date of birth")
@@ -84,7 +85,7 @@ public class CommonStepDefs {
     }
 
     @Then("enter valid SSN")
-    public void enter_valid_ssn(String valid_ssn) {
+    public void enter_valid_ssn() {
         valid_ssn= faker.idNumber().ssnValid().toString();
         commonLocator.ssnField.sendKeys(valid_ssn);
     }
@@ -121,7 +122,7 @@ public class CommonStepDefs {
 
     @Given("select Female Gender")
     public void select_Gender_Female() {
-        commonLocator.genderFemale.click();
+        JSUtils.clickWithTimeoutByJS(commonLocator.genderFemale);
     }
 
     @Given("enter password")
@@ -129,15 +130,41 @@ public class CommonStepDefs {
         commonLocator.passwordField.sendKeys("Testpw12");
     }
 
+    @Given("enter password with only seven chars")
+    public void enter_password_with_only_seven_chars() {
+        commonLocator.passwordField.sendKeys("Testpw1");
+    }
+
+    @Given("enter password without lowercase chars")
+    public void enter_password_without_lowercase_chars() {
+        commonLocator.passwordField.sendKeys("TESTPW12");
+    }
+
+    @Given("enter password without uppercase chars")
+    public void enter_password_without_uppercase_chars() {
+        commonLocator.passwordField.sendKeys("testpw12");
+    }
+
+    @Given("enter password without numbers")
+    public void enter_password_without_numbers() {
+        commonLocator.passwordField.sendKeys("testpwtest");
+    }
+
     @Given("click submit button")
     public void click_submit_Button() {
-        commonLocator.submitButton.click();
+        JSUtils.clickWithTimeoutByJS(commonLocator.submitButton);
     }
 
     @Given("verify Admin created successfully confirmation message")
     public void verify_admin_created_successfully_confirmation_message() {
         WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
         assertTrue(commonLocator.confirmationMessage.getText().contains("Admin Saved"));
+    }
+
+    @Given("verify Admin created successfully confirmation message does not appears")
+    public void verify_admin_created_successfully_confirmation_message_does_not_appears() {
+        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
+        assert(commonLocator.confirmationMessage.getText().contains("Admin Saved"));
     }
 
     @Then("click last page button")
