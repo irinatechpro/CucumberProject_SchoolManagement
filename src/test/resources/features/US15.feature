@@ -1,4 +1,4 @@
-@US15
+gi@US15
 Feature: Vice Deans should be able to create a student
 
   Background: go_homepage_and_login
