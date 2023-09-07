@@ -1,13 +1,14 @@
 @US21
-Feature: student choose lesson management panel
-  Background: Go_to_Homepage
+Feature:student choose lesson management panel
+  Background:Go_to_Homepage
     Given user navigates to "https://managementonschools.com/"
     And user clicks on login link
     And user enters username "robertsmith"
     And user enters password "Abc12345"
     And user clicks on login button
+
   @US21_TC01
-  Scenario: Students choose lesson, grades and announcement successfully
+  Scenario:Students choose lesson successfully
     Then verify Teacher, Day, Start Time and Stop Time are visible
     And user selects a lesson
     And user clicks on submit button
@@ -15,13 +16,22 @@ Feature: student choose lesson management panel
     Then verify selected courses are visible in lesson program
     Then close the application
 
-
   @US21_TC02
-  Scenario: Students choose lesson with same day and time
-    Then verify Teacher, Day, Start Time and Stop Time are visible
+  Scenario:Students choose lesson with same day and time
     And user selects a lesson
     And user clicks on submit button
     Then verify course schedule cannot be selected for the same hour and day
     Then close the application
 
+  @US21_TC03
+  Scenario:Students can delete added lessons
+    Then verify user deletes added lesson
+    Then close the application
 
+  @US21_TC04
+  Scenario:Students choose grades and announcements
+    And user clicks on menu button
+    And user clicks on grades and announcements
+    Then verify user sees their exam grades
+    Then verify user sees meetings created by advisor
+    Then close the application
