@@ -12,18 +12,19 @@ Feature:Vice Deans should be able to view the lesson schedule and make updates.
     And click on Menu button
     And click on Lesson Management Link
     And click Lesson Program
+    And click select lesson
     And select lesson type "<lesson type>"
     And select day type "<day type>"
-    And select education Term "<education term>"
-    And enter Start Time "<start time>"
-    And enter Stop Time "<stop time>"
-    And user clicks Submit button
+    And select education term "<education term>"
+    And enter start time "<start time>"
+    And enter stop time "<stop time>"
+    And click select lesson
     Then assert the alert message containsCreated Lesson Program
     Then verify Lesson, Day, Start Time and Stop Time created are visible
     #Then close the application
     Examples:
-  |lesson type|education term  |day type   |start time|stop time|
-  |English    |SPRING_SEMESTER |MONDAY      |15:00     |16:00    |
+  |lesson type|education term   |day type   |start time|stop time|
+  |English    |FALL SEMESTER   |MONDAY     |15:00 pm  |16:00 pm |
 
   @US11_TC02
   Scenario:Vice Dean should be able to update from the Lesson Program List.

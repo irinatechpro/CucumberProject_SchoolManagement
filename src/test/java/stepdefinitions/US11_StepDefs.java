@@ -37,42 +37,51 @@ public class US11_StepDefs {
     @When("click Lesson Program")
     public void click_lesson_program() {viceDean_lessonManagementPage.lessonProgram.click();
     }
-    @When("select lesson type {string}")
-    public void select_lesson_type(String lessonType) {
+    @When("click select lesson")
+    public void click_select_lesson() {
         WaitUtils.waitFor(10);
-       new Select(viceDean_lessonManagementPage.getSelectionChooseLesson1).selectByVisibleText(lessonType);
-        // viceDean_lessonManagementPage.lessonProgram.click();
+        viceDean_lessonManagementPage.getSelectionChooseLesson.click();
     }
-    @When("select day type {string}")
-    public void select_day_tupe(String dayType) {
-        new Select (viceDean_lessonManagementPage.getSelectionChooseDay).selectByValue(dayType);
+//    @When("select lesson type {string}")
+//    public void select_lesson_type(String lessonType) {
+//        WaitUtils.waitFor(10);
+//       new Select(viceDean_lessonManagementPage.getSelectionChooseLesson).selectByVisibleText(lessonType);
+//        // viceDean_lessonManagementPage.lessonProgram.click();
+//    }
+//    @When("select day type {string}")
+//    public void select_day_type(String dayType) {
+//        WaitUtils.waitFor(10);
+//        new Select (viceDean_lessonManagementPage.getSelectionChooseDay).selectByValue(dayType);
+//    }
+//   @When("select education term {string}")
+//    public void select_education_term(String termType) {
+//       WaitUtils.waitFor(10);
+//        new Select (viceDean_lessonManagementPage.getSelectionChooseEducationTerm).selectByValue(termType);
+//   }
+//    @When("enter start time {string}")
+//    public void enter_start_time(String startTime) {
+//        WaitUtils.waitFor(10);
+//        viceDean_lessonManagementPage.startTime.sendKeys(startTime);
+//    }
+//    @When("enter stop time {string}")
+//    public void enter_stop_time(String stopTime) {
+//        WaitUtils.waitFor(10);
+//    viceDean_lessonManagementPage.stopTime.sendKeys(stopTime);
+//    }
+//    @When("user clicks Submit button")
+//    public void user_clicks_submit_button() {
+//        viceDean_lessonManagementPage.lessonProgramSubmitButton.click();
+//
+//
+//    }
+//    @Then("verify {string} message is appear")
+//    public void verify_message_is_appear(String string) {
+//
+//    }
+//    @Then("verify Lesson, Day, Start Time and Stop Time created are visible")
+//    public void verify_lesson_day_start_time_and_stop_time_created_are_visible() {
 
-    }
-    @When("choose Education Term")
-    public void choose_education_term() {
-      //  viceDean_lessonManagementPage.getSelectionChooseLesson.sele;click();
-
-    }
-    @When("enter Start Time")
-    public void enter_start_time() {
-
-    }
-    @When("enter Stop Time")
-    public void enter_stop_time() {
-
-    }
-    @When("user clicks Submit button")
-    public void user_clicks_submit_button() {
-
-    }
-    @Then("verify {string} message is appear")
-    public void verify_message_is_appear(String string) {
-
-    }
-    @Then("verify Lesson, Day, Start Time and Stop Time created are visible")
-    public void verify_lesson_day_start_time_and_stop_time_created_are_visible() {
-
-    }
+ //   }
 
 
 
