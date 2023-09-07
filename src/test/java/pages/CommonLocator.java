@@ -29,4 +29,23 @@ public class CommonLocator {
     @FindBy(xpath = "//button[(text()='Menu')]")
     public WebElement menuButton;
 
+    @FindBy(xpath = "//*[@placeholder='Name']")
+    public WebElement name;
+    @FindBy(xpath = "//*[@placeholder='Surname']")
+    public WebElement surname;
+    @FindBy(xpath = "//*[@placeholder='Birth Place']")
+    public WebElement birthplace;
+    @FindBy(xpath = "//*[@value='MALE']")
+    public WebElement genderMale;
+    @FindBy(xpath = "//*[@value='FEMALE']")
+    public WebElement genderFemale;
+    @FindBy(xpath = "//*[@placeholder='Password']")
+    public WebElement passwordField;
+    @FindBy(xpath = "//*[@class='fw-semibold btn btn-primary btn-lg']")
+    public WebElement submitButton;
+    @FindBy(xpath = "//*[@role='alert']")
+    public WebElement confirmationMessage;
+    @FindBy(xpath = "//*[.='Last']")
+    public WebElement goLastPageButton;
+
 }

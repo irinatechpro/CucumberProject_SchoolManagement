@@ -21,6 +21,8 @@ public class LoginPage {
 
     @FindBy(xpath = "//button[.='Login']")
     public WebElement loginButton;
+    @FindBy(xpath = "//*[@href='/register']")
+    public WebElement registerLink;
 
 
 }
