@@ -80,7 +80,7 @@ public class JSUtils {
      * but then something gets in the way and element is not visible on screen
      * E.g. the navbar comes over on top of the element you scrolled to
      */
-    public static void scrollToElementThenScrollUpByAmount(WebElement element, int scrollAmount) {
+    public static void scrollToElementThenScrollByAmount(WebElement element, int scrollAmount) {
 
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         js.executeScript("arguments[0].scrollIntoView(true);", element);
