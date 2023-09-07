@@ -3,9 +3,14 @@ package stepdefinitions;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pages.CommonLocator;
 import pages.LoginPage;
+import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.JSUtils;
 import utilities.WaitUtils;
 
 import static org.junit.Assert.assertTrue;
@@ -145,4 +150,61 @@ public class CommonStepDefs {
         commonLocator.goLastPageButton.click();
     }
 
+    //use this if you want to do the entire operation of going to site
+    //and logging in as Vice Dean
+    //If you need to reuse for each scenario, then use this in Background
+    @Given("login as vice dean {string} {string}")
+    public void loginAsViceDean(String username, String password) {
+
+        //go to url
+        Driver.getDriver().get(ConfigReader.getProperty("ms_url"));
+
+        //Wait for the page to load - throw exception if not load in 15s
+        WaitUtils.waitForPageToLoad(15);
+
+        //Find login element and click
+        WaitUtils.waitForClickablility(loginPage.loginLink, 15);
+        loginPage.loginLink.click();
+
+        //Wait for page load + assert correct page has loaded
+        WaitUtils.waitForPageToLoad(15);
+        Assert.assertEquals(
+                Driver.getDriver().getCurrentUrl(),
+                "https://managementonschools.com/login"
+        );
+
+        //Now use credentials for logging in
+        //username
+        WaitUtils.waitForClickablility(loginPage.userName, 15);
+        loginPage.userName.sendKeys(username);
+
+        //password
+        WaitUtils.waitForClickablility(loginPage.password, 15);
+        loginPage.password.sendKeys(password);
+
+        //login button click
+        WaitUtils.waitForClickablility(loginPage.loginButton, 15);
+        loginPage.loginButton.click();
+
+        //Wait for next page load correctly + with username
+        //page correction
+        WaitUtils.waitFor(2);
+        Assert.assertEquals(
+                Driver.getDriver().getCurrentUrl(),
+                "https://managementonschools.com/lesson"
+        );
+
+        //username correction
+        WebElement getUsernameLabel = Driver.getDriver().findElement(By.cssSelector(
+                ".navbar span > span:nth-child(2)"
+        ));
+
+        WaitUtils.waitForVisibility(getUsernameLabel, 15);
+        Assert.assertEquals(
+                username,
+                getUsernameLabel.getText()
+        );
+
+        System.out.println("Complete...");
+    }
 }
