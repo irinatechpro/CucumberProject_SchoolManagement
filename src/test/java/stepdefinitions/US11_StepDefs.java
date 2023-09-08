@@ -29,6 +29,7 @@ public class US11_StepDefs {
         WaitUtils.waitForVisibility(viceDean_lessonManagementPage.lessonProgram, 1);
         Assert.assertTrue(viceDean_lessonManagementPage.lessonProgram.isDisplayed());
         WaitUtils.waitFor(3);
+
     }
     @Then("verify Lesson, Day, Start Time and Stop Time created are visible")
     public void verifyLessonDayStartTimeAndStopTimeCreatedAreVisible() {

@@ -3,20 +3,19 @@ package stepdefinitions;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import utilities.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.CommonLocator;
 import pages.LoginPage;
-import utilities.ConfigReader;
-import utilities.Driver;
-import utilities.JSUtils;
-import utilities.WaitUtils;
+
+import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
+import static utilities.BrowserUtils.formatPhoneNumber;
 
 public class CommonStepDefs {
-    private String valid_ssn;
 
     LoginPage loginPage = new LoginPage();
     CommonLocator commonLocator = new CommonLocator();
@@ -32,9 +31,9 @@ public class CommonStepDefs {
 
     @Given("user navigates to {string}")
     public void userNavigatesTo(String url) {
+        Driver.getDriver().get(url);
         WaitUtils.waitFor(2);
         Driver.getDriver().get(url);
-
     }
 
     @Given("user clicks on login link")
@@ -55,32 +54,21 @@ public class CommonStepDefs {
 
     @Given("user clicks on login button")
     public void user_clicks_on_login_button() {
-        loginPage.loginButton.click();
+        JSUtils.clickWithTimeoutByJS(loginPage.loginButton);
     }
+
 
     @Then("enter date of birth")
     public void enter_date_of_birth() {
        commonLocator.dateOfBirth.sendKeys("01/05/1990");
     }
-
-    public static String formatPhoneNumber(String phoneNumber) {
-        // Remove any non-numeric characters from the phone number
-        String numericPhoneNumber = phoneNumber.replaceAll("[^0-9]", "");
-
-        // Format as XXX-XXX-XXXX
-        return String.format("%s-%s-%s",
-                numericPhoneNumber.substring(0, 3),
-                numericPhoneNumber.substring(3, 6),
-                numericPhoneNumber.substring(6, 10));
-    }
-
     @Then("enter valid phone number")
     public void enter_valid_phone_number() {
         // Generate a fake phone number as a string
         String phoneNumber = faker.phoneNumber().phoneNumber();
 
         // Format the phone number as XXX-XXX-XXXX
-        String formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+        String formattedPhoneNumber = BrowserUtils.formatPhoneNumber(phoneNumber);
 
         System.out.println("Generated Phone Number: " + phoneNumber);
         System.out.println("Formatted Phone Number: " + formattedPhoneNumber);
@@ -89,9 +77,8 @@ public class CommonStepDefs {
     }
 
     @Then("enter valid SSN")
-    public void enter_valid_ssn(String valid_ssn) {
-        valid_ssn= faker.idNumber().ssnValid().toString();
-        commonLocator.ssnField.sendKeys(valid_ssn);
+    public void enter_valid_ssn() {
+        commonLocator.ssnField.sendKeys(faker.idNumber().ssnValid().toString());
     }
 
     @Then("enter username")
@@ -103,6 +90,7 @@ public class CommonStepDefs {
     public void click_menu_button() {
         commonLocator.menuButton.click();
     }
+
 
     @Given("enter Name")
     public void enter_Name() {
@@ -126,7 +114,7 @@ public class CommonStepDefs {
 
     @Given("select Female Gender")
     public void select_Gender_Female() {
-        commonLocator.genderFemale.click();
+        JSUtils.clickWithTimeoutByJS(commonLocator.genderFemale);
     }
 
     @Given("enter password")
@@ -134,9 +122,29 @@ public class CommonStepDefs {
         commonLocator.passwordField.sendKeys("Testpw12");
     }
 
+    @Given("enter password with only seven chars")
+    public void enter_password_with_only_seven_chars() {
+        commonLocator.passwordField.sendKeys("Testpw1");
+    }
+
+    @Given("enter password without lowercase chars")
+    public void enter_password_without_lowercase_chars() {
+        commonLocator.passwordField.sendKeys("TESTPW12");
+    }
+
+    @Given("enter password without uppercase chars")
+    public void enter_password_without_uppercase_chars() {
+        commonLocator.passwordField.sendKeys("testpw12");
+    }
+
+    @Given("enter password without numbers")
+    public void enter_password_without_numbers() {
+        commonLocator.passwordField.sendKeys("testpwtest");
+    }
+
     @Given("click submit button")
     public void click_submit_Button() {
-        commonLocator.submitButton.click();
+        JSUtils.clickWithTimeoutByJS(commonLocator.submitButton);
     }
 
     @Given("verify Admin created successfully confirmation message")
@@ -145,9 +153,17 @@ public class CommonStepDefs {
         assertTrue(commonLocator.confirmationMessage.getText().contains("Admin Saved"));
     }
 
+    @Given("verify Admin created successfully confirmation message does not appears")
+    public void verify_admin_created_successfully_confirmation_message_does_not_appears() {
+        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
+        assert(commonLocator.confirmationMessage.getText().contains("Admin Saved"));
+    }
+
     @Then("click last page button")
     public void click_last_page_button(){
-        commonLocator.goLastPageButton.click();
+
+        WaitUtils.waitFor(3);
+        JSUtils.clickWithTimeoutByJS(commonLocator.goLastPageButton);
     }
 
     //use this if you want to do the entire operation of going to site
@@ -207,4 +223,10 @@ public class CommonStepDefs {
 
         System.out.println("Complete...");
     }
+    @Then("verify submit fails")
+    public void verify_submit_fails() {
+
+        BrowserUtils.verifyElementNotDisplayed(commonLocator.confirmationMessage);
+    }
+
 }
