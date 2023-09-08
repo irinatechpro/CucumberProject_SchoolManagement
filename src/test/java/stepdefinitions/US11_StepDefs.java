@@ -30,53 +30,6 @@ public class US11_StepDefs {
         Assert.assertTrue(viceDean_lessonManagementPage.lessonProgram.isDisplayed());
         WaitUtils.waitFor(3);
 
-    @When("enter password {string}")
-    public void enter_password(String string) {loginPage.password.sendKeys(string);
-    }
-    @When("click on login button")
-    public void click_on_login_button() { loginPage.loginButton.click();
-    }
-    @When("click on Menu button")
-    public void click_on_menu_button() { commonLocator.menuButton.click();
-    }
-    @When("click on Lesson Management Link")
-    public void click_on_lesson_management_link() { viceDean_adminManagementPage.toggleMenu_adminManagement.click();
-    }
-    @When("click Lesson Program")
-    public void click_lesson_program() {viceDean_lessonManagementPage.lessonProgram.click();
-    }
-    @When("select lesson type {string}")
-    public void select_lesson_type(String lessonType) {
-        WaitUtils.waitFor(10);
-       new Select(viceDean_lessonManagementPage.getSelectionChooseLesson1).selectByVisibleText(lessonType);
-        // viceDean_lessonManagementPage.lessonProgram.click();
-    }
-    @When("select day type {string}")
-    public void select_day_tupe(String dayType) {
-        new Select (viceDean_lessonManagementPage.getSelectionChooseDay).selectByValue(dayType);
-
-    }
-    @When("choose Education Term")
-    public void choose_education_term() {
-      //  viceDean_lessonManagementPage.getSelectionChooseLesson.sele;click();
-
-    }
-    //@When("enter Start Time")
-    //public void enter_start_time() {
-
-    //}
-    //@When("enter Stop Time")
-    //public void enter_stop_time() {
-
-    //}
-    @When("user clicks Submit button")
-    public void user_clicks_submit_button() {
-
-    }
-    @Then("verify {string} message is appear")
-    public void verify_message_is_appear(String string) {
-
-
     }
     @Then("verify Lesson, Day, Start Time and Stop Time created are visible")
     public void verifyLessonDayStartTimeAndStopTimeCreatedAreVisible() {
