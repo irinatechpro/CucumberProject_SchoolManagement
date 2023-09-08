@@ -1,11 +1,9 @@
 package stepdefinitions;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.DeanContactGetAllPage;
 import pages.ViceDean_AdminManagementPage;
-import pages.ViceDean_LessonManagementPage;
 import utilities.BrowserUtils;
 import utilities.MediaUtils;
 import java.io.IOException;
