@@ -33,6 +33,10 @@ public class ViceDeanLessonProgram {
     public WebElement successMessage;
 
 
+    @FindBy(xpath = "//*[@data-rr-ui-event-key='lessonProgram']")
+    public WebElement fakingbutton;
+
+
 
 
 

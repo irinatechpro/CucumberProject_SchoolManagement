@@ -32,4 +32,13 @@ public class TeacherMeetManagementPage {
     @FindBy(xpath = "//form")
     public WebElement verifyElementsAtAddMeetAreEdited;
 
+    @FindBy(xpath = "//a[.='Teacher Management']")
+    public WebElement teacherManagementLInk;
+
+    @FindBy(id="isAdvisorTeacher")
+    public WebElement isAdvisorTeacher;
+
+    @FindBy(id="password")
+    public WebElement teacherPassword;
+
 }

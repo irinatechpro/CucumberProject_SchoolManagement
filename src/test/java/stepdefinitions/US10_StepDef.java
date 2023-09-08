@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import pages.CommonLocator;
 import pages.ViceDeanLessonProgram;
 import pages.ViceDean_AdminManagementPage;
 import pages.ViceDean_LessonManagementPage;
@@ -16,20 +17,23 @@ import utilities.Driver;
 import utilities.JSUtils;
 import utilities.WaitUtils;
 
+import static org.junit.Assert.assertTrue;
+
 public class US10_StepDef {
     ViceDeanLessonProgram viceDeanLessonProgram = new ViceDeanLessonProgram();
     ViceDean_LessonManagementPage viceDeanLessonManagementPage = new ViceDean_LessonManagementPage();
     ViceDean_AdminManagementPage viceDeanAdminManagementPage=new ViceDean_AdminManagementPage();
+    CommonLocator commonLocator=new CommonLocator();
     Faker faker = new Faker();
 
-    @Given("click Lesson Management")
-    public void click_lesson_menagement() {
-
-           JSUtils.clickWithTimeoutByJS(viceDeanAdminManagementPage.toggleMenu_lessonManagement);
-
-
-
-        }
+    @Given("click lesson management")
+    public void click_lesson_management() {
+        JSUtils.clickWithTimeoutByJS(commonLocator.lessonManagementLink);
+    }
+    @Given("click lesson program last")
+    public void click_lesson_program_last(){
+        JSUtils.clickWithTimeoutByJS(viceDeanLessonProgram.fakingbutton);
+    }
     @Given("choose Lesson")
     public void choose_lesson(){
 
@@ -51,26 +55,40 @@ public class US10_StepDef {
     }
     @Given("choose start time")
     public void choose_start_time() {
-      BrowserUtils.selectByVisibleText(viceDeanLessonManagementPage.startTime,"13:00");
-        WaitUtils.waitFor(3);
+
+      viceDeanLessonManagementPage.startTime.sendKeys("13:00");
+
     }
     @Given("choose stop time")
     public void choose_stop_time() {
-   BrowserUtils.selectByVisibleText(viceDeanLessonManagementPage.stopTime,"14:00");
+
+        viceDeanLessonManagementPage.stopTime.sendKeys("14:00");
     }
     @Given("user clicks submit button")
     public void user_clicks_submit_button() {
-        WaitUtils.waitFor(2);
+WaitUtils.waitForVisibility(viceDeanAdminManagementPage.toggleMenu_viceDeanManagement,2);
 
-        JSUtils.clickWithTimeoutByJS(viceDeanLessonManagementPage.lessonsAddLessonSubmitButton);
+
+        }
+    @Then("verify lesson  is created")
+    public void verify_lesson_is_created() {
+        WaitUtils.waitForVisibility(viceDeanLessonProgram.createdLessonVisible,5);
+    }
+    @Then("verify selected courses are visible in lesson program ")
+    public void verify_selected_courses_are_visible_in_lesson_program() {
+       assertTrue(viceDeanLessonProgram.createdLessonVisible.isDisplayed());
 
     }
-
-
-
 
 
 
 }
+
+
+
+
+
+
+
 
 
