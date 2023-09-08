@@ -4,22 +4,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import pages.CommonLocator;
-import pages.LoginPage;
-import pages.ViceDean_AdminManagementPage;
 import pages.ViceDean_LessonManagementPage;
 import utilities.ActionUtils;
-import utilities.JSUtils;
 import utilities.MediaUtils;
 import utilities.WaitUtils;
-
 import java.io.IOException;
-
 public class US11_StepDefs {
-    LoginPage loginPage = new LoginPage();
-    CommonLocator commonLocator = new CommonLocator();
     ViceDean_LessonManagementPage viceDean_lessonManagementPage = new ViceDean_LessonManagementPage();
-    ViceDean_AdminManagementPage viceDean_adminManagementPage = new ViceDean_AdminManagementPage();
 
     //US11_TC01
     @When("Management page loads up")
