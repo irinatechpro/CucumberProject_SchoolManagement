@@ -41,11 +41,21 @@ public class CommonLocator {
     public WebElement genderFemale;
     @FindBy(xpath = "//*[@placeholder='Password']")
     public WebElement passwordField;
-    @FindBy(xpath = "//*[@class='fw-semibold btn btn-primary btn-lg']")
+    @FindBy(xpath = "//button[.='Submit']")
     public WebElement submitButton;
     @FindBy(xpath = "//*[@role='alert']")
     public WebElement confirmationMessage;
-    @FindBy(xpath = "//*[.='Last']")
+    @FindBy(xpath = "//a[@class='page-link' and contains(., 'Last')]")
     public WebElement goLastPageButton;
+    @FindBy(xpath = "//*[.='One number']")
+    public WebElement passwordWithoutNumberErrorMessage;
+    @FindBy(xpath = "//*[.='One lowercase character']")
+    public WebElement passwordWithoutLowerCaseErrorMessage;
+    @FindBy(xpath = "//*[.='One uppercase character']")
+    public WebElement passwordWithoutUpperCaseErrorMessage;
+    @FindBy(xpath = "//*[.='At least 8 characters']")
+    public WebElement passwordLessCharErrorMessage;
+
+
 
 }
