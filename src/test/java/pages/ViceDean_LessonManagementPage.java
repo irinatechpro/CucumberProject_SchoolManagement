@@ -114,7 +114,7 @@ public class ViceDean_LessonManagementPage {
      ************************************************************************/
 
     //Select input choose lesson
-    @FindBy(css = "#react-select-3-placeholder")
+    @FindBy(css = ".css-19bb58m input")
     public WebElement getSelectionChooseLesson;
 
     //Select input choose education term
@@ -126,20 +126,23 @@ public class ViceDean_LessonManagementPage {
     public WebElement getSelectionChooseDay;
 
     //start time
-    //NOTE: must send keys in this format: --:-- -- where the last part is am or pm
-                                    //e.g. 21:00 pm
+    //NOTE: must send keys in this format: --:--  where the last part is am or pm
+                                    //e.g. 21:00
     @FindBy(css = "#startTime")
     public WebElement startTime;
 
     //Stop Time
-    //NOTE: must send keys in this format: --:-- -- where the last part is am or pm
-                                    //e.g. 21:00 pm
+    //NOTE: must send keys in this format: --:--  where the last part is am or pm
+                                    //e.g. 21:00
     @FindBy(css = "#stopTime")
     public WebElement stopTime;
 
     //Submit Lesson Program
-    @FindBy(xpath = "(//form)[3]//button")
-    public WebElement lessonProgramSubmitButton;
+    @FindBy(xpath = "//a[.='Lesson Management']")
+    public WebElement submitLessonButton;
+
+
+
 
 
 
