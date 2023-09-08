@@ -22,4 +22,13 @@ public class CreateStudentPage {
 
     @FindBy(id = "email")
     public WebElement emailField;
+
+    @FindBy(xpath = "//div[@class='table-responsive']")
+    public WebElement studentListTable;
+
+    @FindBy(xpath = "//table//tbody//tr[last()]")
+    public WebElement lastRow;
+
+    @FindBy(xpath = "//tr[last()]/td[1]")
+    public static WebElement firstColumnInLastRow;
 }
