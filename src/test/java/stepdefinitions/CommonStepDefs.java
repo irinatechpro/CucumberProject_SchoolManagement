@@ -3,20 +3,19 @@ package stepdefinitions;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import utilities.ConfigReader;
+import utilities.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.CommonLocator;
 import pages.LoginPage;
-import utilities.Driver;
-import utilities.JSUtils;
-import utilities.WaitUtils;
+
+import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
+import static utilities.BrowserUtils.formatPhoneNumber;
 
 public class CommonStepDefs {
-    private String valid_ssn;
 
     LoginPage loginPage = new LoginPage();
     CommonLocator commonLocator = new CommonLocator();
@@ -63,25 +62,13 @@ public class CommonStepDefs {
     public void enter_date_of_birth() {
        commonLocator.dateOfBirth.sendKeys("01/05/1990");
     }
-
-    public static String formatPhoneNumber(String phoneNumber) {
-        // Remove any non-numeric characters from the phone number
-        String numericPhoneNumber = phoneNumber.replaceAll("[^0-9]", "");
-
-        // Format as XXX-XXX-XXXX
-        return String.format("%s-%s-%s",
-                numericPhoneNumber.substring(0, 3),
-                numericPhoneNumber.substring(3, 6),
-                numericPhoneNumber.substring(6, 10));
-    }
-
     @Then("enter valid phone number")
     public void enter_valid_phone_number() {
         // Generate a fake phone number as a string
         String phoneNumber = faker.phoneNumber().phoneNumber();
 
         // Format the phone number as XXX-XXX-XXXX
-        String formattedPhoneNumber = formatPhoneNumber(phoneNumber);
+        String formattedPhoneNumber = BrowserUtils.formatPhoneNumber(phoneNumber);
 
         System.out.println("Generated Phone Number: " + phoneNumber);
         System.out.println("Formatted Phone Number: " + formattedPhoneNumber);
@@ -91,8 +78,7 @@ public class CommonStepDefs {
 
     @Then("enter valid SSN")
     public void enter_valid_ssn() {
-        valid_ssn= faker.idNumber().ssnValid().toString();
-        commonLocator.ssnField.sendKeys(valid_ssn);
+        commonLocator.ssnField.sendKeys(faker.idNumber().ssnValid().toString());
     }
 
     @Then("enter username")
@@ -175,7 +161,9 @@ public class CommonStepDefs {
 
     @Then("click last page button")
     public void click_last_page_button(){
-        commonLocator.goLastPageButton.click();
+
+        WaitUtils.waitFor(3);
+        JSUtils.clickWithTimeoutByJS(commonLocator.goLastPageButton);
     }
 
     //use this if you want to do the entire operation of going to site
@@ -235,4 +223,10 @@ public class CommonStepDefs {
 
         System.out.println("Complete...");
     }
+    @Then("verify submit fails")
+    public void verify_submit_fails() {
+
+        BrowserUtils.verifyElementNotDisplayed(commonLocator.confirmationMessage);
+    }
+
 }

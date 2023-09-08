@@ -235,4 +235,15 @@ public class BrowserUtils {
         List<String> list = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(list.get(windowNumber));
     }
+    // to format phone number as XXX-XXX-XXXX
+    public static String formatPhoneNumber(String phoneNumber) {
+        // Remove any non-numeric characters from the phone number
+        String numericPhoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+
+        // Format as XXX-XXX-XXXX
+        return String.format("%s-%s-%s",
+                numericPhoneNumber.substring(0, 3),
+                numericPhoneNumber.substring(3, 6),
+                numericPhoneNumber.substring(6, 10));
+    }
 }

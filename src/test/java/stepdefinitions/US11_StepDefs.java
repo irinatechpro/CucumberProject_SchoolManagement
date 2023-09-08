@@ -53,14 +53,14 @@ public class US11_StepDefs {
       //  viceDean_lessonManagementPage.getSelectionChooseLesson.sele;click();
 
     }
-    @When("enter Start Time")
-    public void enter_start_time() {
+    //@When("enter Start Time")
+    //public void enter_start_time() {
 
-    }
-    @When("enter Stop Time")
-    public void enter_stop_time() {
+    //}
+    //@When("enter Stop Time")
+    //public void enter_stop_time() {
 
-    }
+    //}
     @When("user clicks Submit button")
     public void user_clicks_submit_button() {
 

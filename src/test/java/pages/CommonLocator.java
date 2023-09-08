@@ -45,7 +45,7 @@ public class CommonLocator {
     public WebElement submitButton;
     @FindBy(xpath = "//*[@role='alert']")
     public WebElement confirmationMessage;
-    @FindBy(xpath = "//*[.='Last']")
+    @FindBy(xpath = "//a[@class='page-link' and contains(., 'Last')]")
     public WebElement goLastPageButton;
     @FindBy(xpath = "//*[.='One number']")
     public WebElement passwordWithoutNumberErrorMessage;
