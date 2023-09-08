@@ -142,8 +142,6 @@ public class ViceDean_LessonManagementPage {
     public WebElement lessonProgramSubmitButton;
 
 
-    @FindBy(id = "react-select-2-placeholder")
-    public WebElement getSelectionChooseLesson1;
 
 
 }
