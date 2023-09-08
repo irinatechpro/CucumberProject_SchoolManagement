@@ -42,8 +42,8 @@ public class US19_StepDefs {
         }
     }
 
-    @And("enter Start Time")
-    public void enterStartTime() {
+    @And("enter Start Time for Add Meet")
+    public void enterStartTimeForAddMeet() {
         waitFor(2);
         teacherMeetManagementPage.startTimeArea.sendKeys("11:00");
     }
@@ -58,8 +58,8 @@ public class US19_StepDefs {
         }
     }
 
-    @And("enter Stop Time")
-    public void enterStopTime() {
+    @And("enter Stop Time for Add Meet")
+    public void enterStopTimeForAddMeet() {
         waitFor(2);
         teacherMeetManagementPage.stopTimeArea.sendKeys("12:00");
     }
@@ -116,12 +116,6 @@ public class US19_StepDefs {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String pastDate = dtf.format(current);
         teacherMeetManagementPage.dateOfMeetArea.sendKeys(pastDate);
-    }
-
-    @And("click on Submit button")
-    public void clickOnSubmitButton() {
-        waitFor(2);
-        teacherMeetManagementPage.submitButtonAddMeet.click();
     }
 
     @Then("verify İleri bir tarih olmalı alert is seen")
