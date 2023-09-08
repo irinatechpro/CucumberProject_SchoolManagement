@@ -20,15 +20,14 @@ Feature: Vice Deans should be able to create a student
     Then enter date of birth
     And enter valid phone number
     And enter valid SSN
-    And enter username
+    And enter student username
     And enter father name
     And enter mother name
     And enter password
     And click submit button
     Then verify student created successfully confirmation message
     Then click last page button
-    And verify student exist on the list
-    And verify student number created automaticaly
+    And verify student number created automatically
     Then close the application
 
 

@@ -4,7 +4,7 @@
 ==================================================================
 
 if you are creating file for user story 1 then name your feature as --> US01.feature
-At the very top use @US01 tag
+At the very top use @US01 tag - replace the number 01 with your user story number
 Test cases must be written in the same feature file
 Before each scenario, use new tag @US01_TC01
 
