@@ -62,4 +62,6 @@ public class ViceDean_AdminManagementPage {
     //12. Left-Side toggled menu links. This is for Guest User
     @FindBy(css = "div[role='dialog'] a:nth-child(12)")
     public WebElement toggleMenu_logout;
+
+
 }

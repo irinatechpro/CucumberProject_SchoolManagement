@@ -1,33 +1,62 @@
 package stepdefinitions;
 
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import pages.DeanContactGetAllPage;
+import pages.ViceDean_AdminManagementPage;
+import pages.ViceDean_LessonManagementPage;
+
+import static utilities.WaitUtils.waitFor;
+
 public class US16_StepDefs {
+    ViceDean_AdminManagementPage viceDeanAdminManagementPage= new ViceDean_AdminManagementPage();
+   ViceDean_LessonManagementPage viceDean_lessonManagementPage = new ViceDean_LessonManagementPage();
+    DeanContactGetAllPage deanContactGetAllPage = new DeanContactGetAllPage();
+   @And("click Menu button")
+   public void clickMenuButton() {
+      waitFor(2);
+      viceDeanAdminManagementPage.navMenuButton.click();
+      waitFor(2);
+  }
+    @And("click Contact Get All button")
+    public void click_contact_get_all_button() {
+        waitFor(2);
+        de
+        waitFor(2);
+
+   }
+    @Then("Verify Delete button is visible")
+    public void verify_delete_button_is_visible() {
+
+    }
+
+    @Then("verify message is seen")
+    public void verify_message_is_seen() {
+
+    }
+    @Then("verify Name is seen")
+    public void verify_name_is_seen() {
+
+    }
+    @Then("verify Email is seen")
+    public void verify_email_is_seen() {
+
+    }
+    @Then("verify Date is seen")
+    public void verify_date_is_seen() {
+
+    }
+    @Then("verify Subject is seen")
+    public void verify_subject_is_seen() {
+
+    }
+
+    @Then("verify message is deleted")
+    public void verify_message_is_deleted() {
+
+    }
 
 
 
-    //@FindBy(xpath = "//*[@class='header_link me-2']")
-//    public WebElement registerLink;
-//    @FindBy(xpath = "//*[@class='header_link ms-2']")
-//    public WebElement loginLink;
-//    @FindBy(id = "name")
-//    public WebElement name;
-//    @FindBy(id = "surname")
-//    public WebElement surname;
-//    @FindBy(id = "birthPlace")
-//    public WebElement birthplace;
-//    @FindBy(id = "phoneNumber")
-//    public WebElement phoneNumber;
-//    @FindBy(xpath = "//*[(text()='Female')]")
-//    public WebElement radioButtonFemale;
-//    @FindBy(xpath = "//*[(text()='Male')]")
-//    public WebElement radioButtonMale;
-//    @FindBy(id = "birthDay")
-//    public WebElement birthDay;
-//    @FindBy(id = "ssn")
-//    public WebElement ssn;
-//    @FindBy(id = "username")
-//    public WebElement username;
-//    @FindBy(id = "password")
-//    public WebElement password;
-//    @FindBy(xpath = "//button[(text()='Register')]")
-//    public WebElement registerButton;
 }
