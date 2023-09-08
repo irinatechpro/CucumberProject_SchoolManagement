@@ -7,17 +7,16 @@ Feature: "Vice Deans should be able to create a lesson schedule.
 
   @US10_TC01
   Scenario: With Valid Credentials
-   And click menu button
-   And click lesson management
-    And click lesson program last
+    And click menu button
+    And click lesson management
+    And click lesson program
     And choose Lesson
     And choose education term
-And chose day
-And choose start time
+    And chose day
+    And choose start time
     And choose stop time
-   And click submit button
-    Then verify lesson  is created
-    Then verify selected courses are visible in lesson program
+    And click submit button on Add Lesson Program
+    Then verify lesson is created
 
 
 

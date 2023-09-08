@@ -34,7 +34,9 @@ public class ViceDeanLessonProgram {
 
 
     @FindBy(xpath = "//*[@data-rr-ui-event-key='lessonProgram']")
-    public WebElement fakingbutton;
+    public WebElement lessonProgramSeccion;
+    @FindBy(xpath = "(//button[.='Submit'])[3]")
+    public WebElement addLessonProgSubmitButton;
 
 
 
