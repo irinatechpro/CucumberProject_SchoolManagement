@@ -9,9 +9,6 @@ public class DeanContactGetAllPage {
     public DeanContactGetAllPage() {
         PageFactory.initElements(Driver.getDriver(), this);}
 
-    @FindBy(xpath = "(//button)[1]")
-    public WebElement menuButton;
-
     @FindBy(xpath = "//a[.='Contact Get All']")
     public WebElement contactGetAllButton;
 

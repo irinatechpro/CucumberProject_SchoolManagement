@@ -7,7 +7,7 @@ Feature: Deans should be able to see the messages sent by users feature
     And user enters username "DeanVena"
     And user enters password "DeanVena11"
     And user clicks on login button
-    And click Menu button
+    And click menu button
     And click Contact Get All button
 
   @US07_TC01

@@ -12,13 +12,6 @@ import static utilities.WaitUtils.waitFor;
 
 public class US07_StepDefs {
     DeanContactGetAllPage deanContactGetAllPage = new DeanContactGetAllPage();
-
-    @And("click Menu button")
-    public void clickMenuButton() {
-        waitFor(2);
-        deanContactGetAllPage.menuButton.click();
-    }
-
     @And("click Contact Get All button")
     public void clickContactGetAllButton() {
         waitFor(2);

@@ -7,7 +7,7 @@ Feature: The teacher should be able to create meetings with students feature
     And user enters username "TeacherKatty"
     And user enters password "TeacherKatty11"
     And user clicks on login button
-    And click Menu button
+    And click menu button
     And click Meet Management button
 
   @US19_TC01
@@ -18,9 +18,9 @@ Feature: The teacher should be able to create meetings with students feature
 
   @US19_TC02
   Scenario: "Start time ve Stop Time" start and end times must be entered
-  And enter Start Time
+  And enter Start Time for Add Meet
   Then verify Start Time is entered
-  And enter Stop Time
+  And enter Stop Time for Add Meet
   Then verify Stop Time is entered
     Then close the application
 
@@ -32,7 +32,7 @@ Feature: The teacher should be able to create meetings with students feature
     Then close the application
 
 
-  @US19_TC04
+
   Scenario: Date of Meet meeting time can be selected. Past date should not be entered.
   And select Date Of Meet meeting time
   Then verify Date of Meet meeting time is selected
@@ -43,10 +43,10 @@ Feature: The teacher should be able to create meetings with students feature
   Scenario: "Date of Meet" meeting time can be selected. Past date should not be entered.
   And select Student from Choose Students DDM
     And select Date Of Meet meeting time with past date
-  And enter Start Time
-  And enter Stop Time
+  And enter Start Time for Add Meet
+  And enter Stop Time for Add Meet
   And enter Description
-  And click on Submit button
+  And click submit button
   Then verify İleri bir tarih olmalı alert is seen
     Then close the application
 
@@ -55,9 +55,9 @@ Feature: The teacher should be able to create meetings with students feature
   Scenario: The teacher should be able to create meetings with students.
     And select Student from Choose Students DDM
     And select Date Of Meet meeting time
-    And enter Start Time
-    And enter Stop Time
+    And enter Start Time for Add Meet
+    And enter Stop Time for Add Meet
     And enter Description
-    And click on Submit button
+    And click submit button
     Then verify meeting is not created
     Then close the application

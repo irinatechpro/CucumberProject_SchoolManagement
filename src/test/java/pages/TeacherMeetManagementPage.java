@@ -26,9 +26,6 @@ public class TeacherMeetManagementPage {
     @FindBy(xpath = "//*[@placeholder='Description']")
     public WebElement descriptionArea;
 
-    @FindBy(xpath = "(//button)[5]")
-    public WebElement submitButtonAddMeet;
-
     @FindBy(xpath = "//*[@role='alert']")
     public WebElement ileriBirTarihOlmalıAlert;
 
