@@ -6,10 +6,7 @@ import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import pages.TeacherMeetManagementPage;
-import utilities.BrowserUtils;
-import utilities.JSUtils;
-import utilities.MediaUtils;
-import utilities.WaitUtils;
+import utilities.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
