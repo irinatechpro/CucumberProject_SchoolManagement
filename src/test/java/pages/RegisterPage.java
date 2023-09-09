@@ -30,7 +30,13 @@ public class RegisterPage {
     @FindBy(xpath = "(//input)[8]")
     public WebElement ssn;
 
+    @FindBy(id = "username")
+    public WebElement userName;
+
     @FindBy(xpath = "(//button)[3]")
     public WebElement registerButton;
 
+    @FindBy(xpath = "//div[contains(text(), 'Guest User registered.')]")
+    public WebElement userRegisteredText;
+    //div[.="Guest User registered"
 }

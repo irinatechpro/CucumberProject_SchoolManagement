@@ -5,15 +5,15 @@ Feature:User Registration
   @US01_TC01
   Scenario Outline: user register successfully
     And user clicks on register link
-    And user enters name "<name>"
+    And user enters name "Anna"
     And user enters surname "<surname>"
-    And user enters birthplace "<birth_place>"
-    And user enters phone number "<phone_number>"
+    And user enters birthplace "San Antonio"
+    And enter valid phone number
     And user clicks on radio button
-    And user enter date of birth "<date_of_birth>"
-    And user enters ssn "<ssn_number>"
-    And user enters username "<username>"
-    And user enters password "<password>"
+    And user enter date of birth "01/01/2000"
+    And enter valid SSN
+    And user enters user name "<username>"
+    And user enters password "Anna1234&"
     And user clicks on register button
     Then verify Guest User registered alert is seen
 
