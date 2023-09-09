@@ -56,6 +56,11 @@ public class CommonLocator {
     @FindBy(xpath = "//*[.='At least 8 characters']")
     public WebElement passwordLessCharErrorMessage;
 
+    @FindBy(linkText = "Lesson Management")
+    public WebElement lessonManagementLink;
+
+    @FindBy(xpath = "//*[@id=\"27\"]/div[1]/div[2]")
+    public WebElement existingEmailMasage;
 
 
 }

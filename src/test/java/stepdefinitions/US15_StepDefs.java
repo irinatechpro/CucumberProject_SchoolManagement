@@ -27,6 +27,7 @@ public class US15_StepDefs {
     }
     @Given("enter email")
     public void enter_email() {
+
         createStudentPage.emailField.sendKeys(faker.internet().emailAddress());
     }
     @Then("enter father name")
