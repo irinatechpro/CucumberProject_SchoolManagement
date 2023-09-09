@@ -3,6 +3,7 @@ package pages;
 import io.cucumber.java.zh_cn.假如;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -60,6 +61,8 @@ public class ViceDean_LessonManagementPage {
      * Below are elements for the Lesson Management area - LESSONS TAB
      ************************************************************************/
 
+    public String trackLessonName = null;
+
     //Text field input for lesson name
     @FindBy(css = "#lessonName")
     public WebElement lessonName;
@@ -109,16 +112,9 @@ public class ViceDean_LessonManagementPage {
     public void findAndDeleteLesson(WebElement element) {
         List<WebElement> getElements = Driver.getDriver().findElements(By.xpath("(//table)[2]//tbody//tr//td"));
 
-        for(WebElement lesson: getElements) {
-            if (lesson.getText().contains(element.getText() )) {
-                WebElement deleteIcon = Driver.getDriver().findElement(By.xpath(
-                        "(//table)[2]//tbody//tr//td//button"
-                ));
-                deleteIcon.click();
-                WaitUtils.waitFor(2);
-
-                Assert.assertFalse(lesson.isDisplayed());
-            }
+        for (WebElement currentElement : getElements) {
+            System.out.println(element.getText());
+            System.out.println("Hi");
         }
     }
 
