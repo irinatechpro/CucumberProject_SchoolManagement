@@ -59,6 +59,8 @@ public class CommonLocator {
     @FindBy(linkText = "Lesson Management")
     public WebElement lessonManagementLink;
 
+    @FindBy(xpath = "//*[@id=\"27\"]/div[1]/div[2]")
+    public WebElement existingEmailMasage;
 
 
 }

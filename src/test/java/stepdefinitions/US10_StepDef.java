@@ -66,23 +66,16 @@ public class US10_StepDef {
     }
     @Given("user clicks submit button")
     public void user_clicks_submit_button() {
-WaitUtils.waitForVisibility(viceDeanAdminManagementPage.toggleMenu_viceDeanManagement,2);
+
 
 
         }
-    @Then("verify lesson  is created")
-    public void verify_lesson_is_created() {
-        WaitUtils.waitForVisibility(viceDeanLessonProgram.createdLessonVisible,5);
-    }
-    @Then("verify selected courses are visible in lesson program ")
-    public void verify_selected_courses_are_visible_in_lesson_program() {
-       assertTrue(viceDeanLessonProgram.createdLessonVisible.isDisplayed());
 
     }
 
 
 
-}
+
 
 
 

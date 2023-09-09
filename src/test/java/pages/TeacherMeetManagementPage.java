@@ -39,6 +39,7 @@ public class TeacherMeetManagementPage {
     public WebElement isAdvisorTeacher;
 
     @FindBy(id="password")
-    public WebElement teacherPassword;
+    public WebElement lastTeacherPassword;
+
 
 }
