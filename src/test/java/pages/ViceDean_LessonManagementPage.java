@@ -1,11 +1,15 @@
 package pages;
 
 import io.cucumber.java.zh_cn.假如;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.BrowserUtils;
 import utilities.Driver;
+import utilities.WaitUtils;
 
 import java.util.List;
 
@@ -57,6 +61,8 @@ public class ViceDean_LessonManagementPage {
      * Below are elements for the Lesson Management area - LESSONS TAB
      ************************************************************************/
 
+    public String trackLessonName = null;
+
     //Text field input for lesson name
     @FindBy(css = "#lessonName")
     public WebElement lessonName;
@@ -87,10 +93,12 @@ public class ViceDean_LessonManagementPage {
 
     //Find the WebElement for lesson from the Lesson List table
     //Note: this is in trial at the moment. Might not work!
+    //UPDATE: THIS METHOD WORKS. USE IT!
+    //CAUTION -- you may need to use JSUtils to scroll element into view first
     public WebElement findLessonInLessonList(String lessonNameInTable) {
 
-        return Driver.getDriver().findElement(By.cssSelector(
-                "(//table)[2]//tbody//td[.='"+lessonName+"']"
+        return Driver.getDriver().findElement(By.xpath(
+                "(//table)[2]//tbody//td[.='"+lessonNameInTable+"']"
         ));
     }
 
@@ -101,13 +109,14 @@ public class ViceDean_LessonManagementPage {
 
     // >>>>>>>>>>>>Still Testing this! Don't delete <<<<<<<<<<<<<
 
-//    public void findAndDeleteLesson(WebElement element) {
-//        List<WebElement> getElements = Driver.getDriver().findElements(By.xpath("(//table)[2]//tbody//tr"));
-//
-//        for(WebElement lesson: getElements) {
-//            if (getElements.)
-//        }
-//    }
+    public void findAndDeleteLesson(WebElement element) {
+        List<WebElement> getElements = Driver.getDriver().findElements(By.xpath("(//table)[2]//tbody//tr//td"));
+
+        for (WebElement currentElement : getElements) {
+            System.out.println(element.getText());
+            System.out.println("Hi");
+        }
+    }
 
     /************************************************************************
      * Below are elements for the Lesson Management area - LESSONS PROGRAM TAB

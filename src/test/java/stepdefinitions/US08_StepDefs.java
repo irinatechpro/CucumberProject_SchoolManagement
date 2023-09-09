@@ -13,7 +13,7 @@ import utilities.WaitUtils;
 public class US08_StepDefs {
     ViceDean_LessonManagementPage lessonManagement = new ViceDean_LessonManagementPage();
     Faker faker = new Faker();
-
+    public static String lessonNameTrack;
     /**
      * ====================================================================
      *                         TC_01
@@ -30,9 +30,14 @@ public class US08_StepDefs {
         lessonManagement.lessonsTab.click();
         WaitUtils.waitFor(1);
     }
-    @Then("Vice Dean types the lesson name into Lesson name field")
-    public void vice_dean_types_the_lesson_name_into_lesson_name_field() {
-        lessonManagement.lessonName.sendKeys("Bioinformatics");
+    @Then("Vice Dean types the lesson {string} into Lesson name field")
+    public void vice_dean_types_the_lesson_name_into_lesson_name_field(String lessonName) {
+
+        lessonName = provideRandomName();
+        lessonManagement.lessonName.sendKeys(lessonName);
+        System.out.println(lessonName);
+        lessonNameTrack = lessonName;
+
         WaitUtils.waitFor(1);
     }
 
@@ -61,6 +66,13 @@ public class US08_StepDefs {
         int randomNum = faker.number().numberBetween(20, 100);
         lessonManagement.creditScore.sendKeys(String.valueOf(randomNum));
         WaitUtils.waitFor(1);
+    }
+
+    public String provideRandomName() {
+        String name = faker.name().firstName();
+        String id = String.valueOf(faker.number().numberBetween(1000, 9999));
+
+        return name + id;
     }
 
     @After
