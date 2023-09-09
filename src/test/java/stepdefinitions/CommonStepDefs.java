@@ -26,7 +26,7 @@ public class CommonStepDefs {
     public void close_the_application() throws InterruptedException {
 
         Thread.sleep(1000);
-       // Driver.closeDriver();
+        Driver.closeDriver();
     }
 
     @Given("user navigates to {string}")
