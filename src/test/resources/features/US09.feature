@@ -23,4 +23,4 @@
       And Vice Dean adds Credit Score
       And Vice Dean adds lesson to the lesson list
       And Vice Dean checks the created fields
-      And Vice Dean clicks on the Delete icon to delete Lesson
+      Then Vice Dean clicks on the Delete icon to delete Lesson
