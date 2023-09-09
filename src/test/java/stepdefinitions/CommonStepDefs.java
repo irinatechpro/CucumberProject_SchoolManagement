@@ -139,12 +139,13 @@ public class CommonStepDefs {
 
     @Given("enter password without numbers")
     public void enter_password_without_numbers() {
-        commonLocator.passwordField.sendKeys("testpwtest");
+        commonLocator.passwordField.sendKeys("Testpwtest");
     }
 
     @Given("click submit button")
     public void click_submit_Button() {
         JSUtils.clickWithTimeoutByJS(commonLocator.submitButton);
+        JSUtils.scrollAllTheWayUpJS();
     }
 
     @Given("verify Admin created successfully confirmation message")
@@ -228,5 +229,23 @@ public class CommonStepDefs {
 
         BrowserUtils.verifyElementNotDisplayed(commonLocator.confirmationMessage);
     }
+    @Then("password without numbers error message appears")
+    public void passwordWithoutNumbersErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutNumberErrorMessage);
+    }
 
+    @Then("password without uppercase error message appears")
+    public void passwordWithoutUppercaseErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutUpperCaseErrorMessage);
+    }
+
+    @Then("password without lowercase error message appears")
+    public void passwordWithoutLowercaseErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutLowerCaseErrorMessage);
+    }
+
+    @Then("password less then 8 character error message appears")
+    public void passwordLessThen8CharacterErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordLessCharErrorMessage);
+    }
 }
