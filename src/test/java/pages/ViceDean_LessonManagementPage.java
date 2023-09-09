@@ -1,11 +1,14 @@
 package pages;
 
 import io.cucumber.java.zh_cn.假如;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.BrowserUtils;
 import utilities.Driver;
+import utilities.WaitUtils;
 
 import java.util.List;
 
@@ -89,8 +92,6 @@ public class ViceDean_LessonManagementPage {
     //Note: this is in trial at the moment. Might not work!
     //UPDATE: THIS METHOD WORKS. USE IT!
     //CAUTION -- you may need to use JSUtils to scroll element into view first
-    //Try using JSUtil to scroll element into view first
-    //And then use JSUtil to scroll by amount, before using the method below
     public WebElement findLessonInLessonList(String lessonNameInTable) {
 
         return Driver.getDriver().findElement(By.xpath(
@@ -105,13 +106,21 @@ public class ViceDean_LessonManagementPage {
 
     // >>>>>>>>>>>>Still Testing this! Don't delete <<<<<<<<<<<<<
 
-//    public void findAndDeleteLesson(WebElement element) {
-//        List<WebElement> getElements = Driver.getDriver().findElements(By.xpath("(//table)[2]//tbody//tr"));
-//
-//        for(WebElement lesson: getElements) {
-//            if (getElements.)
-//        }
-//    }
+    public void findAndDeleteLesson(WebElement element) {
+        List<WebElement> getElements = Driver.getDriver().findElements(By.xpath("(//table)[2]//tbody//tr//td"));
+
+        for(WebElement lesson: getElements) {
+            if (lesson.getText().contains(element.getText() )) {
+                WebElement deleteIcon = Driver.getDriver().findElement(By.xpath(
+                        "(//table)[2]//tbody//tr//td//button"
+                ));
+                deleteIcon.click();
+                WaitUtils.waitFor(2);
+
+                Assert.assertFalse(lesson.isDisplayed());
+            }
+        }
+    }
 
     /************************************************************************
      * Below are elements for the Lesson Management area - LESSONS PROGRAM TAB
