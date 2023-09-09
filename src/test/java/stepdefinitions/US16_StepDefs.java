@@ -1,33 +1,72 @@
 package stepdefinitions;
 
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import pages.DeanContactGetAllPage;
+import pages.ViceDean_AdminManagementPage;
+import utilities.BrowserUtils;
+import utilities.MediaUtils;
+import java.io.IOException;
+import static utilities.WaitUtils.waitFor;
+
 public class US16_StepDefs {
+    ViceDean_AdminManagementPage viceDeanAdminManagementPage= new ViceDean_AdminManagementPage();
+    DeanContactGetAllPage deanContactGetAllPage = new DeanContactGetAllPage();
 
-
-
-    //@FindBy(xpath = "//*[@class='header_link me-2']")
-//    public WebElement registerLink;
-//    @FindBy(xpath = "//*[@class='header_link ms-2']")
-//    public WebElement loginLink;
-//    @FindBy(id = "name")
-//    public WebElement name;
-//    @FindBy(id = "surname")
-//    public WebElement surname;
-//    @FindBy(id = "birthPlace")
-//    public WebElement birthplace;
-//    @FindBy(id = "phoneNumber")
-//    public WebElement phoneNumber;
-//    @FindBy(xpath = "//*[(text()='Female')]")
-//    public WebElement radioButtonFemale;
-//    @FindBy(xpath = "//*[(text()='Male')]")
-//    public WebElement radioButtonMale;
-//    @FindBy(id = "birthDay")
-//    public WebElement birthDay;
-//    @FindBy(id = "ssn")
-//    public WebElement ssn;
-//    @FindBy(id = "username")
-//    public WebElement username;
-//    @FindBy(id = "password")
-//    public WebElement password;
-//    @FindBy(xpath = "//button[(text()='Register')]")
-//    public WebElement registerButton;
+   @And("click Menu button")
+   public void clickMenuButton() {
+      waitFor(2);
+      viceDeanAdminManagementPage.navMenuButton.click();
+      waitFor(1);
+  }
+    @And("click Get All button")
+    public void contact_get_all_button() {
+        waitFor(2);
+        deanContactGetAllPage.contactGetAllButton.click();
+        waitFor(2);
+   }
+   // US16_TC01
+    @Then("Verify Delete button is visible")
+    public void verify_delete_button_is_visible() {
+        try {
+            MediaUtils.takeScreenshotOfTheEntirePage();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+   // US16_TC02
+    @Then("verify message is visible")
+    public void verify_message_is_seen() {
+        waitFor(3);
+        BrowserUtils.verifyElementDisplayed(deanContactGetAllPage.verifyMessageIsSeen);
+    }
+    @Then("verify Name is visible")
+    public void verify_name_is_visible() {
+       BrowserUtils.verifyElementDisplayed(deanContactGetAllPage.verifyNameIsSeen);
+        waitFor(3);
+    }
+    @Then("verify Email is visible")
+    public void verify_email_is_visible() {
+        BrowserUtils.verifyElementDisplayed(deanContactGetAllPage.verifyEmailIsSeen);
+        waitFor(3);
+    }
+    @Then("verify Date is visible")
+    public void verify_date_is_visible() {
+        waitFor(3);
+        BrowserUtils.verifyElementDisplayed(deanContactGetAllPage.verifyDateIsSeen);
+    }
+    @Then("verify Subject is visible")
+    public void verify_subject_is_visible() {
+        waitFor(3);
+        BrowserUtils.verifyElementDisplayed(deanContactGetAllPage.verifySubjectIsSeen);
+    }
+   //US16_TC03
+    @Then("verify ability to delete messages")
+    public void verify_message_is_deleted() {
+        try {
+            MediaUtils.takeScreenshotOfTheEntirePage();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
