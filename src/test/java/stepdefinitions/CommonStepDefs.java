@@ -84,6 +84,7 @@ public class CommonStepDefs {
     @Then("enter username")
     public void enter_username() {
         commonLocator.usernameField.sendKeys(faker.name().username());
+        WaitUtils.waitFor(2);
     }
 
     @Given("click menu button")
@@ -146,6 +147,7 @@ public class CommonStepDefs {
     public void click_submit_Button() {
         JSUtils.clickWithTimeoutByJS(commonLocator.submitButton);
         JSUtils.scrollAllTheWayUpJS();
+        WaitUtils.waitFor(1);
     }
 
     @Given("verify Admin created successfully confirmation message")

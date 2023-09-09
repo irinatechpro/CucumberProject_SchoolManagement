@@ -28,7 +28,7 @@ public class US23_StepDefs {
     @Given("verify Vice Dean created successfully confirmation message")
     public void verify_vice_dean_created_successfully_confirmation_message() {
         WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 1000);
-        assertTrue(commonLocator.confirmationMessage.getText().contains("Vice Dean saved"));
+        assertTrue(commonLocator.confirmationMessage.getText().contains("Vice dean Saved"));
     }
 
 

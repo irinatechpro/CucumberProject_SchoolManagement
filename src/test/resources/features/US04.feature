@@ -22,9 +22,7 @@ Feature: Admin should be able to create a dean
     And enter password
     And click submit button
     And verify dean created successfully confirmation message
-    #Then click last page button
-   # And verify dean number created automatically
-    #Then close the application
+
 
   @US04_TC02
   Scenario: Name_Field_Left_Empty

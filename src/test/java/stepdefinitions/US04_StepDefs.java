@@ -29,14 +29,16 @@ public class US04_StepDefs {
     @Given("click Dean Management Link")
     public void click_Dean_Management_Link() {
         JSUtils.clickWithTimeoutByJS(deanCreatePage.deanManagementLink);
+        JSUtils.scrollAllTheWayUpJS();
     }
 
 
     @Given("verify dean created successfully confirmation message")
     public void verify_dean_created_successfully_confirmation_message() {
-        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 1000);
-        assertTrue(commonLocator.confirmationMessage.getText().contains("Dean saved"));
+        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 2);
+        assertTrue(commonLocator.confirmationMessage.getText().contains("Dean Saved"));
     }
+
     @Given("verify dean created unsuccessfully confirmation message")
     public void verify_dean_created_unsuccessfully_confirmation_message() {
         WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
