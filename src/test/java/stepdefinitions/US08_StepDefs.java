@@ -13,7 +13,7 @@ import utilities.WaitUtils;
 public class US08_StepDefs {
     ViceDean_LessonManagementPage lessonManagement = new ViceDean_LessonManagementPage();
     Faker faker = new Faker();
-
+    public static String lessonNameTrack;
     /**
      * ====================================================================
      *                         TC_01
@@ -36,6 +36,8 @@ public class US08_StepDefs {
         lessonName = provideRandomName();
         lessonManagement.lessonName.sendKeys(lessonName);
         System.out.println(lessonName);
+        lessonNameTrack = lessonName;
+
         WaitUtils.waitFor(1);
     }
 
