@@ -39,4 +39,17 @@ public class RegisterPage {
     @FindBy(xpath = "//div[contains(text(), 'Guest User registered.')]")
     public WebElement userRegisteredText;
     //div[.="Guest User registered"
+
+    @FindBy(xpath = "//div[contains(text(), 'Required')]")
+    public WebElement requiredMessage;
+
+    @FindBy(xpath = "//div[contains(text(), 'Please enter valid phone number')]")
+    public WebElement invalidPhoneNumberMessage;
+    @FindBy(xpath = "//div[contains(text(), 'Please enter valid SSN number')]")
+    public WebElement invalidSSNNumberMessage;
+
+    @FindBy(xpath = "//div[contains(text(), 'At least 8 characters')]")
+    public WebElement invalidPassword;
+
+
 }
