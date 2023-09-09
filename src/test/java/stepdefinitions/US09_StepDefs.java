@@ -46,4 +46,9 @@ public class US09_StepDefs {
                 lessonManagement.findLessonInLessonList(lessonName).getText().contains(lessonName)
         );
     }
+
+    @Then("Vice Dean clicks on the Delete icon to delete Lesson")
+    public void vice_dean_clicks_on_the_delete_icon_to_delete_lesson() {
+        lessonManagement.
+    }
 }
