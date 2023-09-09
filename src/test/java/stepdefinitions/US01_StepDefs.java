@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,12 +10,16 @@ import pages.RegisterPage;
 import utilities.BrowserUtils;
 import utilities.Driver;
 import utilities.JSUtils;
+import utilities.MediaUtils;
+
+import java.io.IOException;
 
 import static utilities.WaitUtils.waitFor;
 
 public class US01_StepDefs {
     RegisterPage registerPage = new RegisterPage();
     CommonLocator commonLocator = new CommonLocator();
+    Faker faker = new Faker();
     @And("user clicks on register link")
     public void userClicksOnRegisterLink() {
         JSUtils.clickWithTimeoutByJS(registerPage.registerLink);
@@ -24,7 +29,7 @@ public class US01_StepDefs {
     @And("user enters surname {string}")
     public void userEntersSurname(String arg0) {
         waitFor(2);
-        registerPage.surname.sendKeys(arg0);
+        registerPage.surname.sendKeys(faker.name().firstName());
     }
 
     @And("user enters birthplace {string}")
@@ -55,25 +60,37 @@ public class US01_StepDefs {
         registerPage.dateOfBirth.sendKeys(arg0);
     }
 
-    @And("user enters ssn {string}")
-    public void userEntersSsn(String arg0) {
-        waitFor(2);
-        Actions actions = new Actions(Driver.getDriver());
-        actions.scrollByAmount(0,250);
-        actions.perform();
-        waitFor(2);
-        registerPage.ssn.sendKeys(arg0);
-    }
+//    @And("user enters ssn {string}")
+//    public void userEntersSsn(String arg0) {
+//        waitFor(2);
+//        Actions actions = new Actions(Driver.getDriver());
+//        actions.scrollByAmount(0,250);
+//        actions.perform();
+//        waitFor(2);
+//        registerPage.ssn.sendKeys(arg0);
+//    }
 
     @And("user clicks on register button")
     public void userClicksOnRegisterButton() {
         waitFor(2);
+        Actions actions = new Actions(Driver.getDriver());
+        actions.scrollByAmount(0,250);
+        actions.perform();
         registerPage.registerButton.click();
     }
 
     @Then("verify Guest User registered alert is seen")
-    public void verifyGuestUserRegisteredAlertIsSeen() {
+    public void verifyGuestUserRegisteredAlertIsSeen() throws IOException {
         waitFor(1);
-        BrowserUtils.verifyElementDisplayed(commonLocator.confirmationMessage);
+        BrowserUtils.verifyExpectedAndActualTextMatch("Guest User registered.",registerPage.userRegisteredText);
+       //BrowserUtils.verifyElementDisplayed(commonLocator.confirmationMessage);
+        //MediaUtils.takeScreenshotOfThisElement(commonLocator.confirmationMessage);
+
+    }
+
+    @And("user enters user name {string}")
+    public void userEntersUserName(String arg0) {
+        waitFor(2);
+        registerPage.userName.sendKeys(faker.name().firstName());
     }
 }
