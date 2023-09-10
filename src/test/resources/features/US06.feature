@@ -144,7 +144,7 @@ Feature: Deans should be able to create a Vice Dean account
     And enter date of birth
     And enter valid phone number
     And enter valid SSN
-    And enter username "Ali"
+    And enters username "Ali"
     And enter password
     And click submit button
     Then verify user name should contains at least four characters
