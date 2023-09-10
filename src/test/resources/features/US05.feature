@@ -11,6 +11,8 @@ Feature: Admins should be able to see and delete Deans
     And Admin user clicks on login button
     Then asserts that page has "Admin Management" title
 
+@US05_TC01
+
   Scenario: TC01
 
     Given Admin user clicks on menu button
@@ -18,3 +20,11 @@ Feature: Admins should be able to see and delete Deans
     When user clicks on "Dean Management" link
     Then asserts that Deans information can be seen
     Then close the application
+
+@US05_TC03
+
+  Scenario:
+  Given Admin user clicks on menu button
+  And Menu list is visible on the left hand side
+  When user clicks on "Dean Management" link
+
