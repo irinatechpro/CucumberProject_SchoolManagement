@@ -19,11 +19,11 @@ public class US13_StepDefs {
     CreateStudentPage createStudentPage=new CreateStudentPage();
     ViceDeanTeacherManagementPage viceDeanTeacherManagementPage=new ViceDeanTeacherManagementPage();
     Faker faker=new Faker();
-//    @Given("click Teacher Management Link")
-//    public void click_teacher_management_link() {
-//        WaitUtils.waitFor(2);
-//        JSUtils.clickWithTimeoutByJS(viceDeanTeacherManagementPage.teacherManagementLink);
-//    }
+    @Given("click TeacherManagementLink")
+    public void click_teacher_management_link() {
+        WaitUtils.waitFor(2);
+        JSUtils.clickWithTimeoutByJS(viceDeanTeacherManagementPage.teacherManagementLink);
+    }
     @Given("select lesson from choose lesson")
     public void select_lesson_from_choose_lesson() {
         WaitUtils.waitFor(2);
@@ -115,5 +115,10 @@ public class US13_StepDefs {
     @Then("verify fails At Least {int} Characters")
     public void verifyFailsAtLeastCharacters(int arg0) {
       assertTrue(commonLocator.passwordLessCharErrorMessage.isDisplayed());
+    }
+
+    @Then("verify submit fails for gender")
+    public void verifySubmitFailsForGender() {
+        assertTrue(viceDeanTeacherManagementPage.failForGender.isDisplayed());
     }
 }

@@ -23,6 +23,8 @@ public class ViceDeanTeacherManagementPage {
     public WebElement teacherManagementLink;
     @FindBy(xpath = "//h5[.='Add Teacher']")
     public WebElement addTeacherHeading;
+    @FindBy(xpath = "//div[@role='alert']")
+    public WebElement failForGender;
 
     @FindBy(xpath = "//input[@role='combobox']")
     public WebElement chooseLesson;
