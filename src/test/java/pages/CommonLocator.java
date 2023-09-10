@@ -29,7 +29,7 @@ public class CommonLocator {
     @FindBy(xpath = "//button[(text()='Menu')]")
     public WebElement menuButton;
 
-<<<<<<< HEAD
+
     @FindBy(xpath = "//*[@id='offcanvasNavbar-expand-lg']/div[2]/div/a[11]")
     public WebElement guestUser;
 
@@ -42,7 +42,7 @@ public class CommonLocator {
     @FindBy(xpath = "//*[@id='root']/div/main/div/div[1]/div/div/div/div[1]/table/tbody/tr[2]/td[5]/span/button")
     public WebElement getDeleteUserGuestSuccessfully;
 
-=======
+
     @FindBy(xpath = "//*[@placeholder='Name']")
     public WebElement name;
     @FindBy(xpath = "//*[@placeholder='Surname']")
@@ -75,7 +75,7 @@ public class CommonLocator {
 
     @FindBy(xpath = "//*[@id=\"27\"]/div[1]/div[2]")
     public WebElement existingEmailMasage;
->>>>>>> 13a777cd82d87cb0eee913fc6bbf7bb11d73d34b
+
 
 
 }

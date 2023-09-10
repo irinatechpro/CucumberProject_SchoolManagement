@@ -37,10 +37,10 @@ public class StudentChooseLessonPage {
     @FindBy(xpath = "//div[@role='alert']")
     public WebElement collisionErrorAlertMessage;
 
-<<<<<<< HEAD
+
     @FindBy(xpath = "//*[@id='lessonId']/option[8]")
     public WebElement selectLesson;
-=======
+
     @FindBy(xpath = "(//tbody)[2]/tr/td[1]/*[.='Cypress']")
     public WebElement addedLesson;
 
@@ -55,6 +55,6 @@ public class StudentChooseLessonPage {
 
     @FindBy(xpath = "(//tbody[@class='table-group-divider'])[2]")
     public WebElement studentMeetingList;
->>>>>>> 13a777cd82d87cb0eee913fc6bbf7bb11d73d34b
+
 
 }
