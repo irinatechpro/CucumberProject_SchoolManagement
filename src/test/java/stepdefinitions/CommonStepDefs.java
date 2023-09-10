@@ -84,6 +84,7 @@ public class CommonStepDefs {
     @Then("enter username")
     public void enter_username() {
         commonLocator.usernameField.sendKeys(faker.name().username());
+        WaitUtils.waitFor(2);
     }
 
     @Given("click menu button")
@@ -148,6 +149,8 @@ public class CommonStepDefs {
     @Given("click submit button")
     public void click_submit_Button() {
         JSUtils.clickWithTimeoutByJS(commonLocator.submitButton);
+        JSUtils.scrollAllTheWayUpJS();
+        WaitUtils.waitFor(1);
     }
 
     @Given("verify Admin created successfully confirmation message")
@@ -250,5 +253,23 @@ public class CommonStepDefs {
 
         BrowserUtils.verifyElementNotDisplayed(commonLocator.confirmationMessage);
     }
+    @Then("password without numbers error message appears")
+    public void passwordWithoutNumbersErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutNumberErrorMessage);
+    }
 
+    @Then("password without uppercase error message appears")
+    public void passwordWithoutUppercaseErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutUpperCaseErrorMessage);
+    }
+
+    @Then("password without lowercase error message appears")
+    public void passwordWithoutLowercaseErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutLowerCaseErrorMessage);
+    }
+
+    @Then("password less then 8 character error message appears")
+    public void passwordLessThen8CharacterErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordLessCharErrorMessage);
+    }
 }
