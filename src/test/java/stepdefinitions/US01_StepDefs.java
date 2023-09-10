@@ -93,4 +93,35 @@ public class US01_StepDefs {
         waitFor(2);
         registerPage.userName.sendKeys(faker.name().firstName());
     }
+
+    @Then("verify blank field required message")
+    public void verifyBlankFieldRequiredMessage() {
+        BrowserUtils.verifyExpectedAndActualTextMatch("Required",registerPage.requiredMessage);
+    }
+
+
+    @And("enter invalid phone number")
+    public void enterInvalidPhoneNumber() {
+        registerPage.phoneNumber.sendKeys("------------");
+    }
+
+    @Then("verify Invalid phone number alert is seen")
+    public void verifyInvalidPhoneNumberAlertIsSeen() {
+        BrowserUtils.verifyExpectedAndActualTextMatch("Please enter valid phone number",registerPage.invalidPhoneNumberMessage);
+    }
+
+    @And("enter invalid ssn number")
+    public void enterInvalidSsnNumber() {
+        registerPage.ssn.sendKeys("-----------");
+    }
+
+    @Then("verify Invalid SSN number alert is seen")
+    public void verifyInvalidSSNNumberAlertIsSeen() {
+        BrowserUtils.verifyExpectedAndActualTextMatch("Please enter valid SSN number",registerPage.invalidSSNNumberMessage);
+    }
+
+    @Then("verify invalid password message seen")
+    public void verifyInvalidPasswordMessageSeen() {
+        BrowserUtils.verifyExpectedAndActualTextMatch("At least 8 characters",registerPage.invalidPassword);
+    }
 }
