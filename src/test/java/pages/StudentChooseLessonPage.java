@@ -37,4 +37,7 @@ public class StudentChooseLessonPage {
     @FindBy(xpath = "//div[@role='alert']")
     public WebElement collisionErrorAlertMessage;
 
+    @FindBy(xpath = "//*[@id='lessonId']/option[8]")
+    public WebElement selectLesson;
+
 }
