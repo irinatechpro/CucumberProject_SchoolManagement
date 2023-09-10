@@ -60,7 +60,13 @@ public class TeacherMeetManagementPage {
     @FindBy(xpath = "//div[contains(text(), 'Meet deleted successfully')]")
     public WebElement verifyMeetDeletedMessage;
 
+    @FindBy(xpath = "//a[.='Teacher Management']")
+    public WebElement teacherManagementLInk;
 
+    @FindBy(id="isAdvisorTeacher")
+    public WebElement isAdvisorTeacher;
 
+    @FindBy(id="password")
+    public WebElement lastTeacherPassword;
 
 }
