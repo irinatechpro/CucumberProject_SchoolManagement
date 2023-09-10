@@ -29,4 +29,18 @@ public class CommonLocator {
     @FindBy(xpath = "//button[(text()='Menu')]")
     public WebElement menuButton;
 
+    @FindBy(xpath = "//*[@id='offcanvasNavbar-expand-lg']/div[2]/div/a[11]")
+    public WebElement guestUser;
+
+    @FindBy(xpath = "//*[@class='fw-bold p-3 card-header']")
+    public WebElement guestUserList;
+
+    @FindBy(xpath = "//*[@class='fa-solid fa-trash']")
+    public WebElement deleteUserGuest;
+
+    @FindBy(xpath = "//*[@id='root']/div/main/div/div[1]/div/div/div/div[1]/table/tbody/tr[2]/td[5]/span/button")
+    public WebElement getDeleteUserGuestSuccessfully;
+
+
+
 }
