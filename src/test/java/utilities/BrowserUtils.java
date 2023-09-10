@@ -203,12 +203,17 @@ public class BrowserUtils {
         }
     }
     // ALERT
-    public void acceptAlert() throws InterruptedException {
+    public static void acceptAlert() throws InterruptedException {
         Driver.getDriver().switchTo().alert().accept();
     }
-    public void dismissAlert() throws InterruptedException {
+    public static void dismissAlert() throws InterruptedException {
         Driver.getDriver().switchTo().alert().accept();
     }
+    public static String alertText() {
+        Driver.getDriver().switchTo().alert().getText();
+        return alertText();
+    }
+
     // IFRAME
     public static void switchIframeByWebElement(String xpath){
         WebElement iframeElement = Driver.getDriver().findElement(By.xpath(xpath));
