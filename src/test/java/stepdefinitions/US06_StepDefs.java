@@ -7,11 +7,11 @@ import utilities.*;
 import static org.junit.Assert.assertTrue;
 public class US06_StepDefs {
     CommonLocator commonLocator =new CommonLocator();
-    @Then("verify Vice Dean created successfully confirmation message")
-    public void verifyViceDeanCreatedSuccessfullyConfirmationMessage() {
-        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
-        assertTrue(commonLocator.confirmationMessage.getText().contains("Vice dean Saved"));
-    }
+//    @Then("verify Vice Dean created successfully confirmation message")
+//    public void verifyViceDeanCreatedSuccessfullyConfirmationMessage() {
+//        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
+//        assertTrue(commonLocator.confirmationMessage.getText().contains("Vice dean Saved"));
+//    }
 
     @Then("verify user name should contains at least four characters")
     public void verifyUserNameShouldContainsAtLeastFourCharacters() {

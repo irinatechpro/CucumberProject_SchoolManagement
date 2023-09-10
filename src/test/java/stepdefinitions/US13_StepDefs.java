@@ -19,11 +19,11 @@ public class US13_StepDefs {
     CreateStudentPage createStudentPage=new CreateStudentPage();
     ViceDeanTeacherManagementPage viceDeanTeacherManagementPage=new ViceDeanTeacherManagementPage();
     Faker faker=new Faker();
-    @Given("click Teacher Management Link")
-    public void click_teacher_management_link() {
-        WaitUtils.waitFor(2);
-        JSUtils.clickWithTimeoutByJS(viceDeanTeacherManagementPage.teacherManagementLink);
-    }
+//    @Given("click Teacher Management Link")
+//    public void click_teacher_management_link() {
+//        WaitUtils.waitFor(2);
+//        JSUtils.clickWithTimeoutByJS(viceDeanTeacherManagementPage.teacherManagementLink);
+//    }
     @Given("select lesson from choose lesson")
     public void select_lesson_from_choose_lesson() {
         WaitUtils.waitFor(2);
