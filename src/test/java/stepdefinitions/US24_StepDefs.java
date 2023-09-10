@@ -17,10 +17,10 @@ public class US24_StepDefs {
     ViceDean_LessonManagementPage viceDeanLessonManagementPage=new ViceDean_LessonManagementPage();
     CommonLocator commonLocator =new CommonLocator();
 
-    @Given("click Teacher Management Link")
-    public void click_teacher_management_link() {
-        JSUtils.clickWithTimeoutByJS(teacherMeetManagementPage.teacherManagementLInk);
-    }
+//    @Given("click Teacher Management Link")
+//    public void click_teacher_management_link() {
+//        JSUtils.clickWithTimeoutByJS(teacherMeetManagementPage.teacherManagementLInk);
+//    }
 
     @Then("select is Advisor Teacher")
     public void select_is_Advisor_Teacher() {
