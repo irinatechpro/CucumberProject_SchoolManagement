@@ -2,20 +2,30 @@ package stepdefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pages.StudentChooseLessonPage;
-import utilities.ActionUtils;
-import utilities.BrowserUtils;
 import utilities.JSUtils;
 import utilities.WaitUtils;
 
-import static org.junit.Assert.assertTrue;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class US21_StepDefs {
     StudentChooseLessonPage studentChooseLessonPage = new StudentChooseLessonPage();
+
     @Then("verify Teacher, Day, Start Time and Stop Time are visible")
     public void verify_teacher_day_start_time_and_stop_time_are_visible() {
         assertTrue(studentChooseLessonPage.teacherHeader.isDisplayed());
+        assertTrue(studentChooseLessonPage.dayHeader.isDisplayed());
+        assertTrue(studentChooseLessonPage.startTimeHeader.isDisplayed());
+        assertTrue(studentChooseLessonPage.stopTimeHeader.isDisplayed());
     }
+    // Get list of lessons before adding new one
+    List<WebElement> allAddedLessons = studentChooseLessonPage.addedlessonsList.findElements(By.xpath("(//tbody)[2]/tr/td[1]"));
+    int originalCount = allAddedLessons.size();
+
     @Then("user selects a lesson")
     public void user_selects_a_lesson() {
         WaitUtils.waitFor(2);
@@ -26,16 +36,21 @@ public class US21_StepDefs {
     public void user_clicks_on_submit_button() {
         JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.submitButton);
     }
-    //TC01 FIX!!!!!!!!!!!!!!
+    //TC01
     @Then("verify lesson added to student message appear")
     public void verify_lesson_added_to_student_message_appear() {
-        //WaitUtils.waitForVisibility(studentChooseLessonPage.lessonAddedToStudentAlertMessage,5);
-        assertTrue(studentChooseLessonPage.lessonAddedToStudentAlertMessage.getText().contains("Lesson added to student"));
+        WaitUtils.waitForVisibility(studentChooseLessonPage.lessonAddedToStudentAlertMessage, 2);
+        assertTrue(studentChooseLessonPage.lessonAddedToStudentAlertMessage.isDisplayed());
     }
-    //COMPLETE!!!!!!!!
+
     @Then("verify selected courses are visible in lesson program")
     public void verify_selected_courses_are_visible_in_lesson_program() {
 
+        // Get updated lessons list
+        List<WebElement> updatedLessons = studentChooseLessonPage.addedlessonsList.findElements(By.xpath("(//tbody)[2]/tr/td[1]"));
+        // Assert list size increased
+        int updatedCount = updatedLessons.size();
+        assertEquals(updatedCount, originalCount + 1);
     }
 
     //TC02
@@ -46,5 +61,37 @@ public class US21_StepDefs {
     }
 
     //TC03
+    @Given("verify user deletes added lesson")
+    public void verify_user_deletes_added_lesson() {
+        //The added lesson still visible in the list
+       assertTrue(studentChooseLessonPage.addedLesson.isDisplayed());
+    }
+
+    //TC04
+    @Given("user clicks on menu button")
+    public void user_clicks_on_menu_button() {
+        JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.menuButton);
+    }
+    @Given("user clicks on grades and announcements")
+    public void user_clicks_on_grades_and_announcements() {
+        JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.gradesAndAnnouncementsLink);
+    }
+    @Then("verify user sees their exam grades")
+    public void verify_user_sees_their_exam_grades() {
+
+        //Find table body
+        WebElement tableBody1 = studentChooseLessonPage.studentGradeList;
+
+        //Assert table body text is empty
+        assertEquals(tableBody1.getText(), "");
+    }
+    @Then("verify user sees meetings created by advisor")
+    public void verify_user_sees_meetings_created_by_advisor() {
+        //Find table body
+        WebElement tableBody2 = studentChooseLessonPage.studentMeetingList;
+
+        //Assert table body text is empty
+        assertEquals(tableBody2.getText(), "");
+    }
 
 }

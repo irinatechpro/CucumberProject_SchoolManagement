@@ -1,11 +1,15 @@
 package pages;
 
 import io.cucumber.java.zh_cn.假如;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.BrowserUtils;
 import utilities.Driver;
+import utilities.WaitUtils;
 
 import java.util.List;
 
@@ -57,6 +61,8 @@ public class ViceDean_LessonManagementPage {
      * Below are elements for the Lesson Management area - LESSONS TAB
      ************************************************************************/
 
+    public String trackLessonName = null;
+
     //Text field input for lesson name
     @FindBy(css = "#lessonName")
     public WebElement lessonName;
@@ -87,10 +93,12 @@ public class ViceDean_LessonManagementPage {
 
     //Find the WebElement for lesson from the Lesson List table
     //Note: this is in trial at the moment. Might not work!
+    //UPDATE: THIS METHOD WORKS. USE IT!
+    //CAUTION -- you may need to use JSUtils to scroll element into view first
     public WebElement findLessonInLessonList(String lessonNameInTable) {
 
-        return Driver.getDriver().findElement(By.cssSelector(
-                "(//table)[2]//tbody//td[.='"+lessonName+"']"
+        return Driver.getDriver().findElement(By.xpath(
+                "(//table)[2]//tbody//td[.='"+lessonNameInTable+"']"
         ));
     }
 
@@ -101,20 +109,21 @@ public class ViceDean_LessonManagementPage {
 
     // >>>>>>>>>>>>Still Testing this! Don't delete <<<<<<<<<<<<<
 
-//    public void findAndDeleteLesson(WebElement element) {
-//        List<WebElement> getElements = Driver.getDriver().findElements(By.xpath("(//table)[2]//tbody//tr"));
-//
-//        for(WebElement lesson: getElements) {
-//            if (getElements.)
-//        }
-//    }
+    public void findAndDeleteLesson(WebElement element) {
+        List<WebElement> getElements = Driver.getDriver().findElements(By.xpath("(//table)[2]//tbody//tr//td"));
+
+        for (WebElement currentElement : getElements) {
+            System.out.println(element.getText());
+            System.out.println("Hi");
+        }
+    }
 
     /************************************************************************
      * Below are elements for the Lesson Management area - LESSONS PROGRAM TAB
      ************************************************************************/
 
     //Select input choose lesson
-    @FindBy(css = "#react-select-3-placeholder")
+    @FindBy(css = ".css-19bb58m input")
     public WebElement getSelectionChooseLesson;
 
     //Select input choose education term
@@ -126,19 +135,25 @@ public class ViceDean_LessonManagementPage {
     public WebElement getSelectionChooseDay;
 
     //start time
-    //NOTE: must send keys in this format: --:-- -- where the last part is am or pm
-                                    //e.g. 21:00 pm
+    //NOTE: must send keys in this format: --:--  where the last part is am or pm
+                                    //e.g. 21:00
     @FindBy(css = "#startTime")
     public WebElement startTime;
 
     //Stop Time
-    //NOTE: must send keys in this format: --:-- -- where the last part is am or pm
-                                    //e.g. 21:00 pm
+    //NOTE: must send keys in this format: --:--  where the last part is am or pm
+                                    //e.g. 21:00
     @FindBy(css = "#stopTime")
     public WebElement stopTime;
 
     //Submit Lesson Program
-    @FindBy(xpath = "(//form)[3]//button")
-    public WebElement lessonProgramSubmitButton;
+    @FindBy(xpath = "//a[.='Lesson Management']")
+    public WebElement submitLessonButton;
+
+
+
+
+
+
 
 }

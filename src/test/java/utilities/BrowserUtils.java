@@ -203,12 +203,17 @@ public class BrowserUtils {
         }
     }
     // ALERT
-    public void acceptAlert() throws InterruptedException {
+    public static void acceptAlert() throws InterruptedException {
         Driver.getDriver().switchTo().alert().accept();
     }
-    public void dismissAlert() throws InterruptedException {
+    public static void dismissAlert() throws InterruptedException {
         Driver.getDriver().switchTo().alert().accept();
     }
+    public static String alertText() {
+        Driver.getDriver().switchTo().alert().getText();
+        return alertText();
+    }
+
     // IFRAME
     public static void switchIframeByWebElement(String xpath){
         WebElement iframeElement = Driver.getDriver().findElement(By.xpath(xpath));
@@ -234,5 +239,16 @@ public class BrowserUtils {
     public static void switchToWindow(int windowNumber){
         List<String> list = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(list.get(windowNumber));
+    }
+    // to format phone number as XXX-XXX-XXXX
+    public static String formatPhoneNumber(String phoneNumber) {
+        // Remove any non-numeric characters from the phone number
+        String numericPhoneNumber = phoneNumber.replaceAll("[^0-9]", "");
+
+        // Format as XXX-XXX-XXXX
+        return String.format("%s-%s-%s",
+                numericPhoneNumber.substring(0, 3),
+                numericPhoneNumber.substring(3, 6),
+                numericPhoneNumber.substring(6, 10));
     }
 }

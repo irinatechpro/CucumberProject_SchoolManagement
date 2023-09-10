@@ -4,11 +4,16 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+<<<<<<< HEAD
 
 import org.junit.Assert;
 import pages.*;
 import pages.ContactPage;
 
+=======
+//import pages.Homepage;
+import pages.Homepage;
+>>>>>>> 13a777cd82d87cb0eee913fc6bbf7bb11d73d34b
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.WaitUtils;

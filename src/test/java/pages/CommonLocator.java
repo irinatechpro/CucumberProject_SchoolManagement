@@ -29,6 +29,7 @@ public class CommonLocator {
     @FindBy(xpath = "//button[(text()='Menu')]")
     public WebElement menuButton;
 
+<<<<<<< HEAD
     @FindBy(xpath = "//*[@id='offcanvasNavbar-expand-lg']/div[2]/div/a[11]")
     public WebElement guestUser;
 
@@ -41,6 +42,40 @@ public class CommonLocator {
     @FindBy(xpath = "//*[@id='root']/div/main/div/div[1]/div/div/div/div[1]/table/tbody/tr[2]/td[5]/span/button")
     public WebElement getDeleteUserGuestSuccessfully;
 
+=======
+    @FindBy(xpath = "//*[@placeholder='Name']")
+    public WebElement name;
+    @FindBy(xpath = "//*[@placeholder='Surname']")
+    public WebElement surname;
+    @FindBy(xpath = "//*[@placeholder='Birth Place']")
+    public WebElement birthplace;
+    @FindBy(xpath = "//*[@value='MALE']")
+    public WebElement genderMale;
+    @FindBy(xpath = "//*[@value='FEMALE']")
+    public WebElement genderFemale;
+    @FindBy(xpath = "//*[@placeholder='Password']")
+    public WebElement passwordField;
+    @FindBy(xpath = "//button[.='Submit']")
+    public WebElement submitButton;
+    @FindBy(xpath = "//*[@role='alert']")
+    public WebElement confirmationMessage;
+    @FindBy(xpath = "//a[@class='page-link' and contains(., 'Last')]")
+    public WebElement goLastPageButton;
+    @FindBy(xpath = "//*[text()='One number']")
+    public WebElement passwordWithoutNumberErrorMessage;
+    @FindBy(xpath = "//*[.='One lowercase character']")
+    public WebElement passwordWithoutLowerCaseErrorMessage;
+    @FindBy(xpath = "//*[.='One uppercase character']")
+    public WebElement passwordWithoutUpperCaseErrorMessage;
+    @FindBy(xpath = "//*[.='At least 8 characters']")
+    public WebElement passwordLessCharErrorMessage;
+
+    @FindBy(linkText = "Lesson Management")
+    public WebElement lessonManagementLink;
+
+    @FindBy(xpath = "//*[@id=\"27\"]/div[1]/div[2]")
+    public WebElement existingEmailMasage;
+>>>>>>> 13a777cd82d87cb0eee913fc6bbf7bb11d73d34b
 
 
 }

@@ -3,10 +3,17 @@ package stepdefinitions;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import utilities.*;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import pages.CommonLocator;
 import pages.LoginPage;
-import utilities.Driver;
-import utilities.WaitUtils;
+
+import java.time.Duration;
+
+import static org.junit.Assert.assertTrue;
+import static utilities.BrowserUtils.formatPhoneNumber;
 
 public class CommonStepDefs {
 
@@ -24,9 +31,9 @@ public class CommonStepDefs {
 
     @Given("user navigates to {string}")
     public void userNavigatesTo(String url) {
+        Driver.getDriver().get(url);
         WaitUtils.waitFor(2);
         Driver.getDriver().get(url);
-
     }
 
     @Given("user clicks on login link")
@@ -47,41 +54,222 @@ public class CommonStepDefs {
 
     @Given("user clicks on login button")
     public void user_clicks_on_login_button() {
-        loginPage.loginButton.click();
+        JSUtils.clickWithTimeoutByJS(loginPage.loginButton);
     }
 
-    //@Then("enter date of birth")
-    //public void enter_date_of_birth() {
-    //   commonLocator.dateOfBirth.sendKeys(faker.date().birthday().toString());
 
-//    }
-    //@Then("enter valid phone number")
-    //public void enter_valid_phone_number() {
-    //    commonLocator.phoneNumberField.sendKeys(faker.phoneNumber().phoneNumber().toString());
-//
-    //}
+    @Then("enter date of birth")
+    public void enter_date_of_birth() {
+       commonLocator.dateOfBirth.sendKeys("01/05/1990");
+    }
+    @Then("enter valid phone number")
+    public void enter_valid_phone_number() {
+        // Generate a fake phone number as a string
+        String phoneNumber = faker.phoneNumber().phoneNumber();
+
+        // Format the phone number as XXX-XXX-XXXX
+        String formattedPhoneNumber = BrowserUtils.formatPhoneNumber(phoneNumber);
+
+        System.out.println("Generated Phone Number: " + phoneNumber);
+        System.out.println("Formatted Phone Number: " + formattedPhoneNumber);
+
+        commonLocator.phoneNumberField.sendKeys(formattedPhoneNumber);
+    }
+
     @Then("enter valid SSN")
     public void enter_valid_ssn() {
         commonLocator.ssnField.sendKeys(faker.idNumber().ssnValid().toString());
-
     }
+
     @Then("enter username")
     public void enter_username() {
         commonLocator.usernameField.sendKeys(faker.name().username());
+        WaitUtils.waitFor(2);
     }
 
     @Given("click menu button")
     public void click_menu_button() {
         commonLocator.menuButton.click();
     }
-    @Given("click Student Management Link")
-    public void click_student_management_link() {
-        commonLocator.studentManagementLink.click();
+
+
+    @Given("enter Name")
+    public void enter_Name() {
+        commonLocator.name.sendKeys(faker.name().firstName());
     }
 
+    @Given("enter Surname")
+    public void enter_Surname() {
 
 
+        commonLocator.surname.sendKeys(faker.name().lastName());
+    }
 
+    @Given("enter Birth Place")
+    public void enter_Birth_Place() {
+        commonLocator.birthplace.sendKeys(faker.country().capital());
+    }
 
+    @Given("select Male Gender")
+    public void select_Gender_Male() {
+        WaitUtils.waitFor(2);
+        commonLocator.genderMale.click();
+    }
 
+    @Given("select Female Gender")
+    public void select_Gender_Female() {
+        JSUtils.clickWithTimeoutByJS(commonLocator.genderFemale);
+    }
+
+    @Given("enter password")
+    public void enter_password() {
+        commonLocator.passwordField.sendKeys("Testpw12");
+    }
+
+    @Given("enter password with only seven chars")
+    public void enter_password_with_only_seven_chars() {
+        commonLocator.passwordField.sendKeys("Testpw1");
+    }
+
+    @Given("enter password without lowercase chars")
+    public void enter_password_without_lowercase_chars() {
+        commonLocator.passwordField.sendKeys("TESTPW12");
+    }
+
+    @Given("enter password without uppercase chars")
+    public void enter_password_without_uppercase_chars() {
+        commonLocator.passwordField.sendKeys("testpw12");
+    }
+
+    @Given("enter password without numbers")
+    public void enter_password_without_numbers() {
+        commonLocator.passwordField.sendKeys("Testpwtest");
+    }
+
+    @Given("click submit button")
+    public void click_submit_Button() {
+        JSUtils.clickWithTimeoutByJS(commonLocator.submitButton);
+        JSUtils.scrollAllTheWayUpJS();
+        WaitUtils.waitFor(1);
+    }
+
+    @Given("verify Admin created successfully confirmation message")
+    public void verify_admin_created_successfully_confirmation_message() {
+        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
+        assertTrue(commonLocator.confirmationMessage.getText().contains("Admin Saved"));
+    }
+
+    @Given("verify Admin created successfully confirmation message does not appears")
+    public void verify_admin_created_successfully_confirmation_message_does_not_appears() {
+        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
+        assert(commonLocator.confirmationMessage.getText().contains("Admin Saved"));
+    }
+    @Then("verify password at least eight characters error message")
+    public void verifyPasswordAtLeastEightCharactersErrorMessage() {
+        Assert.assertTrue(commonLocator.passwordLessCharErrorMessage.isDisplayed());
+    }
+
+    @Then("verify password One uppercase character error message")
+    public void verifyPasswordOneUppercaseCharacter() {
+        Assert.assertTrue(commonLocator.passwordWithoutUpperCaseErrorMessage.isDisplayed());
+    }
+
+    @Then("verify password One lowercase character error message")
+    public void verifyPasswordOneLowercaseCharacterErrorMessage() {
+        Assert.assertTrue(commonLocator.passwordWithoutLowerCaseErrorMessage.isDisplayed());
+    }
+
+    @Then("verify password One number character error message")
+    public void verifyPasswordOneNumberCharacterErrorMessage() {
+        Assert.assertTrue(commonLocator.passwordWithoutNumberErrorMessage.isDisplayed());
+    }
+
+    @Then("click last page button")
+    public void click_last_page_button(){
+
+        WaitUtils.waitFor(3);
+        JSUtils.clickWithTimeoutByJS(commonLocator.goLastPageButton);
+    }
+
+    //use this if you want to do the entire operation of going to site
+    //and logging in as Vice Dean
+    //If you need to reuse for each scenario, then use this in Background
+    @Given("login as vice dean {string} {string}")
+    public void loginAsViceDean(String username, String password) {
+
+        //go to url
+        Driver.getDriver().get(ConfigReader.getProperty("ms_url"));
+
+        //Wait for the page to load - throw exception if not load in 15s
+        WaitUtils.waitForPageToLoad(15);
+
+        //Find login element and click
+        WaitUtils.waitForClickablility(loginPage.loginLink, 15);
+        loginPage.loginLink.click();
+
+        //Wait for page load + assert correct page has loaded
+        WaitUtils.waitForPageToLoad(15);
+        Assert.assertEquals(
+                Driver.getDriver().getCurrentUrl(),
+                "https://managementonschools.com/login"
+        );
+
+        //Now use credentials for logging in
+        //username
+        WaitUtils.waitForClickablility(loginPage.userName, 15);
+        loginPage.userName.sendKeys(username);
+
+        //password
+        WaitUtils.waitForClickablility(loginPage.password, 15);
+        loginPage.password.sendKeys(password);
+
+        //login button click
+        WaitUtils.waitForClickablility(loginPage.loginButton, 15);
+        loginPage.loginButton.click();
+
+        //Wait for next page load correctly + with username
+        //page correction
+        WaitUtils.waitFor(2);
+        Assert.assertEquals(
+                Driver.getDriver().getCurrentUrl(),
+                "https://managementonschools.com/lesson"
+        );
+
+        //username correction
+        WebElement getUsernameLabel = Driver.getDriver().findElement(By.cssSelector(
+                ".navbar span > span:nth-child(2)"
+        ));
+
+        WaitUtils.waitForVisibility(getUsernameLabel, 15);
+        Assert.assertEquals(
+                username,
+                getUsernameLabel.getText()
+        );
+
+        System.out.println("Complete...");
+    }
+    @Then("verify submit fails")
+    public void verify_submit_fails() {
+
+        BrowserUtils.verifyElementNotDisplayed(commonLocator.confirmationMessage);
+    }
+    @Then("password without numbers error message appears")
+    public void passwordWithoutNumbersErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutNumberErrorMessage);
+    }
+
+    @Then("password without uppercase error message appears")
+    public void passwordWithoutUppercaseErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutUpperCaseErrorMessage);
+    }
+
+    @Then("password without lowercase error message appears")
+    public void passwordWithoutLowercaseErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordWithoutLowerCaseErrorMessage);
+    }
+
+    @Then("password less then 8 character error message appears")
+    public void passwordLessThen8CharacterErrorMessageAppears() {
+        BrowserUtils.verifyElementDisplayed(commonLocator.passwordLessCharErrorMessage);
+    }
 }

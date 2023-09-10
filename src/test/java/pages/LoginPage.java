@@ -21,6 +21,10 @@ public class LoginPage {
 
     @FindBy(xpath = "//button[.='Login']")
     public WebElement loginButton;
+    @FindBy(xpath = "//*[@href='/register']")
+    public WebElement registerLink;
+
+
 
     @FindBy(xpath = "//*[@id='root']/div/header/div[1]/div/div/div/nav/span")
     public WebElement verifyUserLogin;
