@@ -100,6 +100,8 @@ public class CommonStepDefs {
 
     @Given("enter Surname")
     public void enter_Surname() {
+
+
         commonLocator.surname.sendKeys(faker.name().lastName());
     }
 
@@ -110,6 +112,7 @@ public class CommonStepDefs {
 
     @Given("select Male Gender")
     public void select_Gender_Male() {
+        WaitUtils.waitFor(2);
         commonLocator.genderMale.click();
     }
 
@@ -160,6 +163,25 @@ public class CommonStepDefs {
     public void verify_admin_created_successfully_confirmation_message_does_not_appears() {
         WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
         assert(commonLocator.confirmationMessage.getText().contains("Admin Saved"));
+    }
+    @Then("verify password at least eight characters error message")
+    public void verifyPasswordAtLeastEightCharactersErrorMessage() {
+        Assert.assertTrue(commonLocator.passwordLessCharErrorMessage.isDisplayed());
+    }
+
+    @Then("verify password One uppercase character error message")
+    public void verifyPasswordOneUppercaseCharacter() {
+        Assert.assertTrue(commonLocator.passwordWithoutUpperCaseErrorMessage.isDisplayed());
+    }
+
+    @Then("verify password One lowercase character error message")
+    public void verifyPasswordOneLowercaseCharacterErrorMessage() {
+        Assert.assertTrue(commonLocator.passwordWithoutLowerCaseErrorMessage.isDisplayed());
+    }
+
+    @Then("verify password One number character error message")
+    public void verifyPasswordOneNumberCharacterErrorMessage() {
+        Assert.assertTrue(commonLocator.passwordWithoutNumberErrorMessage.isDisplayed());
     }
 
     @Then("click last page button")
