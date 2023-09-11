@@ -185,8 +185,7 @@ public class US05_StepDefs {
     public void assertThatDeanSavedAlertIsSeen() throws IOException {
             BrowserUtils.verifyExpectedAndActualTextMatch("Dean Saved", deanManagementPage.deanSavedText);
             WaitUtils.waitFor(1);
-            //BrowserUtils.verifyElementDisplayed(commonLocator.confirmationMessage);
-            //MediaUtils.takeScreenshotOfThisElement(commonLocator.confirmationMessage);
+
 
 
     }
