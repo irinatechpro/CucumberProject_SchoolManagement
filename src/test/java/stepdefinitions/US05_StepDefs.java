@@ -130,8 +130,8 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @When("clicks on Male for gender")
-    public void clicks_on_male_for_gender() {
+    @When("clicks on Female for gender")
+    public void clicks_on_female_for_gender() {
         deanManagementPage.deanGender.click();
         WaitUtils.waitFor(1);
     }
@@ -186,6 +186,29 @@ public class US05_StepDefs {
             BrowserUtils.verifyExpectedAndActualTextMatch("Dean Saved", deanManagementPage.deanSavedText);
             WaitUtils.waitFor(1);
 
+    }
+
+    @And("user goes to the last page of the dean list")
+    public void userGoesToTheLastPageOfTheDeanList() {
+        JSUtils.clickWithTimeoutByJS(deanManagementPage.lastPageButton);
+        WaitUtils.waitFor(1);
+    }
+
+    @And("goes to the Dean created")
+    public void goesToTheDeanCreated() {
+        String nameOfCreatedDean = deanManagementPage.deanName.getText();
+        JSUtils.scrollIntoViewJS(deanManagementPage.lastRowDeanList);
+        WaitUtils.waitFor(1);
+        String lastRow = deanManagementPage.lastRowDeanList.getText();
+        System.out.println("lastRow = " + lastRow);
+        Assert.assertTrue(lastRow.contains(nameOfCreatedDean));
+        WaitUtils.waitFor(1);
+    }
+
+    @And("asserts that Edit button clickable")
+    public void assertsthatEditbottonclickable() {
+        JSUtils.clickWithTimeoutByJS(deanManagementPage.lastRowDeanList);
+        WaitUtils.waitFor(1);
 
 
     }
