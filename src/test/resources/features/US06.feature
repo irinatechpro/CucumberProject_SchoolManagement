@@ -20,7 +20,7 @@ Feature: Deans should be able to create a Vice Dean account
     And enter username
     And enter password
     And click submit button
-    Then verify Vice Dean created successfully confirmation message
+    Then verify Vice Dean is created successfully confirmation message
     Then close the application
 
   @US06_TC02

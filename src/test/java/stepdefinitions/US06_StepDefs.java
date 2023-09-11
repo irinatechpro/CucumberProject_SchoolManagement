@@ -22,6 +22,11 @@ public class US06_StepDefs {
             //exception handling
         }
     }
+
+    @Then("verify Vice Dean is created successfully confirmation message")
+    public void verifyViceDeanIsCreatedSuccessfullyConfirmationMessage() {
+        Assert.assertTrue(commonLocator.confirmationMessage.isDisplayed());
+    }
 }
 
 
