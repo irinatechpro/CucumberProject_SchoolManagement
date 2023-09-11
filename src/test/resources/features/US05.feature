@@ -36,7 +36,7 @@ Feature: Admins should be able to see and delete Deans
     And enters Phone number
     And enters ssn number
     And admin user enters username
-    And admin user enters password "Project11++"
+    And admin user enters password "Istabul1"
     And user clicks on submit
     And user scrolls down to to click last page button
     And user scrolls up to verify the dean created
