@@ -28,5 +28,58 @@ public class DeanManagementPage {
     @FindBy(xpath = "//h5[text()='Dean List']")
     public WebElement deanList;
 
+    @FindBy(xpath = "//h5[text()='Add Dean']")
+    public WebElement addDean;
+
+    @FindBy(xpath = "//input[@id='name']")
+    public WebElement deanName;
+
+    @FindBy(xpath = "//input[@id='surname']")
+    public WebElement deanSurname;
+
+    @FindBy(xpath = "//input[@id='birthPlace']")
+    public WebElement deanBirthPlace;
+
+    @FindBy(xpath = "//input[@value='MALE']")
+    public WebElement deanGender;
+
+    @FindBy(xpath = "//input[@id='birthDay']")
+    public WebElement deanBirthDay;
+
+    @FindBy(xpath = "//input[@id='phoneNumber']")
+    public WebElement deanPhoneNumber;
+
+    @FindBy(xpath = "//input[@id='ssn']")
+    public WebElement deanSsnNumber;
+
+    @FindBy(xpath = "//input[@id='username']")
+    public WebElement deanUsername;
+
+    @FindBy(xpath = "//input[@id='password']")
+    public WebElement deanPassword;
+
+    @FindBy(xpath = "//button[text()='Submit']")
+    public WebElement addDeanSubmit;
+
+    @FindBy(xpath = "(//span[@aria-hidden='true'])[4]")
+    public WebElement lastPageButton;
+
+    @FindBy(xpath = "//span[text()='Buyukersenn']")
+    public WebElement verifyDean;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
