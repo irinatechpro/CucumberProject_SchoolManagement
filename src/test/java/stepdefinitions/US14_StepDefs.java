@@ -50,9 +50,7 @@ public class US14_StepDefs {
      */
     @And("Vice Dean should be able to update teacher information")
     public void viceDeanShouldBeAbleToUpdateTeacherInformation() {
-
         viceDeanTeacherManagementPage.createTeacher();
-
-        WaitUtils.waitFor(2000);
+        viceDeanTeacherManagementPage.updateTeacherInformationAndCheckUpdate();
     }
 }
