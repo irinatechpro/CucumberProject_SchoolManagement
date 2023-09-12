@@ -198,7 +198,7 @@ public class CommonStepDefs {
     public void loginAsViceDean(String username, String password) {
 
         //go to url
-        Driver.getDriver().get(ConfigReader.getProperty("ms_url"));
+        Driver.getDriver().get(ConfigReader.getProperty("url"));
 
         //Wait for the page to load - throw exception if not load in 15s
         WaitUtils.waitForPageToLoad(15);
