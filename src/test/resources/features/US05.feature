@@ -32,7 +32,7 @@ Feature: Admins should be able to see and delete Deans
     And enters surname "<surname>"
     And enters birthplace "<birthplace>"
     And clicks on Female for gender
-    And enters Date of Birth "<DOB>"
+    And enters Date of Birth
     And enters Phone number "<Phone number>"
     And enters ssn number "<ssn number>"
     And admin user enters username "<username>"
@@ -41,7 +41,8 @@ Feature: Admins should be able to see and delete Deans
     Then assert that Dean Saved alert is seen
     And user goes to the last page of the dean list
     And goes to the Dean created
-    Then asserts that Edit button clickable
+    And user clicks on Edit button
+    And user enters a new name "<name>"
 
 
 

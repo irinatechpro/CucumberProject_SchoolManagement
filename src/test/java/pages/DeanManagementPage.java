@@ -72,10 +72,13 @@ public class DeanManagementPage {
     @FindBy(xpath = "//table//tbody//tr[last()]")
     public WebElement lastRowDeanList;
 
-    @FindBy(xpath = "//tr[last()]/td[6]//button")
+    @FindBy(xpath = "//tr[last()]/td[6]//button[@class='text-dark btn btn-outline-info']")
     public WebElement lastColumnDeanList;
 
-    //button[text()='Edit']
+    @FindBy(xpath = "(//input[@id='name'])[2]")
+    public WebElement updateDeanName;
+
+
 
 
 
