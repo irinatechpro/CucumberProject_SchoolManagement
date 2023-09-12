@@ -6,8 +6,8 @@ Feature: Admins should be able to see and delete Deans
     Given Admin user is on The Managementon Schools website
     And clicks on Login link
     And sees the page has Login title
-    When enters username "AdminProjectDot"
-    And password "Project11+"
+    When Admin user enters username "AdminProjectDot"
+    And enters password "Project11+"
     And Admin user clicks on login button
     Then sees the "Admin Management" title
 
@@ -35,7 +35,7 @@ Feature: Admins should be able to see and delete Deans
     And enters Date of Birth
     And enters Phone number "<Phone number>"
     And enters ssn number "<ssn number>"
-    And Admin user enters username "<username>"
+    And Admin user enters a new username "<username>"
     And enters password "Istabul1"
     And user clicks on submit
     Then sees the Dean Saved alert

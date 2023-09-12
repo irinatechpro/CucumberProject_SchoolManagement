@@ -56,14 +56,14 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @When("enters username {string}")
-    public void enters_username(String string) {
+    @When("Admin user enters a new username {string}")
+    public void admin_user_enters_a_new_username(String string) {
         loginPage.userName.sendKeys("AdminProjectDot");
 
     }
 
-    @When("password {string}")
-    public void password(String string) {
+    @When("enters password {string}")
+    public void enters_password(String string) {
         loginPage.password.sendKeys("Project11+");
         WaitUtils.waitFor(1);
     }
