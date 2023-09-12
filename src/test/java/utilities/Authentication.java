@@ -57,14 +57,4 @@ public class Authentication {
         return  response.jsonPath().getString("token");
     }
 
-
-    public static void main(String[] args) {
-        System.out.println("generateTokenAdmin() = " + generateTokenAdmin());
-        System.out.println("generateTokenDean() = " + generateTokenDean());
-        System.out.println("generateTokenViceDean() = " + generateTokenViceDean());
-        System.out.println("generateTokenTeacher() = " + generateTokenTeacher());
-        System.out.println("generateTokenStudent() = " + generateTokenStudent());
-    }
-
-
 }
