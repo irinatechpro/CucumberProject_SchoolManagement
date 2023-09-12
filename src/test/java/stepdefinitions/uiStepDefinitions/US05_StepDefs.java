@@ -16,6 +16,7 @@ import pages.LoginPage;
 import runners.Runner;
 import utilities.*;
 
+import javax.swing.text.Utilities;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +35,7 @@ public class US05_StepDefs {
     Faker faker = new Faker();
 
     private String nameDean;
+    private String nameDeanUpdate;
 
     @Given("Admin user is on The Managementon Schools website")
     public void admin_user_is_on_the_managementon_schools_website() {
@@ -136,11 +138,9 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @And("enters Date of Birth {string}")
-    public void entersDateOfBirth(String arg0) {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        String dob = sdf.format(faker.date().birthday());
-        deanManagementPage.deanBirthDay.sendKeys(dob);
+    @And("enters Date of Birth")
+    public void entersDateOfBirth() {
+        deanManagementPage.deanBirthDay.sendKeys("11/11/1234");
         WaitUtils.waitFor(1);
     }
 
@@ -205,11 +205,20 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @And("asserts that Edit button clickable")
-    public void assertsthatEditbottonclickable() {
-        JSUtils.clickWithTimeoutByJS(deanManagementPage.lastRowDeanList);
-        WaitUtils.waitFor(1);
-
-
+    @And("user clicks on Edit button")
+    public void userClicksOnEditButton() {
+        WaitUtils.waitFor(2);
+        JSUtils.clickWithTimeoutByJS(deanManagementPage.lastColumnDeanList);
+        WaitUtils.waitFor(2);
     }
+
+    @And("user enters a new name {string}")
+    public void userEntersANewName(String string) {
+        WaitUtils.waitFor(2);
+        //BrowserUtils.switchIframeByIndex(1);
+        nameDeanUpdate = faker.name().firstName();
+        deanManagementPage.updateDeanName.sendKeys(nameDeanUpdate);
+        WaitUtils.waitFor(1);
+    }
+
 }
