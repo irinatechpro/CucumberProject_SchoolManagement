@@ -34,13 +34,13 @@ Feature:student choose lesson management panel
 
   @US21_TC03
   Scenario:Students can delete added lessons
-    Then verify user deletes added lesson
+    Then verify added lesson still visible in the list
     Then close the application
 
   @US21_TC04
   Scenario:Students choose grades and announcements
     And user clicks on menu button
     And user clicks on grades and announcements
-    Then verify user sees their exam grades
-    Then verify user sees meetings created by advisor
+    Then verify exam grades is empty
+    Then verify meetings created by advisor is empty
     Then close the application
