@@ -50,8 +50,8 @@ public class US05_StepDefs {
 
     }
 
-    @Given("assserts that the page has Login title")
-    public void assserts_that_the_page_has_login_title() {
+    @Given("sees the page has Login title")
+    public void sees_the_page_has_login_title() {
         Assert.assertTrue(Driver.getDriver().getCurrentUrl().contains("login"));
         WaitUtils.waitFor(1);
     }
@@ -59,7 +59,7 @@ public class US05_StepDefs {
     @When("enters username {string}")
     public void enters_username(String string) {
         loginPage.userName.sendKeys("AdminProjectDot");
-        WaitUtils.waitFor(1);
+
     }
 
     @When("password {string}")
@@ -74,8 +74,8 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @Then("asserts that page has {string} title")
-    public void asserts_that_page_has_a_title(String string) {
+    @Then("sees the {string} title")
+    public void sees_the_title(String string) {
         Assert.assertTrue(adminManagementPage.adminManagementTitle.getText().contains("Admin Management"));
         WaitUtils.waitFor(1);
     }
@@ -86,8 +86,8 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @Given("Menu list is visible on the left hand side")
-    public void menu_list_is_visible_on_the_left_hand_side() {
+    @Given("sees the menu list on the left hand side")
+    public void sees_the_menu_list_on_the_left_hand_side() {
         Assert.assertTrue(adminManagementPage.buttonClose.isDisplayed());
         WaitUtils.waitFor(1);
     }
@@ -98,8 +98,8 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @Then("asserts that Deans information can be seen")
-    public void assertsThatDeansInformationCanBeSeen() {
+    @Then("sees the Deans information")
+    public void sees_the_Deans_information() {
         JSUtils.scrollIntoViewJS(deanManagementPage.deanList);
         Assert.assertTrue(deanManagementPage.name.getText().contains("TeamProject") | deanManagementPage.gender.getText().contains("MALE") |
                 deanManagementPage.phoneNumber.getText().contains("444-444-4444") | deanManagementPage.ssn.getText().contains("444-44-4444") |
@@ -162,40 +162,40 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @When("admin user enters username {string}")
-    public void admin_user_enters_username(String string) {
+    @When("Admin user enters username {string}")
+    public void adminUserEntersUsername(String string) {
         deanManagementPage.deanUsername.sendKeys(faker.name().username());
         WaitUtils.waitFor(1);
 
     }
 
-    @When("admin user enters password {string}")
-    public void admin_user_enters_password(String string) {
-        deanManagementPage.deanPassword.sendKeys("Istabul1");
+    @When("enters password {string}")
+    public void entersPassword(String string) {
+        deanManagementPage.deanPassword.sendKeys("Istanbul1");
         WaitUtils.waitFor(1);
     }
 
     @When("user clicks on submit")
-    public void user_clicks_on_submit() {
+    public void userClicksOnSubmit() {
         deanManagementPage.addDeanSubmit.click();
         WaitUtils.waitFor(1);
     }
 
-    @Then("assert that Dean Saved alert is seen")
-    public void assertThatDeanSavedAlertIsSeen() throws IOException {
-            BrowserUtils.verifyExpectedAndActualTextMatch("Dean Saved", deanManagementPage.deanSavedText);
-            WaitUtils.waitFor(1);
+    @Then("sees the Dean Saved alert")
+    public void seesTheDeanSavedalert() throws IOException {
+        BrowserUtils.verifyExpectedAndActualTextMatch("Dean Saved", deanManagementPage.deanSavedText);
+        WaitUtils.waitFor(1);
 
     }
 
-    @And("user goes to the last page of the dean list")
-    public void userGoesToTheLastPageOfTheDeanList() {
+    @And("Admin user goes to the last page of the dean list")
+    public void adminUserGoesToTheLastPageOfTheDeanList() {
         JSUtils.clickWithTimeoutByJS(deanManagementPage.lastPageButton);
         WaitUtils.waitFor(1);
     }
 
-    @And("goes to the Dean created")
-    public void goesToTheDeanCreated() {
+    @And("goes to the last Dean created")
+    public void goesToTheLastDeanCreated() {
         String nameOfCreatedDean = deanManagementPage.deanName.getText();
         JSUtils.scrollIntoViewJS(deanManagementPage.lastRowDeanList);
         WaitUtils.waitFor(1);
@@ -205,20 +205,47 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @And("user clicks on Edit button")
-    public void userClicksOnEditButton() {
+    @And("clicks on Edit button")
+    public void clicksOnEditButton() {
         WaitUtils.waitFor(2);
         JSUtils.clickWithTimeoutByJS(deanManagementPage.lastColumnDeanList);
         WaitUtils.waitFor(2);
     }
 
-    @And("user enters a new name {string}")
-    public void userEntersANewName(String string) {
+    @And("enters a new Dean name {string}")
+    public void entersANewDeanName(String string) {
         WaitUtils.waitFor(2);
         //BrowserUtils.switchIframeByIndex(1);
         nameDeanUpdate = faker.name().firstName();
         deanManagementPage.updateDeanName.sendKeys(nameDeanUpdate);
+        WaitUtils.waitFor(3);
+    }
+
+
+    @And("enters the password in the edit box {string}")
+    public void entersThePasswordInTheEditBox(String string) {
+        WaitUtils.waitFor(1);
+        deanManagementPage.deanPasswordEditBox.sendKeys("Istanbul1");
         WaitUtils.waitFor(1);
     }
+
+    @And("clicks on Female for gender in the edit box")
+    public void clicksOnFemaleForGenderInTheEditBox() {
+        deanManagementPage.femaleGenderButtonEditBox.click();
+    }
+
+    @And("Admin user clicks Submit button")
+    public void adminUserClicksSubmitButton() {
+        deanManagementPage.submitButtonEditBox.click();
+    }
+
+
+    @And("sees the Dean updated Successful alert")
+    public void seesTheDeanUpdatedSuccessfulAlert() throws IOException {
+        WaitUtils.waitFor(1);
+        BrowserUtils.verifyExpectedAndActualTextMatch("Dean updated Successful", deanManagementPage.deanUpdatedSuccessfulText);
+        WaitUtils.waitFor(1);
+    }
+
 
 }

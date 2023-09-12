@@ -5,27 +5,27 @@ Feature: Admins should be able to see and delete Deans
 
     Given Admin user is on The Managementon Schools website
     And clicks on Login link
-    And assserts that the page has Login title
+    And sees the page has Login title
     When enters username "AdminProjectDot"
     And password "Project11+"
     And Admin user clicks on login button
-    Then asserts that page has "Admin Management" title
+    Then sees the "Admin Management" title
 
 @US05_TC01
 
   Scenario: TC01_Admin should be able to see Name, Gender, Phone Number, SSN and User Name information of Deans
 
     Given Admin user clicks on menu button
-    And Menu list is visible on the left hand side
+    And sees the menu list on the left hand side
     When user clicks on "Dean Management" link
-    Then asserts that Deans information can be seen
+    Then sees the Deans information
 
 @US05_TC03
 
   Scenario: TC03-Admin should be able to update Deans
 
     Given Admin user clicks on menu button
-    And Menu list is visible on the left hand side
+    And sees the menu list on the left hand side
     When user clicks on "Dean Management" link
     And goes to Add Dean
     And enters name "<name>"
@@ -35,14 +35,18 @@ Feature: Admins should be able to see and delete Deans
     And enters Date of Birth
     And enters Phone number "<Phone number>"
     And enters ssn number "<ssn number>"
-    And admin user enters username "<username>"
-    And admin user enters password "Istabul1"
+    And Admin user enters username "<username>"
+    And enters password "Istabul1"
     And user clicks on submit
-    Then assert that Dean Saved alert is seen
-    And user goes to the last page of the dean list
-    And goes to the Dean created
-    And user clicks on Edit button
-    And user enters a new name "<name>"
+    Then sees the Dean Saved alert
+    And Admin user goes to the last page of the dean list
+    And goes to the last Dean created
+    And clicks on Edit button
+    And enters a new Dean name "<name>"
+    And enters the password in the edit box "<Istanbul1>"
+    And clicks on Female for gender in the edit box
+    And Admin user clicks Submit button
+    And sees the Dean updated Successful alert
 
 
 

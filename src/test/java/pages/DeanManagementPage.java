@@ -67,7 +67,7 @@ public class DeanManagementPage {
 
     @FindBy(xpath = "//*[.='Dean Saved']")
     public WebElement deanSavedText;
-    //div[.="Guest User registered"
+
 
     @FindBy(xpath = "//table//tbody//tr[last()]")
     public WebElement lastRowDeanList;
@@ -77,6 +77,19 @@ public class DeanManagementPage {
 
     @FindBy(xpath = "(//input[@id='name'])[2]")
     public WebElement updateDeanName;
+
+    @FindBy(xpath = "(//input[@id='password'])[2]")
+    public WebElement deanPasswordEditBox;
+
+    @FindBy(xpath = "(//button[.='Submit'])[2]")
+    public WebElement submitButtonEditBox;
+
+
+    @FindBy(xpath = "//*[.='Dean updated Successful']")
+    public WebElement deanUpdatedSuccessfulText;
+
+    @FindBy(xpath = "(//input[@value='FEMALE'])[2]")
+    public WebElement femaleGenderButtonEditBox;
 
 
 
