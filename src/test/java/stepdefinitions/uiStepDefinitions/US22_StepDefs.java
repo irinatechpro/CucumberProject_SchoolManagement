@@ -1,4 +1,4 @@
-package stepdefinitions;
+package stepdefinitions.uiStepDefinitions;
 
 import io.cucumber.java.en.Given;
 import utilities.WaitUtils;

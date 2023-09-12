@@ -1,12 +1,10 @@
-package stepdefinitions;
+package stepdefinitions.uiStepDefinitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Wait;
 import pages.ViceDean_LessonManagementPage;
 import utilities.Driver;
 import utilities.JSUtils;
