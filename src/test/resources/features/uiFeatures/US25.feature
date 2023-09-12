@@ -74,7 +74,7 @@ Feature: Admin should be able to create a student
     Then verify submit fails
 
   @US25_TC04
-  Scenario: Birth_place_Field_Left_Empty
+  Scenario: Birth_Place_Field_Left_Empty
     And click menu button
     And click Student Management Link
     And choose Advisor Teacher
@@ -116,7 +116,7 @@ Feature: Admin should be able to create a student
     Then verify submit fails
 
   @US25_TC06
-  Scenario: AdvisorTeacher_not_chosen
+  Scenario: AdvisorTeacher_Not_Chosen
     And click menu button
     And click Student Management Link
     #And choose Advisor Teacher
