@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -40,7 +41,7 @@ public class DeanManagementPage {
     @FindBy(xpath = "//input[@id='birthPlace']")
     public WebElement deanBirthPlace;
 
-    @FindBy(xpath = "//input[@value='MALE']")
+    @FindBy(xpath = "//input[@value='FEMALE']")
     public WebElement deanGender;
 
     @FindBy(xpath = "//input[@id='birthDay']")
@@ -64,8 +65,21 @@ public class DeanManagementPage {
     @FindBy(xpath = "(//span[@aria-hidden='true'])[4]")
     public WebElement lastPageButton;
 
-    @FindBy(xpath = "//span[text()='Buyukersenn']")
-    public WebElement verifyDean;
+    @FindBy(xpath = "//*[.='Dean Saved']")
+    public WebElement deanSavedText;
+    //div[.="Guest User registered"
+
+    @FindBy(xpath = "//table//tbody//tr[last()]")
+    public WebElement lastRowDeanList;
+
+    @FindBy(xpath = "//tr[last()]/td[6]//button")
+    public WebElement lastColumnDeanList;
+
+    //button[text()='Edit']
+
+
+
+
 
 
 

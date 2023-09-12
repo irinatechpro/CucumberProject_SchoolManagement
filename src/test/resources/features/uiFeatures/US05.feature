@@ -28,18 +28,22 @@ Feature: Admins should be able to see and delete Deans
     And Menu list is visible on the left hand side
     When user clicks on "Dean Management" link
     And goes to Add Dean
-    And enters name
-    And enters surname
-    And enters birthplace
-    And clicks on Male for gender
-    And enters Date of Birth
-    And enters Phone number
-    And enters ssn number
-    And admin user enters username
+    And enters name "<name>"
+    And enters surname "<surname>"
+    And enters birthplace "<birthplace>"
+    And clicks on Female for gender
+    And enters Date of Birth "<DOB>"
+    And enters Phone number "<Phone number>"
+    And enters ssn number "<ssn number>"
+    And admin user enters username "<username>"
     And admin user enters password "Istabul1"
     And user clicks on submit
-    And user scrolls down to to click last page button
-    And user scrolls up to verify the dean created
+    Then assert that Dean Saved alert is seen
+    And user goes to the last page of the dean list
+    And goes to the Dean created
+    Then asserts that Edit button clickable
+
+
 
 
 
