@@ -61,8 +61,8 @@ public class US21_StepDefs {
     }
 
     //TC03
-    @Given("verify user deletes added lesson")
-    public void verify_user_deletes_added_lesson() {
+    @Given("verify added lesson still visible in the list")
+    public void verify_added_lesson_still_visible_in_the_list() {
         //The added lesson still visible in the list
        assertTrue(studentChooseLessonPage.addedLesson.isDisplayed());
     }
@@ -76,8 +76,8 @@ public class US21_StepDefs {
     public void user_clicks_on_grades_and_announcements() {
         JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.gradesAndAnnouncementsLink);
     }
-    @Then("verify user sees their exam grades")
-    public void verify_user_sees_their_exam_grades() {
+    @Then("verify exam grades is empty")
+    public void verify_exam_grades_is_empty() {
 
         //Find table body
         WebElement tableBody1 = studentChooseLessonPage.studentGradeList;
@@ -85,8 +85,8 @@ public class US21_StepDefs {
         //Assert table body text is empty
         assertEquals(tableBody1.getText(), "");
     }
-    @Then("verify user sees meetings created by advisor")
-    public void verify_user_sees_meetings_created_by_advisor() {
+    @Then("verify meetings created by advisor is empty")
+    public void verify_meetings_created_by_advisor_is_empty() {
         //Find table body
         WebElement tableBody2 = studentChooseLessonPage.studentMeetingList;
 
