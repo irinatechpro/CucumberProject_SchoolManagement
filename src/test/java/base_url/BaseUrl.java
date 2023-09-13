@@ -9,7 +9,9 @@ import static utilities.Authentication.*;
 
 
 public class BaseUrl {
+
     public static RequestSpecification spec;
+
     static public void adminSetUp() {
         spec = new RequestSpecBuilder().
                 setContentType(ContentType.JSON).
@@ -39,7 +41,7 @@ public class BaseUrl {
     public static void studentSetUp() {
         spec = new RequestSpecBuilder().
                 setContentType(ContentType.JSON).
-                addHeader("Authorization", generateTokenStudent()).
+               // addHeader("Authorization", generateTokenStudent()).
                 setBaseUri(ConfigReader.getProperty("apiUrl")).build();
     }
 
