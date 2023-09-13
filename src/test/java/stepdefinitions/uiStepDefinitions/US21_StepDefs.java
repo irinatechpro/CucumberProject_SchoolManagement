@@ -89,7 +89,7 @@ public class US21_StepDefs {
         WebElement tableBody2 = studentChooseLessonPage.studentMeetingList;
 
         //Assert table body text is empty
-        assertEquals(tableBody2.getText(), "");
+        assertTrue(tableBody2.getText().isEmpty());
     }
 
 }
