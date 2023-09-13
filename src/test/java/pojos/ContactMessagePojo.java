@@ -1,6 +1,8 @@
 package pojos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.github.javafaker.HarryPotter;
+import com.github.javafaker.Lorem;
 
 @JsonIgnoreProperties(ignoreUnknown = true)//ignores unrecognized fields
 public class ContactMessagePojo {
