@@ -2,7 +2,7 @@
 Feature: Vice Deans should be able to create a student
 
   Background: go_homepage_and_login
-    Given user navigates to "https://managementonschools.com/"
+    Given user navigates to
     And user clicks on login link
     And user enters username "JGreen"
     And user enters password "JasonGreen1"
