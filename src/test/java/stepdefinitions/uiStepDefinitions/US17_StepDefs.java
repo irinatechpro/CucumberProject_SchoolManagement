@@ -19,7 +19,7 @@ public class US17_StepDefs {
 
     @Given("user navigates to")
     public void user_navigates_to() {
-        Driver.getDriver().get(ConfigReader.getProperty("ms_url"));
+        Driver.getDriver().get(ConfigReader.getProperty("url"));
 
     }
     @Given("user clicks on the login link")
