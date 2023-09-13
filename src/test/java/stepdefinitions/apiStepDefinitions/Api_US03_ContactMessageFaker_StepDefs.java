@@ -16,7 +16,7 @@ public class Api_US03_ContactMessageFaker_StepDefs extends BaseUrl {
    /*
    Given
       url from baseUrl
-    And
+   And
       Request body:
         {
           "email": "abd@ab.com",
@@ -24,11 +24,11 @@ public class Api_US03_ContactMessageFaker_StepDefs extends BaseUrl {
           "name": "Robert Smith",
           "subject": "Registration"
         }
-  When
+   When
         Send post request
-  Then
+   Then
         Status code is 200
-  And
+   And
         Response body should be like:
         {
         "object": {

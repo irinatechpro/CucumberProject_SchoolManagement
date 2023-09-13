@@ -1,8 +1,6 @@
 package stepdefinitions.apiStepDefinitions;
 
 import base_url.BaseUrl;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import pojos.ContactMessagePojo;
@@ -11,11 +9,11 @@ import utils.ObjectMapperUtils;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
-public class Api_US03_ContactMessage_StepDefs extends BaseUrl {
+public class Api_US03_ContactMessagePractice_StepDefs extends BaseUrl {
    /*
    Given
       url from baseUrl
-    And
+   And
       Request body:
         {
           "email": "abd@ab.com",
@@ -23,11 +21,11 @@ public class Api_US03_ContactMessage_StepDefs extends BaseUrl {
           "name": "Robert Smith",
           "subject": "Registration"
         }
-  When
+   When
         Send post request
-  Then
+   Then
         Status code is 200
-  And
+   And
         Response body should be like:
         {
         "object": {
