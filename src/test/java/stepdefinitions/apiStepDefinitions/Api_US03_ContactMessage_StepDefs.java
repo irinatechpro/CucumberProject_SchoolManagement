@@ -1,11 +1,13 @@
 package stepdefinitions.apiStepDefinitions;
 
 import base_url.BaseUrl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import pojos.ContactMessagePojo;
 import pojos.ContactMessageResponsePojo;
-
+import utils.ObjectMapperUtils;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
@@ -41,34 +43,35 @@ public class Api_US03_ContactMessage_StepDefs extends BaseUrl {
     */
 
     Response response;
+    ContactMessagePojo expectedData;
 
     //-------------------- TC01 -----------------------
     @Test
-    public void postUS03TC1(){
-    studentSetUp();
+    public void postUS03TC1() {
+        studentSetUp();
 
-    //Set the url
-    spec.pathParams("first","contactMessages", "second", "save");
+        //Set the url
+        spec.pathParams("first","contactMessages", "second", "save");
 
-    //Set the expected data
-    ContactMessagePojo expectedData = new ContactMessagePojo("abd@ab.com", "This is text", "Robert Smith", "Registration");
+        //Set the expected data
+        expectedData = new ContactMessagePojo("abd@ab.com", "This is text", "Robert Smith", "Registration");
 
-    //Send the request and get the response
-    response = given(spec).body(expectedData).post("{first}/{second}");
-    response.prettyPrint();
+        //Send the request and get the response
+        response = given(spec).body(expectedData).post("{first}/{second}");
+        response.prettyPrint();
 
-    //Do Assertion
-    ContactMessageResponsePojo actualData = response.as(ContactMessageResponsePojo.class);
+        //Do Assertion
+        ContactMessageResponsePojo actualData = ObjectMapperUtils.convertJsonToJava(response.asString(), ContactMessageResponsePojo.class);
 
-    assertEquals(200, response.statusCode());
-    assertEquals(expectedData.getEmail(), actualData.getObject().getEmail());
-    assertEquals(expectedData.getMessage(), actualData.getObject().getMessage());
-    assertEquals(expectedData.getName(), actualData.getObject().getName());
-    assertEquals(expectedData.getSubject(), actualData.getObject().getSubject());
+        assertEquals(200, response.statusCode());
+        assertEquals(expectedData.getEmail(), actualData.getObject().getEmail());
+        assertEquals(expectedData.getMessage(), actualData.getObject().getMessage());
+        assertEquals(expectedData.getName(), actualData.getObject().getName());
+        assertEquals(expectedData.getSubject(), actualData.getObject().getSubject());
 
-    //Additional assertion for the response body
-    assertEquals("Contact Message Created Successfully", actualData.getMessage());
-    assertEquals("CREATED", actualData.getHttpStatus());
+        //Additional assertion for the response body
+        assertEquals("Contact Message Created Successfully", actualData.getMessage());
+        assertEquals("CREATED", actualData.getHttpStatus());
 
     }
 }
