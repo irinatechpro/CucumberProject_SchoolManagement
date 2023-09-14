@@ -1,19 +1,22 @@
 package stepdefinitions.apiStepDefinitions;
 
 import base_url.BaseUrl;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.javafaker.Faker;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import pojos.ContactMessagePojo;
 import pojos.ContactMessageResponsePojo;
-
+import utilities.FakerUtils;
+import utils.ObjectMapperUtils;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
-public class Api_US03_ContactMessage_StepDefs extends BaseUrl {
+public class Api_US03_ContactMessageFaker_StepDefs extends BaseUrl {
    /*
    Given
       url from baseUrl
-    And
+   And
       Request body:
         {
           "email": "abd@ab.com",
@@ -21,11 +24,11 @@ public class Api_US03_ContactMessage_StepDefs extends BaseUrl {
           "name": "Robert Smith",
           "subject": "Registration"
         }
-  When
+   When
         Send post request
-  Then
+   Then
         Status code is 200
-  And
+   And
         Response body should be like:
         {
         "object": {
@@ -41,24 +44,29 @@ public class Api_US03_ContactMessage_StepDefs extends BaseUrl {
     */
 
     Response response;
+    ContactMessagePojo expectedData;
 
     //-------------------- TC01 -----------------------
     @Test
-    public void postUS03TC1(){
+    public void postUS03TC1() throws JsonProcessingException {
     studentSetUp();
 
     //Set the url
     spec.pathParams("first","contactMessages", "second", "save");
 
     //Set the expected data
-    ContactMessagePojo expectedData = new ContactMessagePojo("abd@ab.com", "This is text", "Robert Smith", "Registration");
+    expectedData = new ContactMessagePojo(
+            FakerUtils.emailFaker(),
+            Faker.instance().book().title(),
+            FakerUtils.nameFaker(),
+            FakerUtils.lessonFaker());
 
     //Send the request and get the response
     response = given(spec).body(expectedData).post("{first}/{second}");
     response.prettyPrint();
 
     //Do Assertion
-    ContactMessageResponsePojo actualData = response.as(ContactMessageResponsePojo.class);
+    ContactMessageResponsePojo actualData = ObjectMapperUtils.convertJsonToJava(response.asString(), ContactMessageResponsePojo.class);
 
     assertEquals(200, response.statusCode());
     assertEquals(expectedData.getEmail(), actualData.getObject().getEmail());
