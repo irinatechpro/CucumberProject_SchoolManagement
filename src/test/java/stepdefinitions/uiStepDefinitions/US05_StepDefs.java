@@ -116,7 +116,7 @@ public class US05_StepDefs {
 
     @And("enters birthplace {string} on Add Dean section")
     public void enters_birthplace_on_add_dean_cection(String string) {
-        deanManagementPage.deanBirthPlace.sendKeys(faker.country().capital());
+        deanManagementPage.deanBirthPlace.sendKeys("Istanbul");
         WaitUtils.waitFor(1);
     }
 
@@ -152,7 +152,7 @@ public class US05_StepDefs {
 
     @And("Admin user enters a new username {string} on Add Dean section")
     public void adminUserEntersANewUsernameOnAddDeanSection(String string) {
-        deanManagementPage.deanUsername.sendKeys(faker.name().username());
+        deanManagementPage.deanUsername.sendKeys(faker.bothify("????##"));
         WaitUtils.waitFor(1);
 
     }
