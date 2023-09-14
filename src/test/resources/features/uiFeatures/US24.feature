@@ -12,13 +12,13 @@ Feature: Admin should be able to create a teacher
     And click menu button
     And click Teacher Management Link
     And choose Lesson
-    And enter Name
+    And enter Teacher Name
     And enter Surname
     And enter Birth Place
     And enter email
     And enter valid phone number
     And select is Advisor Teacher
-    And select Male Gender
+    And select Teacher Male Gender
     Then enter date of birth
     And enter valid SSN
     And enter username
@@ -35,7 +35,7 @@ Feature: Admin should be able to create a teacher
       And enter email
       And enter valid phone number
       And select is Advisor Teacher
-      And select Male Gender
+      And select Teacher Male Gender
       Then enter date of birth
       And enter valid SSN
       And enter username
@@ -54,7 +54,7 @@ Feature: Admin should be able to create a teacher
       #  And enter email
         And enter valid phone number
         And select is Advisor Teacher
-        And select Male Gender
+        And select Teacher Male Gender
         Then enter date of birth
         And enter valid SSN
         And enter username

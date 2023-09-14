@@ -3,11 +3,8 @@ package stepdefinitions.uiStepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.ContactPage;
-import utilities.BrowserUtils;
 import utilities.JSUtils;
 import utilities.WaitUtils;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class US03_StepDefs {
@@ -39,19 +36,21 @@ public class US03_StepDefs {
     public void user_clicks_on_send_message_button() {
         JSUtils.clickWithTimeoutByJS(contactPage.sendMessageButton);
     }
-    //TC01
+
+    //-------------------- TC01 -----------------------
     @Then("verify contact message created successfully confirmation appear")
     public void verify_contact_message_created_successfully_confirmation_appear() {
         WaitUtils.waitForVisibility(contactPage.contactCreatedAlertMessage,5);
         assertTrue(contactPage.contactCreatedAlertMessage.getText().contains("Contact Message Created Successfully"));
     }
-    //TC02
+
+    //-------------------- TC02 -----------------------
     @Then("verify the required message is visible")
     public void verify_the_required_message_is_visible() {
         assertTrue(contactPage.requiredTextMessage.isDisplayed());
     }
 
-    //TC03
+    //-------------------- TC03 -----------------------
     @Then("verify please enter valid email message will appear")
     public void verify_please_enter_valid_email_message_will_appear() {
         WaitUtils.waitForVisibility(contactPage.invalidEmailAlertMessage,5);

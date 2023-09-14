@@ -36,7 +36,8 @@ public class US21_StepDefs {
     public void user_clicks_on_submit_button() {
         JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.submitButton);
     }
-    //TC01
+
+    //-------------------- TC01 -----------------------
     @Then("verify lesson added to student message appear")
     public void verify_lesson_added_to_student_message_appear() {
         WaitUtils.waitForVisibility(studentChooseLessonPage.lessonAddedToStudentAlertMessage, 2);
@@ -53,21 +54,21 @@ public class US21_StepDefs {
         assertEquals(updatedCount, originalCount + 1);
     }
 
-    //TC02
+    //-------------------- TC02 -----------------------
     @Then("verify course schedule cannot be selected for the same hour and day")
     public void verify_course_schedule_cannot_be_selected_for_the_same_hour_and_day() {
         WaitUtils.waitForVisibility(studentChooseLessonPage.collisionErrorAlertMessage,5);
         assertTrue(studentChooseLessonPage.collisionErrorAlertMessage.getText().contains("Course schedule cannot be selected for the same hour and day"));
     }
 
-    //TC03
+    //-------------------- TC03 -----------------------
     @Given("verify added lesson still visible in the list")
     public void verify_added_lesson_still_visible_in_the_list() {
         //The added lesson still visible in the list
        assertTrue(studentChooseLessonPage.addedLesson.isDisplayed());
     }
 
-    //TC04
+    //-------------------- TC04 -----------------------
     @Given("user clicks on menu button")
     public void user_clicks_on_menu_button() {
         JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.menuButton);
@@ -76,14 +77,11 @@ public class US21_StepDefs {
     public void user_clicks_on_grades_and_announcements() {
         JSUtils.clickWithTimeoutByJS(studentChooseLessonPage.gradesAndAnnouncementsLink);
     }
-    @Then("verify exam grades is empty")
-    public void verify_exam_grades_is_empty() {
-
+    @Then("verify exam grades are visible")
+    public void verify_exam_grades_are_visible() {
         //Find table body
         WebElement tableBody1 = studentChooseLessonPage.studentGradeList;
-
-        //Assert table body text is empty
-        assertEquals(tableBody1.getText(), "");
+        assertTrue(tableBody1.isDisplayed());
     }
     @Then("verify meetings created by advisor is empty")
     public void verify_meetings_created_by_advisor_is_empty() {
@@ -91,7 +89,7 @@ public class US21_StepDefs {
         WebElement tableBody2 = studentChooseLessonPage.studentMeetingList;
 
         //Assert table body text is empty
-        assertEquals(tableBody2.getText(), "");
+        assertTrue(tableBody2.getText().isEmpty());
     }
 
 }

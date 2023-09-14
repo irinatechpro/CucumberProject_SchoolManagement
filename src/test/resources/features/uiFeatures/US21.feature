@@ -41,6 +41,6 @@ Feature:student choose lesson management panel
   Scenario:Students choose grades and announcements
     And user clicks on menu button
     And user clicks on grades and announcements
-    Then verify exam grades is empty
+    Then verify exam grades are visible
     Then verify meetings created by advisor is empty
     Then close the application

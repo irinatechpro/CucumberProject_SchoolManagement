@@ -9,17 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.CommonLocator;
 import pages.LoginPage;
-
-import java.time.Duration;
-
 import static org.junit.Assert.assertTrue;
-import static utilities.BrowserUtils.formatPhoneNumber;
 
 public class CommonStepDefs {
 
     LoginPage loginPage = new LoginPage();
     CommonLocator commonLocator = new CommonLocator();
-
     Faker faker = new Faker();
 
     @Then("close the application")
