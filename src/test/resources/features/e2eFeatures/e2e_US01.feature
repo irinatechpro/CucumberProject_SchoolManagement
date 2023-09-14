@@ -1,4 +1,4 @@
-@E2E @US01
+@E2E
 Feature:Prospective students should be able to register in the system
 
   @UI
