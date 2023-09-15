@@ -31,7 +31,7 @@ public class US02_StepDefs {
     @Given("user goes to url")
     public void user_goes_to_url() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("ms_url"));
+        Driver.getDriver().get(ConfigReader.getProperty("url"));
     }
     @When("User clicks on the login link")
     public void user_clicks_on_the_login_link() {
