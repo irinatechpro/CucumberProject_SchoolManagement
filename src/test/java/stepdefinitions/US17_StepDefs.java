@@ -42,7 +42,7 @@ public class US17_StepDefs {
     }
     @Given("user chooses the lesson")
     public void user_chooses_the_lesson() {
-        BrowserUtils.selectByValue(studentInfoManagement.chooseLesson,"1");
+        BrowserUtils.selectByIndex(studentInfoManagement.chooseLesson,1);
         WaitUtils.waitFor(2);
     }
     @Given("user chooses the student")
@@ -80,11 +80,10 @@ public class US17_StepDefs {
         studentInfoManagement.submitButton1.click();
         WaitUtils.waitFor(2);
     }
+
     @Then("verify student info added successfully ont the list")
     public void verify_student_info_added_successfully_ont_the_list() {
         Assert.assertTrue(studentInfoManagement.studentInfoList.isDisplayed());
-        WaitUtils.waitFor(3);
-        Driver.closeDriver();
 
     }
 
