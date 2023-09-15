@@ -7,6 +7,7 @@ Feature: Admin should be able to create a student
     And user enters username "AdminProjectDot"
     And user enters password "Project11+"
     And user clicks on login button
+    Then user sees title "Dean Management"
   @US25_TC01
   Scenario: With_Valid_Credentials
     And click menu button
