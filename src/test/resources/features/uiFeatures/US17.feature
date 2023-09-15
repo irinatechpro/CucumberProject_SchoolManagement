@@ -8,7 +8,7 @@ Feature: The teacher should be able to give grades to the students
      And user enters password
      And user click on login button
   @US17_TC01
-  Scenario: The lesson, student and semester should be selectable
+  Scenario: The lesson, student and semester should be choose able
     And user chooses the lesson
     And user chooses the student
     And user choose education term
