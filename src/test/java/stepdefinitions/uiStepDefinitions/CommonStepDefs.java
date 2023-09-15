@@ -267,4 +267,9 @@ public class CommonStepDefs {
     public void passwordLessThen8CharacterErrorMessageAppears() {
         BrowserUtils.verifyElementDisplayed(commonLocator.passwordLessCharErrorMessage);
     }
+    @Then("verify submit fails with error message")
+    public void verify_submit_fails_with_error_message() {
+
+        BrowserUtils.verifyElementDisplayed(commonLocator.errorMessageAdvisorTeacher);
+    }
 }
