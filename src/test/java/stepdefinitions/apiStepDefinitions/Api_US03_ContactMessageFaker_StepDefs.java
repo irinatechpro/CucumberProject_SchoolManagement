@@ -44,7 +44,7 @@ public class Api_US03_ContactMessageFaker_StepDefs extends BaseUrl {
         }
     */
 
-    Response response;
+    Response response; //declare in the class level, otherwise it will be another object
     ContactMessagePojo expectedData;
 
     //-------------------- TC01 -----------------------
