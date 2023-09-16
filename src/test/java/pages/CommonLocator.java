@@ -76,6 +76,9 @@ public class CommonLocator {
     @FindBy(xpath = "//*[@id=\"27\"]/div[1]/div[2]")
     public WebElement existingEmailMasage;
 
+    @FindBy(xpath = "//*[@role='alert' and .='Please select advisor teacher']")
+    public WebElement errorMessageAdvisorTeacher;
+
 
 
 }

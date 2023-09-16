@@ -9,17 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.CommonLocator;
 import pages.LoginPage;
-
-import java.time.Duration;
-
 import static org.junit.Assert.assertTrue;
-import static utilities.BrowserUtils.formatPhoneNumber;
 
 public class CommonStepDefs {
 
     LoginPage loginPage = new LoginPage();
     CommonLocator commonLocator = new CommonLocator();
-
     Faker faker = new Faker();
 
     @Then("close the application")
@@ -271,5 +266,10 @@ public class CommonStepDefs {
     @Then("password less then 8 character error message appears")
     public void passwordLessThen8CharacterErrorMessageAppears() {
         BrowserUtils.verifyElementDisplayed(commonLocator.passwordLessCharErrorMessage);
+    }
+    @Then("verify submit fails with error message")
+    public void verify_submit_fails_with_error_message() {
+
+        BrowserUtils.verifyElementDisplayed(commonLocator.errorMessageAdvisorTeacher);
     }
 }
