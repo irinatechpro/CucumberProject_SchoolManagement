@@ -8,11 +8,7 @@ Feature:student choose lesson management panel
     And user clicks on login button
 
   @US21_TC01
-
-  Scenario: Students choose lesson, grades and announcement successfully
-
   Scenario:Students choose lesson successfully
-
     Then verify Teacher, Day, Start Time and Stop Time are visible
     And user selects a lesson
     And user clicks on submit button
@@ -24,9 +20,6 @@ Feature:student choose lesson management panel
 
   Scenario: Students choose lesson with same day and time
     Then verify Teacher, Day, Start Time and Stop Time are visible
-
-  Scenario:Students choose lesson with same day and time
-
     And user selects a lesson
     And user clicks on submit button
     Then verify course schedule cannot be selected for the same hour and day
