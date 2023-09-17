@@ -14,6 +14,8 @@ import utilities.BrowserUtils;
 import utilities.JSUtils;
 import utilities.WaitUtils;
 
+import javax.swing.text.Utilities;
+
 import static org.junit.Assert.assertTrue;
 
 public class US15_StepDefs {
@@ -41,6 +43,8 @@ public class US15_StepDefs {
     @Given("click Student Management Link")
     public void click_student_management_link() {
         commonLocator.studentManagementLink.click();
+        JSUtils.scrollAllTheWayUpJS();
+        WaitUtils.waitFor(3);
     }
     @Given("verify student created successfully confirmation message")
     public void verify_student_created_successfully_confirmation_message() {

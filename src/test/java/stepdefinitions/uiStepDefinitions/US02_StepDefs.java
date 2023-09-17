@@ -31,7 +31,7 @@ public class US02_StepDefs {
     @Given("user goes to url")
     public void user_goes_to_url() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("ms_url"));
+        Driver.getDriver().get(ConfigReader.getProperty("url"));
     }
     @When("User clicks on the login link")
     public void user_clicks_on_the_login_link() {
@@ -53,15 +53,17 @@ public class US02_StepDefs {
     }
     @Then("Verify if the user logged in")
     public void verify_if_the_user_logged_in() {
+        //it is all happening too fast!
+        // give wait here so there is some time to see and assert + to click menu button after
+        WaitUtils.waitFor(2);
         Assert.assertTrue(loginPage.verifyUserLogin.isDisplayed());
-
     }
 
 
     @When("Click on the Menu Button")
     public void click_on_the_menu_button() {
+        WaitUtils.waitFor(1);
         commonLocator.menuButton.click();
-
     }
     @When("Open the Main menu")
     public void open_the_main_menu() {

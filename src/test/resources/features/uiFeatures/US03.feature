@@ -1,5 +1,5 @@
 @US03
-Feature:User Sending Message
+Feature:User should be able to send messages from contact page
   Background:Go_to_Homepage
     Given user navigates to "https://managementonschools.com/"
   @US03_TC01

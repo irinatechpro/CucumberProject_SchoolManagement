@@ -7,6 +7,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utilities.Driver;
 
+import static base_url.BaseUrl.studentSetUp;
+
 public class Hooks {
         /*
         Hooks is used to run before or after each scenario
@@ -17,9 +19,10 @@ public class Hooks {
          */
         @Before
         public void setUpScenarios(){
-
 //        System.out.println("Before Hooks>>>>>>>>>");
+            studentSetUp();
         }
+
         @After
         public void tearDown(Scenario scenario){
 //        System.out.println("After Hooks>>>>>>>>>>");
