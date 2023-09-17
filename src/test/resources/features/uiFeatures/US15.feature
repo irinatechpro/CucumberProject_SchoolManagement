@@ -134,7 +134,7 @@ Feature: Vice Deans should be able to create a student
     And enter password
     And click submit button
     And click submit button
-    Then verify submit fails
+    Then verify submit fails with error message
 
   @US15_TC07
   Scenario: Phone_Number_Field_Left_Empty
