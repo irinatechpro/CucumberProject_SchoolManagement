@@ -1,4 +1,4 @@
-@US02
+ @US02
 Feature:
 
   Background:
