@@ -67,4 +67,68 @@ public class WaitUtils {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
 
     }
+    public static void sleep(int timeOut) {
+        try {
+            Thread.sleep(timeOut);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void wait(int secs) {
+        try {
+            Thread.sleep(1000 * secs);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        } catch (java.util.NoSuchElementException e) {
+            e.printStackTrace();
+        } catch (StaleElementReferenceException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void waitAndClick(WebElement element, int timeout) {
+        for (int i = 0; i < timeout; i++) {
+            try {
+                element.click();
+                return;
+            } catch (WebDriverException e) {
+                WaitUtils.wait(1);
+            }
+        }
+    }
+    public static void waitAndSendText(WebElement element, String text, int timeout) {
+        for (int i = 0; i < timeout; i++) {
+            try {
+                element.sendKeys(text);
+                return;
+            } catch (WebDriverException e) {
+                WaitUtils.wait(1);
+            }
+        }
+    }
+    public static void waitAndSendTextWithDefaultTime(WebElement element, String text) {
+        for (int i = 0; i < 5; i++) {
+            try {
+                element.sendKeys(text);
+                return;
+            } catch (WebDriverException e) {
+                WaitUtils.wait(1);
+            }
+        }
+    }
+    public static String waitAndGetText(WebElement element, int timeout) {
+        String text = "";
+        for (int i = 0; i < timeout; i++) {
+            try {
+                text = element.getText();
+                return text;
+            } catch (WebDriverException e) {
+                WaitUtils.wait(1);
+            }
+        }
+        return null;
+    }
 }

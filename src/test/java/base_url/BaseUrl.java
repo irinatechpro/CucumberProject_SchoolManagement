@@ -4,21 +4,15 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import utilities.ConfigReader;
-
 import static utilities.Authentication.*;
-
-
 public class BaseUrl {
-
     public static RequestSpecification spec;
-
     static public void adminSetUp() {
         spec = new RequestSpecBuilder().
                 setContentType(ContentType.JSON).
                 addHeader("Authorization", generateTokenAdmin()).
                 setBaseUri(ConfigReader.getProperty("apiUrl")).build();
     }
-
     public static void deanSetUp() {
         spec = new RequestSpecBuilder().
                 setContentType(ContentType.JSON).
@@ -31,7 +25,6 @@ public class BaseUrl {
                 addHeader("Authorization",  generateTokenViceDean()).
                 setBaseUri(ConfigReader.getProperty("apiUrl")).build();
     }
-
     public static void teacherSetUp() {
         spec = new RequestSpecBuilder().
                 setContentType(ContentType.JSON).
@@ -52,5 +45,4 @@ public class BaseUrl {
                 setBaseUri(ConfigReader.getProperty("apiUrl")).build();
 
     }
-
 }

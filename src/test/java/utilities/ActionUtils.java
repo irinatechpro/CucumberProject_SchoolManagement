@@ -15,17 +15,14 @@ public class ActionUtils {
     }
     // ACTIONS_HOVER_OVER
     public static void hoverOverOnElementActions(WebElement element) {
-// Actions actions = new Actions(driver);
         new Actions(Driver.getDriver()).moveToElement(element).perform();
     }
     // ACTIONS_SCROLL_DOWN
     public static void scrollDownActions() {
-// Actions actions = new Actions(driver);
         new Actions(Driver.getDriver()).sendKeys(Keys.PAGE_DOWN).perform();
     }
     // ACTIONS_SCROLL_UP
     public static void scrollUpActions() {
-// Actions actions = new Actions(driver);
         new Actions(Driver.getDriver()).sendKeys(Keys.PAGE_UP).perform();
     }
     // ACTIONS_SCROLL_RIGHT
@@ -38,12 +35,10 @@ public class ActionUtils {
     }
     // ACTIONS_DRAG_AND_DROP
     public static void dragAndDropActions(WebElement source, WebElement target) {
-// Actions actions = new Actions(driver);
         new Actions(Driver.getDriver()).dragAndDrop(source,target).perform();
     }
     // ACTIONS_DRAG_AND_DROP_BY
     public static void dragAndDropActions(WebElement source, int x, int y) {
-// Actions actions = new Actions(driver);
         new Actions(Driver.getDriver()).dragAndDropBy(source,x,y).perform();
     }
 }
