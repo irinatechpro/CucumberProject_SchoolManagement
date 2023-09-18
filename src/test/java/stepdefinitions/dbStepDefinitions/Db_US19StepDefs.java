@@ -19,16 +19,16 @@ public class Db_US19StepDefs {
 
     }
 
-    @When("get student via name")
-    public void getStudentViaName() throws SQLException {
+    @When("get students")
+    public void getStudents() throws SQLException {
       statement = connection.createStatement();
       String query = "select * from meet";
       resultSet = statement.executeQuery(query);
     }
 
 
-    @Then("validate student, date of meet, start time, stop time, description is edited")
-    public void validateStudentDateOfMeetStartTimeStopTimeDescriptionIsEdited() throws SQLException {
+    @Then("validate studentID {string}, date {string}, start time {string}, stop time {string}, description {string} is edited")
+    public void validateStudentIDDateStartTimeStopTimeDescriptionIsEdited(String studentId, String date, String startTime, String stopTime, String description) throws SQLException {
         resultSet.next();
         String actualDate = resultSet.getString("date");
         String actualDescription = resultSet.getString("description");
@@ -36,11 +36,11 @@ public class Db_US19StepDefs {
         String actualStartTime = resultSet.getString("start_time");
         String actualStopTime = resultSet.getString("stop_time");
 
-        assertEquals("2026-09-01",actualDate);
-        assertEquals("Test Results",actualDescription);
-        assertEquals("534",actualId);
-        assertEquals("10:19:00",actualStartTime);
-        assertEquals("11:30:00",actualStopTime);
+        assertEquals(date,actualDate);
+        assertEquals(description,actualDescription);
+        assertEquals(studentId,actualId);
+        assertEquals(startTime,actualStartTime);
+        assertEquals(stopTime,actualStopTime);
 
     }
 }
