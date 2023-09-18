@@ -6,7 +6,8 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utilities.Driver;
-public class Hooks {
+public class
+        Hooks {
     /*
     Hooks is used to run before or after each scenario
     this class should only have @Before or @After annotations
