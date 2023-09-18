@@ -3,8 +3,9 @@ package stepdefinitions.apiStepDefinitions;
 import base_url.BaseUrl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
-import org.testng.annotations.Test;
 import pojos.ContactMessagePojo;
 import pojos.ContactMessageResponsePojo;
 import utilities.FakerUtils;
@@ -43,28 +44,29 @@ public class Api_US03_ContactMessageFaker_StepDefs extends BaseUrl {
         }
     */
 
-    Response response;
+    Response response; //declare in the class level, otherwise it will be another object
     ContactMessagePojo expectedData;
 
     //-------------------- TC01 -----------------------
-    @Test
-    public void postUS03TC1() throws JsonProcessingException {
-    studentSetUp();
+    @Given("user sends post request to send message from contact page")
+    public void user_sends_post_request_to_send_message_from_contact_page() {
+        //Set the url
+        spec.pathParams("first", "contactMessages", "second", "save");
 
-    //Set the url
-    spec.pathParams("first","contactMessages", "second", "save");
+        //Set the expected data
+        expectedData = new ContactMessagePojo(
+                FakerUtils.emailFaker(),
+                Faker.instance().book().title(),
+                FakerUtils.nameFaker(),
+                FakerUtils.lessonFaker());
 
-    //Set the expected data
-    expectedData = new ContactMessagePojo(
-            FakerUtils.emailFaker(),
-            Faker.instance().book().title(),
-            FakerUtils.nameFaker(),
-            FakerUtils.lessonFaker());
+        //Send the request and get the response
+        response = given(spec).body(expectedData).post("{first}/{second}");
+        response.prettyPrint();
+    }
 
-    //Send the request and get the response
-    response = given(spec).body(expectedData).post("{first}/{second}");
-    response.prettyPrint();
-
+    @Then("validate response data is the same with created user credentials")
+    public void validate_response_data_is_the_same_with_created_user_credentials() {
     //Do Assertion
     ContactMessageResponsePojo actualData = ObjectMapperUtils.convertJsonToJava(response.asString(), ContactMessageResponsePojo.class);
 
