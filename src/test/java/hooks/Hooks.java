@@ -2,10 +2,14 @@ package hooks;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utilities.Driver;
+
+import static base_url.BaseUrl.*;
+
 public class Hooks {
     /*
     Hooks is used to run before or after each scenario
@@ -14,9 +18,25 @@ public class Hooks {
     but conditional hooks can be used for running specific tags @Before("@smoke")
     Note : we should include this hooks class in the runner
      */
-    @Before
-    public void setUpScenarios() {
+    @Before("@Api_admin")
+    //This will run before each @Api_admin
+    public void beforeApi_admin(){adminSetUp();}
+    @Before("@Api_dean")
+    //This will run before each @Api_admin
+    public void beforeApi_dean(){ deanSetUp();}
+    @Before("@Api_viceDean")
+    //This will run before each @Api_admin
+    public void beforeApi_viceDean(){
+        viceDeanSetUp();
     }
+    @Before("@Api_teacher")
+    //This will run before each @Api_admin
+    public void beforeApi_teacher(){
+        teacherSetUp();
+    }
+    @Before("@Api_student")
+    //This will run before each @Api_admin
+    public void beforeApi_student(){ studentSetUp(); }
     @After
     public void tearDown(Scenario scenario) {
         /*
