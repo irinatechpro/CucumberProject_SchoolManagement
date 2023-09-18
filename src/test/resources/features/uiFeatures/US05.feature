@@ -1,5 +1,5 @@
 @US05
-Feature: Admins should be able to see and delete Deans
+Feature: Admins should be able to see and update Deans
 
   Background: Login as Admin User
 
