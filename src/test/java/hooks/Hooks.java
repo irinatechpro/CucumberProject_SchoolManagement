@@ -19,23 +19,14 @@ public class Hooks {
     Note : we should include this hooks class in the runner
      */
     @Before("@Api_admin")
-    //This will run before each @Api_admin
     public void beforeApi_admin(){adminSetUp();}
     @Before("@Api_dean")
-    //This will run before each @Api_admin
     public void beforeApi_dean(){ deanSetUp();}
     @Before("@Api_viceDean")
-    //This will run before each @Api_admin
-    public void beforeApi_viceDean(){
-        viceDeanSetUp();
-    }
+    public void beforeApi_viceDean(){viceDeanSetUp();}
     @Before("@Api_teacher")
-    //This will run before each @Api_admin
-    public void beforeApi_teacher(){
-        teacherSetUp();
-    }
+    public void beforeApi_teacher(){teacherSetUp();}
     @Before("@Api_student")
-    //This will run before each @Api_admin
     public void beforeApi_student(){ studentSetUp(); }
     @After
     public void tearDown(Scenario scenario) {

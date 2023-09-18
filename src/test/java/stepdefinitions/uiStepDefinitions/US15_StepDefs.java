@@ -90,7 +90,6 @@ public class US15_StepDefs {
             System.out.println("Assertion failed: The number is not a 4-digit number");
         }
     }
-
     @Given("send get All Student request")
     public void send_get_All_Student_request() {
         spec.pathParams("first", "students", "second", "getAll");
