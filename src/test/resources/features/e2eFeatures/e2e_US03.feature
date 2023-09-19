@@ -1,4 +1,4 @@
-@E2E @US03_Api
+git @E2E @US03_Api
 Feature: User should be able to send messages from contact page(Api)
 
   @API
