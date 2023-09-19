@@ -1,11 +1,11 @@
 package utilities;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import static org.junit.Assert.*;
-
 public class BrowserUtils {
     public static void clickWithTimeOut(WebElement element, int timeout) {
         for (int i = 0; i < timeout; i++) {
@@ -29,7 +29,6 @@ public class BrowserUtils {
         }
         return null;
     }
-
     /*
     Custom method to wait to type in an input
     */
@@ -77,12 +76,10 @@ public class BrowserUtils {
             }
         }
     }
-
     public static void selectByIndex(WebElement element, int index){
         Select objSelect =new Select(element);
         objSelect.selectByIndex(index);
     }
-
     public static void selectByValue(WebElement element, String value) {
         Select objSelect = new Select(element);
         objSelect.selectByValue(value);
@@ -93,6 +90,16 @@ public class BrowserUtils {
             System.out.println(option.getText());
             if (option.getText().equals(textOfDropdown)){
                 option.click();
+                break;
+            }
+        }
+    }
+    public static void selectAnItemFromDropdown(WebElement item, String selectableItem) {
+        WaitUtils.waitFor(5);
+        Select select = new Select(item);
+        for (int i = 0; i < select.getOptions().size(); i++) {
+            if (select.getOptions().get(i).getText().equalsIgnoreCase(selectableItem)) {
+                select.getOptions().get(i).click();
                 break;
             }
         }
@@ -111,7 +118,7 @@ public class BrowserUtils {
         return select.getFirstSelectedOption();
     }
     // DROPDOWN: accepts dropdown element and returns all selected element texts as an arraylist
-    public ArrayList<String> getDropdownSelectedOptions(WebElement element) throws Exception {
+    public static ArrayList<String> getDropdownSelectedOptions(WebElement element) throws Exception {
         if (element!=null){
             Select list = new Select(element);
             ArrayList<WebElement> allSelectedOptions = (ArrayList<WebElement>) list.getAllSelectedOptions();
@@ -239,6 +246,57 @@ public class BrowserUtils {
     public static void switchToWindow(int windowNumber){
         List<String> list = new ArrayList<>(Driver.getDriver().getWindowHandles());
         Driver.getDriver().switchTo().window(list.get(windowNumber));
+    }
+
+    //========switchToTab=====//
+    public static void switchToTab(String tabTitle){
+        var windows = Driver.getDriver().getWindowHandles();
+
+        System.out.println("Number of tabs: " + windows.size());
+
+        System.out.println("Window handles:");
+        windows.forEach(System.out::println);
+
+        for(String window : windows){
+            System.out.println("Switching to window: " + window);
+            Driver.getDriver().switchTo().window(window);
+
+            System.out.println("Current window title: " + Driver.getDriver().getTitle());
+
+            if(tabTitle.equals(Driver.getDriver().getTitle())){
+                break;
+            }
+        }
+    }
+    //========switchToNewTab=====//
+    public static void switchToNewTab(){
+        var windows = Driver.getDriver().getWindowHandles();
+        windows.forEach(Driver.getDriver().switchTo()::window);
+    }
+    //==========Return a list of string given a list of Web Element====////
+    public static List<String> getElementsText(List<WebElement> list) {
+        List<String> elemTexts = new ArrayList<>();
+        for (WebElement el : list) {
+            if (!el.getText().isEmpty()) {
+                elemTexts.add(el.getText());
+            }
+        }
+        return elemTexts;
+    }
+
+    //========Returns the Text of the element given an element locator==//
+    public static List<String> getElementsText(By locator) {
+        List<WebElement> elems = Driver.getDriver().findElements(locator);
+        List<String> elemTexts = new ArrayList<>();
+        for (WebElement el : elems) {
+            if (!el.getText().isEmpty()) {
+                elemTexts.add(el.getText());
+            }
+        }
+        return elemTexts;
+    }
+    public static void waitAndClickLocationText(WebElement element, String value) {
+        Driver.getDriver().findElement(By.xpath("//*[text()='" + value + "']")).click();
     }
     // to format phone number as XXX-XXX-XXXX
     public static String formatPhoneNumber(String phoneNumber) {
