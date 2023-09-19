@@ -118,7 +118,7 @@ public class BrowserUtils {
         return select.getFirstSelectedOption();
     }
     // DROPDOWN: accepts dropdown element and returns all selected element texts as an arraylist
-    public ArrayList<String> getDropdownSelectedOptions(WebElement element) throws Exception {
+    public static ArrayList<String> getDropdownSelectedOptions(WebElement element) throws Exception {
         if (element!=null){
             Select list = new Select(element);
             ArrayList<WebElement> allSelectedOptions = (ArrayList<WebElement>) list.getAllSelectedOptions();
