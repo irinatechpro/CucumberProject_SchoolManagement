@@ -1,4 +1,4 @@
-@US13_E2E
+@e2e_US13
 Feature: Vice Deans should be able to create a teacher
   @US13_UI
   Scenario: With_Valid_Credentials

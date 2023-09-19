@@ -208,11 +208,8 @@ public class US13_StepDefs {
 
     @Then("close the connection")
     public void close_the_connection() {
-
+        DBUtils.closeConnection();
 
     }
-
-
-
 }
 
