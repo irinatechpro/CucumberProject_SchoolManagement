@@ -22,6 +22,7 @@ import java.util.List;
 import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.replaceFiltersWith;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class US15_StepDefs {
@@ -109,8 +110,14 @@ public class US15_StepDefs {
     public void get_Student_Data_by_username() throws SQLException {
         String query = "select * from student where username = '"+StudentUserName+"'";
         resultSet = DBUtils.executeQuery(query);
-        resultSet.next();//To move the pointer to the records, we need to call next()
+        resultSet.next();
     }
+    @Then("validate  username")
+    public void validate_username() throws SQLException {
+        String actualUsername = resultSet.getString("username");
+        assertEquals(StudentUserName, actualUsername);
+    }
+
 
 
 
