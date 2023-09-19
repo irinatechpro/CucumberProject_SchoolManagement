@@ -1,5 +1,6 @@
-@US05
-Feature: Admins should be able to see and delete Deans
+@E2E_US05
+Feature: Admins should be able to see and update Deans
+
 
   Background: Login as Admin User
 
@@ -11,7 +12,7 @@ Feature: Admins should be able to see and delete Deans
     And Admin user clicks on login button
     Then sees the "Admin Management" title
 
-  @US05_TC01
+  @UI05_TC01
 
   Scenario: TC01_Admin should be able to see Name, Gender, Phone Number, SSN and User Name information of Deans
 
@@ -20,7 +21,19 @@ Feature: Admins should be able to see and delete Deans
     When user clicks on "Dean Management" link
     Then sees the Deans information
 
-  @US05_TC03
+  @DB05_TC01
+
+  Scenario Outline: Validate Admins can see Name, Gender, Phone Number, SSN and User Name information of Deans
+    Given connect to database
+    When get Dean via username "<username>"
+    Then validate  name "<name>", surname "<surname>",birth_place "<birth_place>", gender "<gender>", date_of_birth "<date_of_birth>",phone "<phone>",ssn "<ssn>",username "<username>",password"<password>"
+    And close the connection
+
+    Examples:
+      | username    | birth_day  | birth_place | gender | name | phone_number | ssn         | surname |
+      | alvaro.howe | 2000-01-01 | New York    | 0      | John | 685 205 2829 | 721-73-5270 | Doe     |
+
+  @UI05_TC03
 
   Scenario: TC03-Admin should be able to update Deans
 
@@ -47,3 +60,13 @@ Feature: Admins should be able to see and delete Deans
     And clicks on Female for gender on the edit box
     And Admin user clicks Submit button on the edit box
     Then sees the Dean updated Successful alert
+
+
+   @DB05_TC03
+
+  Scenario: Validate Admin can update Deans
+
+    Given connect to database
+    When get Dean via username "<username>"
+    Then validate  name "<name>" changed
+    And close the connection
