@@ -1,7 +1,7 @@
 @E2E
 Feature:Admins should be able to register in the system
 
-  @Database_Test
+  @Database_Test @Api_admin
   Scenario Outline: Validate registered user on database
     Given connect to database
     When get admin user via username "<username>"
@@ -9,5 +9,5 @@ Feature:Admins should be able to register in the system
     And close the connection
     Examples:
       | username      | gender | name      | phone_number | ssn         | surname    |
-      | mitchell.king | 1      | Brunilda  | 381 675 4791 | 477 07 7923 | Balistreri |
+      | Admin | 0      | Admin  | 555 444 4321 | 987 99 9999 | Admin |
 

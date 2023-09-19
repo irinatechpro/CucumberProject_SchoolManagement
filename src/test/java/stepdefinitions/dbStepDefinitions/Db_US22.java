@@ -3,22 +3,29 @@ package stepdefinitions.dbStepDefinitions;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import utilities.DBUtils;
 import utilities.JDBCUtils;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import utilities.JSUtils;
+
+import java.sql.*;
 
 import static org.junit.Assert.assertEquals;
 
 public class Db_US22 {
 
-    private ResultSet resultSet;
+    Connection connection;
+    Statement statement;
+    ResultSet resultSet;
     private static String fakePhoneNumber;
     private static String fakeSsn;
     private static String fakeUsername;
 
     @Given("connect to database")
-    public void connect_to_database() throws SQLException {
-        //connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:6982/school_management", "select_user", "43w5ijfso");
+    public void  connect_to_database() throws SQLException {
+        connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
+        statement = connection.createStatement();
+        resultSet = statement.executeQuery("select * from guest_user where username = '" + "Admin" + "'");
+        resultSet.next();
         //The connection will be created when we call executeQuery() method from JDBCUtils class.
     }
 
@@ -26,10 +33,8 @@ public class Db_US22 {
     public void get_admin_user_via_username(String username) throws SQLException {
 
         //Statement statement = connection.createStatement();
-
-        String query = "select * from guest_user where username = '" + fakeUsername + "'";
-
-        resultSet = JDBCUtils.executeQuery(query);
+        String query = "select * from guest_user where username = '" + username + "'";
+        resultSet = DBUtils.executeQuery(query);
         resultSet.next();//To move the pointer to the records, we need to call next()
 
     }
@@ -45,11 +50,11 @@ public class Db_US22 {
         String actualSsn = resultSet.getString("ssn");
         String actualSurname = resultSet.getString("surname");
 
-        assertEquals(fakeUsername, actualUsername);//fakeUsername will be generated on UI part and will be validated here
+        assertEquals(username, actualUsername);//fakeUsername will be generated on UI part and will be validated here
         assertEquals(gender, actualGender);
         assertEquals(name, actualName);
-        assertEquals(fakePhoneNumber, actualPhone_number);
-        assertEquals(fakeSsn, actualSsn);
+        assertEquals(phone_number, actualPhone_number);
+        assertEquals(ssn, actualSsn);
         assertEquals(surname, actualSurname);
     }
 
@@ -58,7 +63,7 @@ public class Db_US22 {
 
         //resultSet.close();
         //connection.close();
-        JDBCUtils.closeConnection();
+        DBUtils.closeConnection();
 
     }
 }
