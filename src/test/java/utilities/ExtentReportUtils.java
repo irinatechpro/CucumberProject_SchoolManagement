@@ -4,17 +4,10 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-
 import static utilities.MediaUtils.takeScreenshotOfTheEntirePageAsString;
-
-
 public class ExtentReportUtils {
-
-
     protected static ExtentReports extentReports;
     protected static ExtentSparkReporter extentSparkReporter;
     protected static ExtentTest extentTest;
@@ -71,8 +64,6 @@ public class ExtentReportUtils {
         extentTest
                 .log(Status.PASS,message)
                 .addScreenCaptureFromPath(takeScreenshotOfTheEntirePageAsString());
-
-
     }
     /*
     FLUSH MUST BE USED AT THE VERY END TO GENERATE THE REPORT
@@ -81,6 +72,4 @@ public class ExtentReportUtils {
     public static void flush(){
         extentReports.flush();
     }
-
-
 }
