@@ -32,8 +32,8 @@ public class US15_StepDefs {
     private static String studentMotherName;
     CreateStudentPage createStudentPage = new CreateStudentPage();
     CommonLocator commonLocator =new CommonLocator();
-    private static Response response;
-    private static ResultSet resultSet;
+    Response response;
+    ResultSet resultSet;
     Faker faker = new Faker();
     @Given("choose Advisor Teacher")
     public void choose_advisor_teacher() throws Exception {
@@ -111,6 +111,7 @@ public class US15_StepDefs {
         resultSet = DBUtils.executeQuery(query);
         resultSet.next();//To move the pointer to the records, we need to call next()
     }
+
 
 
 
