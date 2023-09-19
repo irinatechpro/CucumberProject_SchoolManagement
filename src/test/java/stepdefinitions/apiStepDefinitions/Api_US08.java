@@ -1,24 +1,18 @@
 package stepdefinitions.apiStepDefinitions;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.apache.poi.ss.formula.functions.T;
-
-import java.util.List;
-
 import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.replaceFiltersWith;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class Api_US08 {
     Response response;
     int lessonId; //null
+    String lessonName = "BioInformatics";
+
     @Then("check lesson names all show up")
     public void check_lesson_names_all_show_up() {
 
@@ -42,7 +36,7 @@ public class Api_US08 {
     public void showASpecificLessonByName() {
         response = given(spec)
                 .pathParams("first", "lessons", "second", "getLessonByName")
-                .queryParam("lessonName", "BioInformatics")
+                .queryParam("lessonName", lessonName)
                 .get("/{first}/{second}");
 
         response.prettyPrint();
