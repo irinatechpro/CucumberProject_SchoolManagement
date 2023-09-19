@@ -20,7 +20,7 @@ Feature:Vice Deans should be able to view the lesson schedule and make updates.
     Then scroll down until see Lesson Program
     And verify update Button exists
   @US11_TC03_UI
-  Scenario: Vice Dean should be able to delete from the Lesson Program List.
+  Scenario: Vice Dean should be able to delete from the Lesson Pgit switch rogram List.
     Then verify Delete button is visible
     Then scroll down until see Lesson Program
     Then verify Delete button is visible
