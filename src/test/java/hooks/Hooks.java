@@ -6,6 +6,9 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utilities.Driver;
+
+import static base_url.BaseUrl.adminSetUp;
+
 public class Hooks {
     /*
     Hooks is used to run before or after each scenario
@@ -17,6 +20,13 @@ public class Hooks {
     @Before
     public void setUpScenarios() {
     }
+
+    @Before("@Api_admin")
+    //This will run before each @Api_admin
+    public void beforeApi_admin(){
+        adminSetUp();
+    }
+
     @After
     public void tearDown(Scenario scenario) {
         /*

@@ -15,7 +15,7 @@ public class DBUtils {
     private static Statement statement;
     private static ResultSet resultSet;
     /**
-     * DBUtils.createConnection(); -> to connect to teh database
+     * DBUtils.createConnection(); -> to connect to the database
      */
     //This method establishes a connection with the ManagementOnSchool database and returns Connection data
     public static Connection connectToDatabase() {
