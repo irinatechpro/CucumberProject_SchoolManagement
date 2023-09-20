@@ -4,22 +4,30 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.interactions.Actions;
 import pages.CommonLocator;
 import pages.RegisterPage;
-import utilities.BrowserUtils;
+import utilities.*;
 import utilities.Driver;
-import utilities.JSUtils;
-import utilities.MediaUtils;
 
 import java.io.IOException;
+import java.sql.*;
 
+import static org.junit.Assert.assertEquals;
 import static utilities.WaitUtils.waitFor;
 
 public class US01_StepDefs {
+
+    private static String guestUserSurname;
+    private static String guestUserUsername;
     RegisterPage registerPage = new RegisterPage();
     CommonLocator commonLocator = new CommonLocator();
     Faker faker = new Faker();
+    Connection connection;
+    ResultSet resultSet;
+
     @And("user clicks on register link")
     public void userClicksOnRegisterLink() {
         JSUtils.clickWithTimeoutByJS(registerPage.registerLink);
@@ -28,8 +36,9 @@ public class US01_StepDefs {
 
     @And("user enters surname {string}")
     public void userEntersSurname(String arg0) {
+        guestUserSurname = faker.name().firstName();
         waitFor(2);
-        registerPage.surname.sendKeys(faker.name().firstName());
+        registerPage.surname.sendKeys(guestUserSurname);
     }
 
     @And("user enters birthplace {string}")
@@ -90,8 +99,9 @@ public class US01_StepDefs {
 
     @And("user enters user name {string}")
     public void userEntersUserName(String arg0) {
+        guestUserUsername = faker.name().firstName();
         waitFor(2);
-        registerPage.userName.sendKeys(faker.name().firstName());
+        registerPage.userName.sendKeys(guestUserUsername);
     }
 
     @Then("verify blank field required message")
@@ -124,4 +134,46 @@ public class US01_StepDefs {
     public void verifyInvalidPasswordMessageSeen() {
         BrowserUtils.verifyExpectedAndActualTextMatch("At least 8 characters",registerPage.invalidPassword);
     }
+
+//    @Given("register connect to database")
+//    public void registerconnectToDatabase() throws SQLException {
+//       connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
+//    }
+
+    @When("get guest user via username {string}")
+    public void getGuestUserViaUsername(String username) throws SQLException {
+
+        Statement statement = connection.createStatement();
+        String query = "select * from guest_user where username = 'Raven'";
+        resultSet = DBUtils.executeQuery(query);
+        resultSet.next();
+
+    }
+
+    @Then("validate  username {string} date_of_birth {string}   birth_place {string}   name {string} phone_number {string}  ssn_number {string} surname {string}")
+    public void validateUsernameDate_of_birthBirth_placeNamePhone_numberSsn_numberSurname(String username, String birth_day, String birth_place, String name, String phone_number, String ssn, String surname) throws SQLException {
+        String actualUsername = resultSet.getString("username");
+        String actualBirth_day = resultSet.getString("birth_day");
+        String actualBirth_place = resultSet.getString("birth_place");
+        String actualName = resultSet.getString("name");
+        String actualPhone_number = resultSet.getString("phone_number");
+        String actualSsn = resultSet.getString("ssn");
+        String actualSurname = resultSet.getString("surname");
+
+        assertEquals(username, actualUsername);
+        assertEquals(birth_day, actualBirth_day);
+        assertEquals(birth_place, actualBirth_place);
+        assertEquals(name, actualName);
+        assertEquals(phone_number, actualPhone_number);
+        assertEquals(ssn, actualSsn);
+        assertEquals(surname, actualSurname);
+    }
+
+//    @And("close the connection")
+//    public void closeTheConnection() throws SQLException {
+//        resultSet.close();
+//        connection.close();
+//    }
+
+
 }
