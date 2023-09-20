@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.CommonLocator;
@@ -14,14 +16,24 @@ import utilities.BrowserUtils;
 import utilities.JSUtils;
 import utilities.WaitUtils;
 
+import java.sql.ResultSet;
+import java.util.List;
+
+import static base_url.BaseUrl.spec;
+import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static stepdefinitions.uiStepDefinitions.CommonStepDefs.*;
+import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerFormattedPhoneNumber;
 
 public class US10_StepDef {
+
     ViceDeanLessonProgram viceDeanLessonProgram = new ViceDeanLessonProgram();
     ViceDean_LessonManagementPage viceDeanLessonManagementPage = new ViceDean_LessonManagementPage();
     ViceDean_AdminManagementPage viceDeanAdminManagementPage = new ViceDean_AdminManagementPage();
     CommonLocator commonLocator = new CommonLocator();
     Faker faker = new Faker();
+
 
     @Given("click lesson management")
     public void click_lesson_management() {
@@ -90,4 +102,7 @@ public class US10_StepDef {
 
 
 
-}
+    }
+
+
+
