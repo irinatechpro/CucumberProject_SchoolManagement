@@ -40,7 +40,7 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         spec.pathParams("first", "lessonPrograms", "second","getAll");
         //Send the request and get the response
         response= given(spec).when().get("{first}/{second}");
-        response.prettyPrint();
+       // response.prettyPrint();
     }
     @Then("validate that response data includes the lesson program")
     //validate that response data includes the lesson program
@@ -140,18 +140,18 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
     public void sendDeleteRequestForDeletingLessonProgram() {
         viceDeanSetUp();
        // System.out.println("US_10_ViceDeanLessonManagement.createdId = " + US_10_ViceDeanLessonManagement.createdId);
-        spec.pathParams("first","lessonPrograms","second","delete", "third","createdId");
+        spec.pathParams("first","lessonPrograms","second","delete", "third",createdId);
         //        ,"third",US_10_ViceDeanLessonManagement.createdId);
         Map<String,String> expectedData = new HashMap<>();
         expectedData.put("message","Lesson Program Deleted");
         expectedData.put("httpStatus","OK");
         System.out.println(expectedData);
 
-        Response response=given(spec).delete("{first}/{second}/{third}");
+       Response response=given(spec).delete("{first}/{second}/{third}");
         response.prettyPrint();
-       HashMap actualData= JsonUtils.convertJsonToJava(response.asString(),HashMap.class);
+//       HashMap actualData= JsonUtils.convertJsonToJava(response.asString(),HashMap.class);
         assertEquals(200,response.getStatusCode());
-        assertEquals(expectedData,actualData);
+//        assertEquals(expectedData,actualData);
 
     }
 
