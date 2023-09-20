@@ -1,8 +1,9 @@
 @E2E_US05
 Feature: Admins should be able to see and update Deans
 
+  @UI05_TC01
 
-  Background: Login as Admin User
+  Scenario: TC01_Admin should be able to see Name, Gender, Phone Number, SSN and User Name information of Deans
 
     Given Admin user is on The Managementon Schools website
     And clicks on Login link
@@ -11,11 +12,6 @@ Feature: Admins should be able to see and update Deans
     And enters password on Login page "Project11+"
     And Admin user clicks on login button
     Then sees the "Admin Management" title
-
-  @UI05_TC01
-
-  Scenario: TC01_Admin should be able to see Name, Gender, Phone Number, SSN and User Name information of Deans
-
     Given Admin user clicks on menu button
     And sees the menu list on the left hand side
     When user clicks on "Dean Management" link
@@ -47,6 +43,7 @@ Feature: Admins should be able to see and update Deans
     Examples:
       | name   | surname  | birth_place | gender | birth_day  | phone_number | ssn         | username |
       | Serena | Williams | Istanbul    | 1      | 1234-11-11 | 181-081-6739 | 253-85-9497 | 123      |
+
 
 
 

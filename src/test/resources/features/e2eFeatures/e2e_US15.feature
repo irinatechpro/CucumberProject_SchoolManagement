@@ -37,7 +37,7 @@ Feature: Vice Deans should be able to create a student
     Then get studentID from API
     Then delete student using studentID
     And validate student data deleted
-  #@US15_DB
-    #Scenario: Validate created student on database
-    #Given get Student Data by username
-    #Then validate  username
+  @US15_DB
+    Scenario: Validate created student on database
+    Given get Student Data by username
+    Then validate  username

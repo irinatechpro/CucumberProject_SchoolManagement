@@ -266,6 +266,7 @@ public class US05_StepDefs {
     public void get_dean_via_username(String username) throws SQLException {
 
         String query = "select * from dean where username = '" + fakeUsername + "'";
+        System.out.println("fakeUsername = " + fakeUsername);
 
         resultSet = DBUtils.executeQuery(query);
         resultSet.next();//To move the pointer to the records, we need to call next()
@@ -282,8 +283,9 @@ public class US05_StepDefs {
     String actualPhone_number = resultSet.getString("phone_number");
     String actualSsn = resultSet.getString("ssn");
     String actualUsername = resultSet.getString("username");
+        System.out.println("actualUsername = " + actualUsername);
 
-    assertEquals(name, actualName);
+        assertEquals(name, actualName);
     assertEquals(surname,actualSurname);
     assertEquals(birth_place, actualBirth_place);
     assertEquals(gender, actualGender);
