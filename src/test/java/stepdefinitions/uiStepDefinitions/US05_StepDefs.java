@@ -10,8 +10,13 @@ import pages.AdminManagementPage;
 import pages.DeanManagementPage;
 import pages.LoginPage;
 import utilities.*;
+import static org.junit.Assert.*;
+import static utilities.FakerUtils.faker;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class US05_StepDefs {
 
@@ -20,10 +25,17 @@ public class US05_StepDefs {
 
     DeanManagementPage deanManagementPage = new DeanManagementPage();
 
-    Faker faker = new Faker();
+    ResultSet resultSet;
 
     private String nameDean;
     private String nameDeanUpdate;
+
+    private static String formattedPhoneNumber;
+
+    private static String fakeSsn;
+
+    private static String fakeUsername;
+
 
     @Given("Admin user is on The Managementon Schools website")
     public void admin_user_is_on_the_managementon_schools_website() {
@@ -103,14 +115,13 @@ public class US05_StepDefs {
 
     @And("enters name {string} on Add Dean section")
     public void enters_name_on_add_dean_section(String string) {
-        nameDean = faker.name().firstName();
-        deanManagementPage.deanName.sendKeys(nameDean);
+        deanManagementPage.deanName.sendKeys("Serena");
         WaitUtils.waitFor(1);
     }
 
     @And("enters surname {string} on Add Dean section")
     public void enters_surname_on_add_dean_section(String string) {
-        deanManagementPage.deanSurname.sendKeys(faker.name().lastName());
+        deanManagementPage.deanSurname.sendKeys("Williams");
         WaitUtils.waitFor(1);
     }
 
@@ -135,9 +146,11 @@ public class US05_StepDefs {
     @And("enters Phone number {string} on Add Dean section")
     public void enters_phone_number_on_Add_Dean_Section(String string) {
 
+        Faker faker = new Faker();
+
         String phoneNumber = faker.phoneNumber().phoneNumber();
 
-        String formattedPhoneNumber = BrowserUtils.formatPhoneNumber(phoneNumber);
+       formattedPhoneNumber = BrowserUtils.formatPhoneNumber(phoneNumber);
 
         deanManagementPage.deanPhoneNumber.sendKeys(formattedPhoneNumber);
         WaitUtils.waitFor(1);
@@ -145,14 +158,16 @@ public class US05_StepDefs {
     }
 
     @And("enters ssn number {string} on Add Dean section")
-    public void enters_ssn_number_on_add_dean_ssection(String string) {
-        deanManagementPage.deanSsnNumber.sendKeys(faker.idNumber().ssnValid().toString());
+    public void enters_ssn_number_on_add_dean_section(String string) {
+        fakeSsn = faker.idNumber().ssnValid();
+        deanManagementPage.deanSsnNumber.sendKeys(fakeSsn);
         WaitUtils.waitFor(1);
     }
 
     @And("Admin user enters a new username {string} on Add Dean section")
     public void adminUserEntersANewUsernameOnAddDeanSection(String string) {
-        deanManagementPage.deanUsername.sendKeys(faker.bothify("????##"));
+        fakeUsername = faker.bothify("????##");
+        deanManagementPage.deanUsername.sendKeys(fakeUsername);
         WaitUtils.waitFor(1);
 
     }
@@ -235,4 +250,54 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
+    @Then("sees the the Deans information")
+    public void seesTheTheDeansInformation() {
+        String nameOfCreatedDean = deanManagementPage.deanName.getText();
+        JSUtils.scrollIntoViewJS(deanManagementPage.lastRowDeanList);
+        WaitUtils.waitFor(1);
+        String lastRow = deanManagementPage.lastRowDeanList.getText();
+        System.out.println("lastRow = " + lastRow);
+        Assert.assertTrue(lastRow.contains(nameOfCreatedDean));
+        WaitUtils.waitFor(1);
+
+    }
+
+    @When("get Dean via username {string}")
+    public void get_dean_via_username(String username) throws SQLException {
+
+        String query = "select * from dean where username = '" + fakeUsername + "'";
+
+        resultSet = DBUtils.executeQuery(query);
+        resultSet.next();//To move the pointer to the records, we need to call next()
+
+    }
+
+    @Then("validate  name {string}, surname {string}, birth_place {string}, gender {string}, birth_day {string}, phone_number {string},ssn {string}, username{string}")
+    public void validate_name_surname_birth_place_gender_birth_day_phone_number_ssn_username(String name, String surname, String birth_place, String gender, String birth_day, String phone_number, String ssn, String username) throws SQLException {
+    String actualName = resultSet.getString("name");
+    String actualSurname = resultSet.getString("surname");
+    String actualBirth_place = resultSet.getString("birth_place");
+    String actualGender = resultSet.getString("gender");
+    String actualBirth_day = resultSet.getString("birth_day");
+    String actualPhone_number = resultSet.getString("phone_number");
+    String actualSsn = resultSet.getString("ssn");
+    String actualUsername = resultSet.getString("username");
+
+    assertEquals(name, actualName);
+    assertEquals(surname,actualSurname);
+    assertEquals(birth_place, actualBirth_place);
+    assertEquals(gender, actualGender);
+    assertEquals(birth_day, actualBirth_day);
+    assertEquals(formattedPhoneNumber, actualPhone_number);
+    assertEquals(fakeSsn, actualSsn);
+    assertEquals(fakeUsername, actualUsername);
+
+
+
+
+
+
+
+
+    }
 }
