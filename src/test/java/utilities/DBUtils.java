@@ -8,7 +8,7 @@ public class DBUtils {
 
     private static Connection connection;
     private static Statement statement;
-    private static ResultSet resultSet;
+    public static ResultSet resultSet;
     /**
      * DBUtils.createConnection(); -> to connect to the database
      */
