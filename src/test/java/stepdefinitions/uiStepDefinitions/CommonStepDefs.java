@@ -26,11 +26,13 @@ public class CommonStepDefs {
     public static String fakerSurname;
     public static String fakerBirthPlace;
     public static String dateOfBirth;
+    public static String fakerDateOfBirth;
     public static String fakerPassword;
     public static String fakeSsn;
     public static String fakerFormattedPhoneNumber;
     public static String fakerUsername;
     public static String formattedDate;
+
 
     @Then("close the application")
     public void close_the_application() throws InterruptedException {
@@ -86,6 +88,8 @@ public class CommonStepDefs {
             // Handle any parsing errors here
             e.printStackTrace();
         }
+       fakerDateOfBirth = "01/05/1990";
+       commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
     }
     @Then("enter valid phone number")
     public void enter_valid_phone_number() {
