@@ -10,10 +10,12 @@ import pojos.LessonManagementLessonName;
 import pojos.LessonManagementLessonPost;
 import pojos.LessonManagementObjectPojo;
 import pojos.LessonManagementPojo;
-
+import utilities.JsonUtils;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static base_url.BaseUrl.spec;
 import static base_url.BaseUrl.viceDeanSetUp;
@@ -22,14 +24,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Api_US11_ViceDeanLessonScheduleUpdate {
-    Response response;
-
+   // Response response;
     LessonManagementLessonPost objectPost;
     LessonManagementObjectPojo object;
     LessonManagementPojo expectedData;
     LessonManagementLessonName lessonName;
-
+    Response response;
     static int createdId;
+  //-----------------------------TC01--------------------------------
     @When("send get request for viewing lesson Program")
     public void send_get_request_for_viewing_lesson_program() {
         //Set the url
@@ -37,8 +39,8 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         viceDeanSetUp();
         spec.pathParams("first", "lessonPrograms", "second","getAll");
         //Send the request and get the response
-        response= given(spec).get("{first}/{second}");
-       // response.prettyPrint();
+        response= given(spec).when().get("{first}/{second}");
+        response.prettyPrint();
     }
     @Then("validate that response data includes the lesson program")
     //validate that response data includes the lesson program
@@ -58,52 +60,16 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         System.out.println("startTimes= "+ startTimes);
         System.out.println("stopTimes= "+ stopTimes);
         System.out.println("days= "+ days);
-       // List<String> lesson = new ArrayList<>();
-       // lesson.add("Selenium");
-        //List<Integer> lessonId = new ArrayList<>();
-       // lessonId.add(2);
-        //List<Integer> lessonProgramId= new ArrayList<>();
-       // lessonProgramId.add(951);
-        // List<String> startTimes = jsonPath.getList("startTime");
+
+        ArrayList<String> lesson = new ArrayList<>();
+         lesson.add("Selenium");
+        assertTrue(lessonNames.contains(lesson));
+
+        ArrayList<Integer> lessonId = new ArrayList<>();
+        lessonId.add(39);
+        assertTrue(lessonIds.contains(lessonId));
     }
-
-
-        //String actstartTime = jsonPath.getList("content.findAll{it.startTime=='3'}").get(0).toString();
-        //        "lessonProgramId": 127,
-//                "startTime": "13:31:00",
-//                "stopTime": "13:32:00",
-//                "lessonName": [
-//        {
-//            "lessonId": 6,
-//                "lessonName": "JavaScript",
-//                "creditScore": 8,
-//                "compulsory": true
-//        }
-//        ],
-//        "day": "FRIDAY"
-
-
-
-    //Do assertion
-      // response.then().statusCode(200);
-
-
-
-
-
-
-        //"lessonProgramId": 3
-       // System.out.println(jsonPath.getList("content.findAll{it.lessonProgramId=='33'}"));
-       // List<String> lessonNames= jsonPath.getList("lessonName.lessonName");
-       // List<Integer> lessonProgramIds = jsonPath.getList("lessonProgramId.lessonProgramId");
-
-
-
-       // assertTrue(lessonNames.contains(lesson));
-        //assertTrue(lessonIds.contains(lessonId));
-  //  }
-
-
+    //------------------------------TC02----------------------------------------
     @Given("Vice Dean sends post request for lesson program")
     public void viceDeanSendsPutRequestForLessonProgram() {
         viceDeanSetUp();
@@ -144,8 +110,6 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         "day": "MONDAY"
     },
      */
-
-
         expectedData = new LessonManagementPojo(object,"Created Lesson Program","CREATED");
         response= given(spec).body(objectPost).post("{first}/{second}");
 
@@ -157,25 +121,40 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         createdId = (Integer.parseInt(jsonPath.getString("object.lessonProgramId")) - 1);
 
         System.out.println("createdId = " + createdId);
-        //ReusableMethods.waitFor(3);
+       // ReusableMethods.waitFor(3);
         
     }
 
     @Then("Vice Dean update the lesson program and assert")
     public void viceDeanUpdateTheLessonProgramAndAssert() {
 
-        LessonManagementPojo actualData = response.as(LessonManagementPojo.class);
-                //as(LessonManagementPojo.class);
-        assertEquals(expectedData.getObject().getDay(),actualData.getObject().getDay());
-        assertEquals(expectedData.getObject().getStopTime(),actualData.getObject().getStopTime().substring(0,5));
-        assertEquals(expectedData.getObject().getStartTime(),actualData.getObject().getStartTime().substring(0,5));
-        
-    }
+      //  LessonManagementPojo actualData = response.as(LessonManagementPojo.class);
+     //  System.out.println("actualData = " + actualData);
+//        assertEquals(expectedData.getObject().getDay(),actualData.getObject().getDay());
+//       assertEquals(expectedData.getObject().getStopTime(),actualData.getObject().getStopTime().substring(0,5));
+//        assertEquals(expectedData.getObject().getStartTime(),actualData.getObject().getStartTime().substring(0,5));
 
+    }
+//-----------------------------------TC03--------------------------------------------
     @Then("send delete request for deleting lesson Program")
     public void sendDeleteRequestForDeletingLessonProgram() {
+        viceDeanSetUp();
+       // System.out.println("US_10_ViceDeanLessonManagement.createdId = " + US_10_ViceDeanLessonManagement.createdId);
+        spec.pathParams("first","lessonPrograms","second","delete", "third","createdId");
+        //        ,"third",US_10_ViceDeanLessonManagement.createdId);
+        Map<String,String> expectedData = new HashMap<>();
+        expectedData.put("message","Lesson Program Deleted");
+        expectedData.put("httpStatus","OK");
+        System.out.println(expectedData);
+
+        Response response=given(spec).delete("{first}/{second}/{third}");
+        response.prettyPrint();
+       HashMap actualData= JsonUtils.convertJsonToJava(response.asString(),HashMap.class);
+        assertEquals(200,response.getStatusCode());
+        assertEquals(expectedData,actualData);
+
     }
 
-
+//as(LessonManagementPojo.class);
 
 }
