@@ -40,4 +40,4 @@ Feature: Vice Deans should be able to create a student
   #@US15_DB
     #Scenario: Validate created student on database
     #Given get Student Data by username
-    #Then validate  username
+    #Then validate username
