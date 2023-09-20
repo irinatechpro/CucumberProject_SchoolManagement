@@ -3,6 +3,7 @@ Feature: "Vice Deans should be able to create a lesson schedule.
   (Lesson Program - Add Lesson Program)"
 
   Background:
+
     Given login as vice dean "ViceDeanEmilly" "ViceDeanEmilly123"
 
   @US10_TC01
