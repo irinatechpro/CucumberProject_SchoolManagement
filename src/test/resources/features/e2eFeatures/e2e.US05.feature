@@ -19,7 +19,22 @@ Feature: Admins should be able to see and update Deans
     Given Admin user clicks on menu button
     And sees the menu list on the left hand side
     When user clicks on "Dean Management" link
-    Then sees the Deans information
+    And goes to Add Dean section
+    And enters name "<name>" on Add Dean section
+    And enters surname "<surname>" on Add Dean section
+    And enters birthplace "<birthplace>" on Add Dean section
+    And clicks on Female for gender on Add Dean section
+    And enters Date of Birth on Add Dean section
+    And enters Phone number "<Phone number>" on Add Dean section
+    And enters ssn number "<ssn number>" on Add Dean section
+    And Admin user enters a new username "<username>" on Add Dean section
+    And enters the password "Istabul1" on Add Dean section
+    And user clicks on submit on Add Dean section
+    Then sees the Dean Saved alert
+    And Admin user goes to the last page of the dean list
+    And goes to the last Dean created
+
+
 
   @DB05_TC01
 
@@ -28,6 +43,7 @@ Feature: Admins should be able to see and update Deans
     When get Dean via username "<username>"
     Then validate  name "<name>", surname "<surname>",birth_place "<birth_place>", gender "<gender>", date_of_birth "<date_of_birth>",phone "<phone>",ssn "<ssn>",username "<username>",password"<password>"
     And close the connection
+
 
     Examples:
       | username    | birth_day  | birth_place | gender | name | phone_number | ssn         | surname |
