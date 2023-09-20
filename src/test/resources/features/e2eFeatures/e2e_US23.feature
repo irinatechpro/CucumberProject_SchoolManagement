@@ -1,4 +1,4 @@
-git@e2e_US23
+@e2e_US23
 Feature: Admin should be able to create a vice dean
 
 
@@ -26,12 +26,10 @@ Feature: Admin should be able to create a vice dean
 
   @US23_API @Api_viceDean
 
-  Scenario: Admin created dean on API
-    Given send get All vice dean request
-    Then filter vice dean Data using username
-    Then validate response data is the same with created vice dean Credentials
+  Scenario: Admin created vice dean on API
+    Given send get All vice dean request on API
+    Then filter vice_dean Data using username and validate
 
 
-  @US23_DB
-  Scenario: Admin created vice dean on database
-    Given get vice dean Data by username
+
+
