@@ -135,10 +135,10 @@ public class US01_StepDefs {
         BrowserUtils.verifyExpectedAndActualTextMatch("At least 8 characters",registerPage.invalidPassword);
     }
 
-    @Given("connect to database")
-    public void connectToDatabase() throws SQLException {
-       connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
-    }
+//    @Given("register connect to database")
+//    public void registerconnectToDatabase() throws SQLException {
+//       connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
+//    }
 
     @When("get guest user via username {string}")
     public void getGuestUserViaUsername(String username) throws SQLException {
@@ -169,9 +169,11 @@ public class US01_StepDefs {
         assertEquals(surname, actualSurname);
     }
 
-    @And("close the connection")
-    public void closeTheConnection() throws SQLException {
-        resultSet.close();
-        connection.close();
-    }
+//    @And("close the connection")
+//    public void closeTheConnection() throws SQLException {
+//        resultSet.close();
+//        connection.close();
+//    }
+
+
 }
