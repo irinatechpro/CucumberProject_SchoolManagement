@@ -23,8 +23,9 @@ import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerFormattedPho
 
 public class US23_StepDefs {
 
-    private static String vicedeanUserName;
-    private static String vicedean;
+    private static String vice_deanUserName;
+    private static String vice_dean;
+    private static String vice_dean_data;
 
     Response response;
 
@@ -48,27 +49,27 @@ public class US23_StepDefs {
 
     @Given("send get All vice dean request on API")
     public void send_get_All_vice_dean_request_on_API() {
-        spec.pathParams("first", "dean", "second", "getAll");
+        spec.pathParams("first", "vice_dean", "second", "getAll");
         response = given(spec).get("{first}/{second}");
     }
 
     @Then("filter vice_dean Data using username and validate")
     public void filter_vice_dean_Data_using_username_and_validate(){
         JsonPath jsonPath = response.jsonPath();
-        List<String> studentData = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}");
-        System.out.println("vicedeanData = " + studentData);
-        String actUsername = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.username").get(0).toString();
-        String actName = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.name").get(0).toString();
-        String actSurname = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.surname").get(0).toString();
-        String actBirthDay = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.birthDay").get(0).toString();
-        String actBirthPlace = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.birthPlace").get(0).toString();
-        String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.phoneNumber").get(0).toString();
-        String actGender = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.gender").get(0).toString();
+        List<String> vice_deanData = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}");
+        System.out.println("vice_deanData = " + vice_dean_data);
+        String actUsername = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.username").get(0).toString();
+        String actName = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.name").get(0).toString();
+        String actSurname = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.surname").get(0).toString();
+        String actBirthDay = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.birthDay").get(0).toString();
+        String actBirthPlace = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.birthPlace").get(0).toString();
+        String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.phoneNumber").get(0).toString();
+        String actGender = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.gender").get(0).toString();
 
-        String actSsn = jsonPath.getList("findAll{it.username=='"+vicedeanUserName+"'}.ssn").get(0).toString();
+        String actSsn = jsonPath.getList("findAll{it.username=='"+vice_deanUserName+"'}.ssn").get(0).toString();
 
         assertEquals(200, response.statusCode());
-        assertEquals(vicedeanUserName, actUsername);
+        assertEquals(vice_deanUserName, actUsername);
         assertEquals(fakeSsn, actSsn);
         assertEquals(fakerName, actName);
         assertEquals(fakerSurname, actSurname);
