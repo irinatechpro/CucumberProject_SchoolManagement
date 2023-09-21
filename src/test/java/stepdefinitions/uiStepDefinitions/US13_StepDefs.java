@@ -211,12 +211,6 @@ public class US13_StepDefs {
             assertEquals(fakeEmail, actEmail);
             assertTrue(actIsAdvisor, true);
        }
-
-    @Then("close the connection")
-    public void close_the_connection() {
-        DBUtils.closeConnection();
-
-    }
     @Given("seng Get request to get teacher by getAll")
     public void sengGetRequestToGetTeacherByGetAll() {
         https://managementonschools.com/app/teachers/getAll
