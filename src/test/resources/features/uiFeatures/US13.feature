@@ -13,15 +13,15 @@ Feature: Vice Deans should be able to create a teacher
     And click menu button
     And click TeacherManagementLink
     And select lesson from choose lesson
-    And enter Name
-    And enter Surname
-    And enter Birth Place
-    And enter email
-    And enter valid phone number
+    And enter Teacher Name
+    And enter Teacher Surname
+    And enter Teacher Birth Place
+    And enter Teacher email
+    And enter Teacher valid phone number
     And select teacher has advisory role
-    And select Male Gender
-    Then enter date of birth
-    And enter valid SSN
+    And select Teacher Male Gender
+    Then enter Teacher date of birth
+    And enter Teacher valid SSN
     And enter username for teacher
     And enter password
     And click submit button

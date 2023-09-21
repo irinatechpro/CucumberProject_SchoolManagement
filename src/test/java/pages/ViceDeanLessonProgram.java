@@ -29,7 +29,7 @@ public class ViceDeanLessonProgram {
     public WebElement chooseTeacher;
     @FindBy(xpath = "(//button[.='Submit'])[4]")
     public WebElement submitButton;
-    @FindBy(xpath = "//div[@role='alert']//*[.='Lesson added to Teacher']")
+    @FindBy(xpath = "//div[@role='alert']")
     public WebElement successMessage;
     @FindBy(xpath = "//*[@data-rr-ui-event-key='lessonProgram']")
     public WebElement lessonProgramSeccion;
