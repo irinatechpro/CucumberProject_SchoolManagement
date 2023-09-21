@@ -27,17 +27,18 @@ Feature: Vice Deans should be able to create a student
     Then click last page button
     And verify student number created automatically
     Then close the application
-  #@US15_API @Api_viceDean
-  #Scenario: Validate created student on API
-  #  Given send get All Student request on API
-  #  Then filter Student Data using username and validate
-  #@US15_API_delete @Api_viceDean
-  #Scenario: Delete student data and validate it on API
-  #  Given send get All Student request on API
-  #  Then get studentID from API
-  #  Then delete student using studentID
-  #  And validate student data deleted
   @US15_DB
-    Scenario: Validate created student on database
+  Scenario: Validate created student on database
     Given get Student Data by username
-    Then validate  username
+    Then validate Student data
+    Then close the connection
+  @US15_API @Api_viceDean
+  Scenario: Validate created student on API
+    Given send get All Student request on API
+    Then filter Student Data using username and validate
+  @US15_API_delete @Api_viceDean
+  Scenario: Delete student data and validate it on API
+    Given send get All Student request on API
+    Then get studentID from API
+    Then delete student using studentID
+    And validate student data deleted
