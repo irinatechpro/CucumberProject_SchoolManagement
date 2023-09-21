@@ -169,9 +169,9 @@ public class US01_StepDefs {
         assertEquals(surname, actualSurname);
     }
 
-    @And("close the connection")
-    public void closeTheConnection() throws SQLException {
-        resultSet.close();
-        connection.close();
-    }
+//    @And("close the connection")
+//    public void closeTheConnection() throws SQLException {
+//        resultSet.close();
+//        connection.close();
+//    }
 }

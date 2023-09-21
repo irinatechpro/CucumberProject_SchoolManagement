@@ -5,6 +5,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -17,6 +19,8 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import static base_url.BaseUrl.spec;
+import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -32,11 +36,13 @@ public class US13_StepDefs {
     public static String fakeEmail;
     public static String formattedPhoneNumber;
     public static String fakeSsn;
-    public static String gender;
+    public static String genderDB;
+    public static String genderAPI;
     Connection connection;
     public static String birth_day;
     public Statement statement;
     public ResultSet resultSet;
+    Response response;
 
     @Given("click TeacherManagementLink")
     public void click_teacher_management_link() {
@@ -120,7 +126,8 @@ public class US13_StepDefs {
 
     @Given("select Teacher Male Gender")
     public void select_teacher_male_gender() {
-        gender = "0";
+        genderDB= "0";
+        genderAPI="MALE";
         commonLocator.genderMale.click();
         WaitUtils.waitFor(2);
 
@@ -161,7 +168,7 @@ public class US13_StepDefs {
         assertTrue(viceDeanTeacherManagementPage.failForGender.isDisplayed());
     }
 
-    @Given("connect to database")
+    @Given("connect to DataBase")
     public void connect_to_database() throws SQLException {
         connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
 
@@ -190,13 +197,12 @@ public class US13_StepDefs {
             String actSurname = resultSet.getString("surname");
             String actEmail = resultSet.getString("email");
             String actIsAdvisor = resultSet.getString("is_advisor");
-
            SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
         String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
         String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
         assertEquals(formattedExpectedDate, formattedActualDate);
             assertEquals(fakeBirthPlace, actBirth_place);
-            assertEquals(gender, actGender);
+            assertEquals(genderDB, actGender);
             assertEquals(fakeName, actName);
             assertEquals(formattedPhoneNumber, actPhone_number);
             assertEquals(fakeSsn, actSsn);
@@ -211,5 +217,46 @@ public class US13_StepDefs {
         DBUtils.closeConnection();
 
     }
+    @Given("seng Get request to get teacher by getAll")
+    public void sengGetRequestToGetTeacherByGetAll() {
+        https://managementonschools.com/app/teachers/getAll
+        spec.pathParams("first","teachers","second","getAll");
+        response= given(spec).get("{first}/{second}");
+        response.prettyPrint();
+    }
+
+    @Then("validate that teacher is created")
+    public void validateThatTeacherIsCreated() throws ParseException {
+        JsonPath jsonPath=response.jsonPath();
+      String actName=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.name").get(0).toString();
+      String actSurname=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.surname").get(0).toString();
+      String actBirthDay=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthDay").get(0).toString();
+      String actSsn=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.ssn").get(0).toString();
+      String actBirthPlace=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthPlace").get(0).toString();
+      String actPhoneNumber=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.phoneNumber").get(0).toString();
+      String actGender=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.gender").get(0).toString();
+      String actEmail=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.email").get(0).toString();
+      String actAdvisorTeacher=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.advisorTeacher").get(0).toString();
+      String actUsername=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.username").get(0).toString();
+
+      assertEquals(200,response.statusCode());
+      assertEquals(fakeName,actName);
+      assertEquals(fakeSurname,actSurname);
+        SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
+        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
+      assertEquals(formattedExpectedDate,formattedActualDate);
+      assertEquals(fakeSsn,actSsn);
+      assertEquals(fakeBirthPlace,actBirthPlace);
+      assertEquals(formattedPhoneNumber,actPhoneNumber);
+      assertEquals(genderAPI,actGender);
+      assertEquals(fakeEmail,actEmail);
+      assertTrue(actAdvisorTeacher,true);
+      assertEquals(fakeUsername,actUsername);
+
+    }
+
+
+
 }
 
