@@ -8,3 +8,4 @@ Feature: Vice Deans should be able to view the lesson list and make updates (Les
   Scenario: Vice Dean should be able to view the Lesson Name, Compulsory and Credit Score created.
     Then create a new lesson
     And view the new lesson created
+    And delete the created lesson
