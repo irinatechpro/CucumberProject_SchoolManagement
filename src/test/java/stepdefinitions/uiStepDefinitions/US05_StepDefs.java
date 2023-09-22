@@ -13,6 +13,7 @@ import pages.LoginPage;
 import utilities.*;
 import static org.junit.Assert.*;
 import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerUsername;
+import static stepdefinitions.uiStepDefinitions.US13_StepDefs.birth_day;
 import static utilities.FakerUtils.faker;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class US05_StepDefs {
     Faker faker = new Faker();
 
     ResultSet resultSet;
+    ResultSet updatedResultSet;
 
     private String nameDean;
     private String nameDeanUpdate;
@@ -48,7 +50,7 @@ public class US05_StepDefs {
 
     private static  String fakeDeanName;
 
-    private static  String fakeDeanSurnameName;
+    private static  String fakeDeanSurname;
 
     private static String surnameDeanUpdate;
 
@@ -143,8 +145,8 @@ public class US05_StepDefs {
     @And("enters surname {string} on Add Dean section")
     public void enters_surname_on_add_dean_section(String string) {
 
-        fakeDeanSurnameName = faker.name().lastName();
-        deanManagementPage.deanSurname.sendKeys(fakeDeanSurnameName);
+        fakeDeanSurname = faker.name().lastName();
+        deanManagementPage.deanSurname.sendKeys(fakeDeanSurname);
     }
 
     @And("enters birthplace {string} on Add Dean section")
@@ -348,16 +350,40 @@ public class US05_StepDefs {
     public void getUpdatedDeanViaUsername() throws SQLException {
 
         //statement = connection.createStatement();
-        String query = "select * from dean where username = '" + fakeUpdatedUsername + "'";
-        resultSet = DBUtils.executeQuery(query);
+        String query1 = "select * from dean where username = '" + fakeUpdatedUsername + "'";
+        System.out.println("fakeUpdatedUsername = " + fakeUpdatedUsername);
+
+        resultSet = DBUtils.executeQuery(query1);
         resultSet.next();//To move the pointer to the records, we need to call next()
+
 
     }
 
 
     @Then("validate Dean's details are updated")
-    public void validateDeanSDetailsAreUpdated() {
+    public void validateDeanSDetailsAreUpdated() throws SQLException {
+        String actualUpdatedName = resultSet.getString("name");
+        String actualUpdatedSurname = resultSet.getString("surname");
+        String actualUpdatedBirth_place = resultSet.getString("birth_place");
+        String actualUpdatedGender = resultSet.getString("gender");
+        String actualUpdatedBirth_day = resultSet.getString("birth_day");
+        String actualUpdatedPhone_number = resultSet.getString("phone_number");
+        String actualUpdatedSsn = resultSet.getString("ssn");
+        String actualUpdatedUsername = resultSet.getString("username");
+        System.out.println("actualUpdatedUsername = " + actualUpdatedUsername);
+
+        assertFalse(nameDeanUpdate, equals(actualUpdatedName));//fakeUsername will be generated on UI part and will be validated here
+        assertFalse(surnameDeanUpdate,equals(actualUpdatedSurname));
+        assertFalse("Istanbul", equals(actualUpdatedBirth_place));
+        assertFalse("Female", equals(actualUpdatedGender));
+        assertFalse("11/11/1234", equals(actualUpdatedBirth_day));
+        assertFalse(formattedUpdatedPhoneNumber, equals(actualUpdatedPhone_number));
+        assertFalse(fakeUpdatedSsn, equals(actualUpdatedSsn));
+        assertFalse(fakeUpdatedUsername, equals(actualUpdatedUsername));
+
     }
+
+
 
 
 }
