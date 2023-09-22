@@ -33,17 +33,15 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
     static int createdId;
   //-----------------------------TC01--------------------------------
     @When("send get request for viewing lesson Program")
+
     public void send_get_request_for_viewing_lesson_program() {
-        //Set the url
-        // https://managementonschools.com/app/lessonPrograms/getAll
-        viceDeanSetUp();
+                viceDeanSetUp();
         spec.pathParams("first", "lessonPrograms", "second","getAll");
-        //Send the request and get the response
         response= given(spec).when().get("{first}/{second}");
        // response.prettyPrint();
     }
     @Then("validate that response data includes the lesson program")
-    //validate that response data includes the lesson program
+
     public void validate_that_response_data_includes_the_lesson_program() {
         response.then().statusCode(200);
         JsonPath jsonPath = response.jsonPath();
@@ -70,7 +68,7 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         assertTrue(lessonIds.contains(lessonId));
     }
     //------------------------------TC02----------------------------------------
-    @Given("Vice Dean sends post request for lesson program")
+    @When ("Vice Dean sends post request for lesson program")
     public void viceDeanSendsPutRequestForLessonProgram() {
         viceDeanSetUp();
         spec.pathParams("first","lessonPrograms", "second", "save");
@@ -79,12 +77,12 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         lessonId.add(2);
         objectPost =new LessonManagementLessonPost(
                 "MONDAY",
-                Faker.instance().number().numberBetween(1,10),
+                Faker.instance().number().numberBetween(1,6),
                 lessonId,
                 "13:00","22:00");
 
         lessonName = new LessonManagementLessonName(2,"Java",10,true);
-//        LessonManagementLessonName
+
 //                "lessonId": 2,
 //                "lessonName": "Java",
 //                "creditScore": 10,
@@ -93,10 +91,10 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         ArrayList<LessonManagementLessonName> lessonNames=new ArrayList<>();
         lessonNames.add(lessonName);
         object = new LessonManagementObjectPojo(1728,"13:00","22:00",lessonNames,"MONDAY");
-       // LessonManagementObjectPojo {
+
     /*
     "object": {
-        "lessonProgramId": 1612,
+        "lessonProgramId": 1728,
                 "startTime": "13:00:00",
                 "stopTime": "22:00:00",
                 "lessonName": [
@@ -108,8 +106,8 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         }
         ],
         "day": "MONDAY"
-    },
-     */
+
+      */
         expectedData = new LessonManagementPojo(object,"Created Lesson Program","CREATED");
         response= given(spec).body(objectPost).post("{first}/{second}");
 
@@ -121,40 +119,42 @@ public class Api_US11_ViceDeanLessonScheduleUpdate {
         createdId = (Integer.parseInt(jsonPath.getString("object.lessonProgramId")) - 1);
 
         System.out.println("createdId = " + createdId);
-       // ReusableMethods.waitFor(3);
-        
+        //ReusableMethods.waitFor(3);
     }
-
     @Then("Vice Dean update the lesson program and assert")
     public void viceDeanUpdateTheLessonProgramAndAssert() {
+       // JsonPath jsonPath = response.jsonPath();
+        HashMap actualData= JsonUtils.convertJsonToJava(response.asString(),HashMap.class);
+       // LessonManagementLessonPost actualData = response.as(LessonManagementLessonPost.class);
+       // LessonManagementPojo actualData = response.as(LessonManagementPojo.class);
+       System.out.println("actualData = " + actualData);
+        assertEquals(expectedData,actualData);
 
-      //  LessonManagementPojo actualData = response.as(LessonManagementPojo.class);
-     //  System.out.println("actualData = " + actualData);
-//        assertEquals(expectedData.getObject().getDay(),actualData.getObject().getDay());
-//       assertEquals(expectedData.getObject().getStopTime(),actualData.getObject().getStopTime().substring(0,5));
-//        assertEquals(expectedData.getObject().getStartTime(),actualData.getObject().getStartTime().substring(0,5));
+      //assertEquals(expectedData.getObject().getDay(),actualData.getObject().
+     assertEquals(expectedData.getObject().getStopTime(),actualData.get(object.getStopTime().substring(0,5)));
+       // assertEquals(expectedData.getObject().getStartTime(),actualData.getObject().getStartTime().substring(0,5));
 
     }
 //-----------------------------------TC03--------------------------------------------
     @Then("send delete request for deleting lesson Program")
     public void sendDeleteRequestForDeletingLessonProgram() {
         viceDeanSetUp();
-       // System.out.println("US_10_ViceDeanLessonManagement.createdId = " + US_10_ViceDeanLessonManagement.createdId);
+        System.out.println("createdId = " + createdId);
         spec.pathParams("first","lessonPrograms","second","delete", "third",createdId);
-        //        ,"third",US_10_ViceDeanLessonManagement.createdId);
+        System.out.println("createdId = " + createdId);
         Map<String,String> expectedData = new HashMap<>();
         expectedData.put("message","Lesson Program Deleted");
         expectedData.put("httpStatus","OK");
-        System.out.println(expectedData);
+        System.out.println("expectedData = " + expectedData);
 
        Response response=given(spec).delete("{first}/{second}/{third}");
         response.prettyPrint();
-//       HashMap actualData= JsonUtils.convertJsonToJava(response.asString(),HashMap.class);
+       HashMap actualData= JsonUtils.convertJsonToJava(response.asString(),HashMap.class);
         assertEquals(200,response.getStatusCode());
-//        assertEquals(expectedData,actualData);
+        assertEquals(expectedData,actualData);
+        System.out.println("actualData = " + actualData);
 
     }
 
-//as(LessonManagementPojo.class);
 
 }

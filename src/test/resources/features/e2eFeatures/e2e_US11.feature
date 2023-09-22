@@ -10,7 +10,7 @@
     # gets the lesson program and assert
   @E2E_US11_02
   Scenario: TC02 They should be able to update from the Lesson Program List.
-    Given Vice Dean sends post request for lesson program
+    When Vice Dean sends post request for lesson program
     Then Vice Dean update the lesson program and assert
   @E2E_US11_03
   Scenario: TC03 Vice Dean send delete request for deleting lesson Program
