@@ -30,5 +30,5 @@ Feature: The teacher should be able to create meetings with students feature
     And close the connection for US19
     Examples:
       | studentID | date of meet | start time | stop time | description |
-      |   707     | 2023-12-16   | 15:10:00   | 16:10:00  | sinav toplantisi|
+      |   60     | 2023-09-25   | 22:00:00   | 23:00:00   | Acil |
 
