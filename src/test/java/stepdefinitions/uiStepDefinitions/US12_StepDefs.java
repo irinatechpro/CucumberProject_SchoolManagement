@@ -2,6 +2,8 @@ package stepdefinitions.uiStepDefinitions;
 
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.*;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,6 +17,9 @@ import utilities.*;
 
 import java.util.List;
 
+import static base_url.BaseUrl.spec;
+import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class US12_StepDefs {
@@ -22,6 +27,9 @@ public class US12_StepDefs {
     ViceDean_LessonManagementPage viceDean_lessonManagementPage=new ViceDean_LessonManagementPage();
     CommonLocator commonLocator=new CommonLocator();
     Faker faker=new Faker();
+    Response response;
+    public Integer teacherId;
+    public Integer lessonId;
     @When("the Education Term Management page loads up")
     public void the_education_term_management_page_loads_up() {
         WaitUtils.waitForVisibility(viceDeanLessonProgram.educationTermManagement,3);
@@ -51,8 +59,10 @@ public class US12_StepDefs {
     }
     @Then("Vice Dean  tick to choose lesson")
     public void vice_dean_tick_to_choose_lesson() {
+        JSUtils.scrollIntoViewJS(viceDeanLessonProgram.chooseLesson);
+        lessonId=faker.number().numberBetween(1,100);
 
-       JSUtils.clickWithTimeoutByJS (viceDeanLessonProgram.chooseLesson.findElement(By.xpath("(//input[@id='lessonProgramId'])["+faker.number().numberBetween(1,100)+"]")));
+       JSUtils.clickWithTimeoutByJS (viceDeanLessonProgram.chooseLesson.findElement(By.xpath("(//input[@id='lessonProgramId'])["+lessonId+"]")));
 
     }
     @Then("Vice Dean should scroll down until see the Choose Teacher")
@@ -70,8 +80,8 @@ public class US12_StepDefs {
     }
     @Then("Vice Dean select teacher")
     public void vice_dean_select_teacher() {
-
-    viceDeanLessonProgram.chooseTeacher.findElement(By.xpath("//select[@id='teacherId']//option[@value='"+faker.number().numberBetween(1,100)+"']")).click();
+        teacherId= faker.number().numberBetween(1,100);
+    viceDeanLessonProgram.chooseTeacher.findElement(By.xpath("//select[@id='teacherId']//option[@value='"+teacherId+"']")).click();
         WaitUtils.waitFor(3);
 
     }
@@ -89,4 +99,20 @@ public class US12_StepDefs {
     }
 
 
+    @Given("send GET request to lesson programs with getAllAssigned")
+    public void sendGETRequestToLessonProgramsWithGetAllAssigned() {
+        //https://managementonschools.com/app/lessonPrograms/getAllAssigned
+        spec.pathParams("first","lessonPrograms","second","getAllAssigned");
+        response=given(spec).get("{first}/{second}");
+        response.prettyPrint();
+        
+    }
+
+    @Then("validate that teacher is assign to lesson")
+    public void validateThatTeacherIsAssignToLesson() {
+        JsonPath jsonPath=response.jsonPath();
+        String actTeacherName=jsonPath.getList("teachers.findAll{it.lessonProgramId=='Lincoln McDermott'}.name").get(0).toString();
+      assertEquals(200,response.statusCode());
+        assertEquals(teacherId,actTeacherName);
+    }
 }
