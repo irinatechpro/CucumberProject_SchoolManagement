@@ -7,15 +7,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import pages.CommonLocator;
-import pages.CreateStudentPage;
 import pages.DeanCreatePage;
 import utilities.DBUtils;
-import utilities.Driver;
 import utilities.JSUtils;
 import utilities.WaitUtils;
 
@@ -25,20 +19,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static stepdefinitions.uiStepDefinitions.CommonStepDefs.*;
-import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerFormattedPhoneNumber;
+
 public class US04_StepDefs {
 
     private static String deanUserName;
+    private static String deanName;
     private static String dean;
     private static String deanData;
     public static String id;
+    //   public static String genderDB;
+    //   public static String genderAPI;
+//    public static String birth_day;
 
     public Statement statement;
     Connection connection;
@@ -83,11 +80,86 @@ public class US04_StepDefs {
     public void verifyDeanNumberUnCreatedAutomatically() {
 
     }
+//API
+//@And("enter username for dean")
+//public void enterUsernameForDean() {
+//    do {
+//        fakerUsername = faker.name().username();
+//    } while (fakerUsername.length() <= 4);
+//
+//    commonLocator.usernameField.sendKeys(fakerUsername);
+//    WaitUtils.waitFor(2);
+//    System.out.println("fakerUsername = " + fakerUsername);
+//}
+
+//    @Given("enter Dean Name")
+//    public void enter_dean_name() {
+//        fakerName = faker.name().firstName();
+//        deanCreatePage.deanManagementLink.sendKeys(fakerName);
+//        WaitUtils.waitFor(2);
+//    }
+
+//    @Given("enter Dean Surname")
+//    public void enter_dean_surname() {
+//        fakerSurname = faker.name().lastName();
+//        commonLocator.surname.sendKeys(fakerSurname);
+//        WaitUtils.waitFor(2);
+//    }
+
+//    @Given("enter Dean Birth Place")
+//    public void enter_teacher_birth_place() {
+//        fakerBirthPlace = faker.address().city();
+//        commonLocator.birthplace.sendKeys(fakerBirthPlace);
+//        WaitUtils.waitFor(2);
+//    }
+
+
+//    @Given("enter Dean valid phone number")
+//    public void enter_dean_valid_phone_number() {
+//        // Generate a fake phone number as a string
+//        String fakerPhoneNumber = faker.phoneNumber().phoneNumber();
+//
+//    }
+//
+//    @Given("select dean Male Gender")
+//    public void select_dean_male_gender() {
+//        genderDB= "0";
+//        genderAPI="MALE";
+//        commonLocator.genderMale.click();
+//        WaitUtils.waitFor(2);
+//
+//    }
+//
+//    @Then("enter Teacher date of birth")
+//    public void enter_teacher_date_of_birth() {
+//
+//        birth_day = "25-05-1988";
+//        commonLocator.dateOfBirth.sendKeys(birth_day);
+//
+//        WaitUtils.waitFor(3);
+//    }
+//
+//    @Then("enter dean valid SSN")
+//    public void enter_dean_valid_ssn() {
+//        fakeSsn = faker.idNumber().ssnValid();
+//        commonLocator.ssnField.sendKeys(fakeSsn);
+//
+//
+//        WaitUtils.waitFor(2);
+//
+//    }
+
+
+//    @Given("connect to DataBase")
+//    public void connect_to_database() throws SQLException {
+//        connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
+//
+//    }
 
     @Given("send get All dean request on API")
     public void send_get_All_dean_request_on_API() {
-        https://managementonschools.com/app/dean/getAll
-        spec.pathParams("first","dean","second","getAll");
+        https://managementonschools.com/app/teachers/getAll
+        spec.pathParams("first", "dean", "second", "getAll").queryParams("size", "10000");
         response = given(spec).get("{first}/{second}");
         response.prettyPrint();
     }
@@ -96,9 +168,8 @@ public class US04_StepDefs {
     //public void filter_dean_Data_using_username_and_validate() {
     public void validate_that_dean_created() {
         JsonPath jsonPath = response.jsonPath();
-        List<String> deanData = jsonPath.getList("findAll{it.username=='" + fakerUsername + "'}");
-        System.out.println("deanData = " + deanData);
-
+//        List<String> deanData = jsonPath.getList("findAll{it.username=='" + fakerUsername + "'}");
+//        System.out.println("deanData = " + deanData);
         String actId = jsonPath.getList("findAll{it.username=='" + fakerUsername + "'}.id").get(0).toString();
         String actUsername = jsonPath.getList("findAll{it.username=='" + fakerUsername + "'}.username").get(0).toString();
         String actName = jsonPath.getList("findAll{it.username=='" + fakerUsername + "'}.name").get(0).toString();
@@ -123,10 +194,7 @@ public class US04_StepDefs {
         //assertEquals(fakerPassword, actPassword);
         assertEquals(id, actId);
 
-
-
     }
-
 
     @Then("get deanID from API")
     public void get_dean_id_from_api() {
@@ -152,8 +220,6 @@ public class US04_StepDefs {
 //DB
 
 
-
-
 @When("get dean user via username {string}")
 public void get_dean_user_via_username(String string) throws SQLException {
     statement = connection.createStatement();
@@ -167,7 +233,7 @@ public void get_dean_user_via_username(String string) throws SQLException {
 
         resultSet.next();
         String actUsername = resultSet.getString("username");
-        String actBirthDay=resultSet.getString("birth_day");
+        String actBirthDay = resultSet.getString("birth_day");
         String actBirth_place = resultSet.getString("birth_place");
         String actGender = resultSet.getString("gender");
         String actName = resultSet.getString("name");
@@ -175,9 +241,11 @@ public void get_dean_user_via_username(String string) throws SQLException {
         String actSsn = resultSet.getString("ssn");
         String actSurname = resultSet.getString("surname");
         String actId = resultSet.getString("userId");
-        SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat expectedDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
-        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
+        String formattedActualDate = new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
+
+
         assertEquals(formattedExpectedDate, formattedActualDate);
         assertEquals(fakerBirthPlace, actBirth_place);
         assertEquals("Female", actGender);
