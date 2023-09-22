@@ -1,27 +1,18 @@
 package stepdefinitions.uiStepDefinitions;
-
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import pages.CommonLocator;
 import pages.CreateStudentPage;
 import utilities.*;
-
-import javax.swing.text.Utilities;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.replaceFiltersWith;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static stepdefinitions.uiStepDefinitions.CommonStepDefs.*;
@@ -43,7 +34,6 @@ public class US15_StepDefs {
     public void choose_advisor_teacher() throws Exception {
 
         BrowserUtils.selectByIndex(createStudentPage.advisorTeacherDropBox, 4);
-        //advisorTeacher = BrowserUtils.getDropdownSelectedOptions(createStudentPage.advisorTeacherDropBox).get(4);
     }
     @Given("enter email")
     public void enter_email() {
@@ -153,10 +143,31 @@ public class US15_StepDefs {
         resultSet = DBUtils.executeQuery(query);
         resultSet.next();
     }
-    @Then("validate  username")
-    public void validate_username() throws SQLException {
+    @Then("validate Student data")
+    public void validate_Student_data() throws SQLException {
+
         String actualUsername = resultSet.getString("username");
+        String actualName = resultSet.getString("name");
+        String actualSurname = resultSet.getString("surname");
+        String actualSSN = resultSet.getString("ssn");
+        String actualBirthDate = resultSet.getString("birth_day");
+        String actualBirthPlace = resultSet.getString("birth_place");
+        String actualPhoneNumber = resultSet.getString("phone_number");
+        String actualGender = resultSet.getString("gender");
+        String actualMotherName = resultSet.getString("mother_name");
+        String actualFatherName = resultSet.getString("father_name");
+        String actualStudentNumber = resultSet.getString("student_number");
         assertEquals(StudentUserName, actualUsername);
+        assertEquals(fakeSsn, actualSSN);
+        assertEquals(fakerName, actualName);
+        assertEquals(fakerSurname, actualSurname);
+        assertEquals(formattedDate, actualBirthDate);
+        assertEquals(fakerBirthPlace, actualBirthPlace);
+        assertEquals(fakerFormattedPhoneNumber, actualPhoneNumber);
+        assertEquals("0", actualGender);
+        assertEquals(studentMotherName, actualMotherName);
+        assertEquals(studentFatherName, actualFatherName);
+        assertEquals(numberText, actualStudentNumber);
     }
 
 
