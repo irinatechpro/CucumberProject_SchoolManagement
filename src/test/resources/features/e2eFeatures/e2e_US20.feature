@@ -1,7 +1,11 @@
 @E2E
 Feature: The teacher should be able to create meetings with students feature
 
-  Background: user goes to school management home page and login as a Teacher
+
+
+
+  @UI_TC01
+  Scenario: The Date, Start Time, Stop Time and Description of the meetings should be visible to the teacher
     Given user navigates to "https://managementonschools.com/"
     And user clicks on login link
     And user enters username "Anna"
@@ -9,10 +13,6 @@ Feature: The teacher should be able to create meetings with students feature
     And user clicks on login button
     And click menu button
     And click Meet Management button
-
-
-  @UI_TC01
-  Scenario: The Date, Start Time, Stop Time and Description of the meetings should be visible to the teacher
     And select Student
     And select Date Of Meeting
     And enter Start Time
@@ -28,7 +28,15 @@ Feature: The teacher should be able to create meetings with students feature
   Scenario:
 
   @DB_TC01
-  Scenario:
+  Scenario Outline: validate created meeting
+    Given connect to database
+    When get meeting via description "<description>"
+    Then validate  description "<description>" date "<date>" start_time "<start_time>"   stop_time "<stop_time>"
+    And close the connection
+    Examples:
+      | description      | date                         | start_time              | stop_time                |
+      | rehberlk         | 2023-10-10                   | 08:20:00                | 09:20:00                  |
+
 
   @UI_TC02
   Scenario: Teacher can update meet
