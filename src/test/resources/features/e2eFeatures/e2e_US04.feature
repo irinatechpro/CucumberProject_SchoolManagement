@@ -24,11 +24,22 @@ Feature: Admin should be able to create a dean
     And verify dean created successfully confirmation message
     Then close the application
 
-  @US04_API @Api_Dean
 
+  @US04_DB
+  Scenario: Validate created dean on database
+    Given connect to DataBase
+    When get dean user via username "<username>"
+    Then validate the credentials for dean
+
+  @US04_API @Api_Dean
   Scenario: Admin created dean on API
     Given send get All dean request on API
-    Then filter dean Data using username and validate
+    Then validate that dean created
+
+
+#    Examples:
+#      | username | birth_day  | birth_place | gender | name | phone_number | ssn         | surname |
+#      | pepe     | 1998-01-01 | Hook        | Female | Pero | 395 285 1025 | 773-68-8290 | joe     |
 
 
 
