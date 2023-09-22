@@ -23,12 +23,9 @@ Feature: The teacher should be able to create meetings with students feature
     Then verify meet could not created.
 
   @US19_DB
-  Scenario Outline:
+  Scenario:
     Given connect to database for DB
-    When get students via "<studentID>"
-    Then validate studentID "<studentID>", date "<date of meet>", start time "<start time>", stop time "<stop time>", description "<description>" is edited
+    When get students
+    Then validate studentID, date, start time, stop time, description is edited
     And close the connection for US19
-    Examples:
-      | studentID | date of meet | start time | stop time | description |
-      |   60     | 2023-09-25   | 22:00:00   | 23:00:00   | Acil |
 
