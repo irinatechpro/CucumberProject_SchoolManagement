@@ -1,7 +1,7 @@
 @E2E @US07
 Feature: Deans should be able to see the messages sent by users feature
 
-  @UI
+  @US07_UI
   Scenario: TC02 Deans should be able to view messages, authors, emails,sending dates, and subject information
     Given user navigates to "https://managementonschools.com/"
     And user clicks on login link
@@ -17,7 +17,7 @@ Feature: Deans should be able to see the messages sent by users feature
     Then verify Subject is seen
     Then close the application
 
-  @API
+  @US07_API @Api_dean
   Scenario: TC_01 Deans should be able to see the messages sent by users
     Given send get request for messages
     Then verify message, Name, Email, Date, Subject is seen

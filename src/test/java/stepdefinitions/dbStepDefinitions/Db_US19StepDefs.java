@@ -1,8 +1,10 @@
 package stepdefinitions.dbStepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import utilities.DBUtils;
 
 import java.sql.*;
 
@@ -10,20 +12,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Db_US19StepDefs {
-    Connection connection;
-    Statement statement;
+    //Connection connection;
+    //Statement statement;
     ResultSet resultSet;
     @Given("connect to database for DB")
     public void connectToDatabaseForDB() throws SQLException {
-      connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management","select_user","43w5ijfso");
+      //connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management","select_user","43w5ijfso");
 
     }
 
-    @When("get students")
-    public void getStudents() throws SQLException {
-      statement = connection.createStatement();
-      String query = "select * from meet";
-      resultSet = statement.executeQuery(query);
+    @When("get students via {string}")
+    public void getStudents(String studentID) throws SQLException {
+      //statement = connection.createStatement();
+      String query = "select * from meet where id = '"+ studentID+"'";
+      resultSet = DBUtils.executeQuery(query);
     }
 
 
@@ -42,5 +44,10 @@ public class Db_US19StepDefs {
         assertEquals(startTime,actualStartTime);
         assertEquals(stopTime,actualStopTime);
 
+    }
+
+    @And("close the connection for US19")
+    public void closeTheConnection() {
+        DBUtils.closeConnection();
     }
 }

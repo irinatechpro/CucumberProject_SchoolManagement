@@ -14,7 +14,6 @@ public class Api_US07StepDefs extends BaseUrl {
     Response response;
     @Given("send get request for messages")
     public void sendGetRequestForMessages() {
-        deanSetUp();
         //set the url
         spec.pathParams("first","contactMessages","second","getAll").queryParams("page",0, "size", 10, "sort", "date", "type", "desc");
 

@@ -23,7 +23,6 @@ public class Api_US19StepDefs extends BaseUrl {
     AddMeetExpectedPojo expectedData;
     @Given("send post request for add meet")
     public void sendPostRequestForAddMeet() {
-        teacherSetUp();
         spec.pathParams("first","meet","second","save");
 
         List<Integer> studentIds = new ArrayList<>();

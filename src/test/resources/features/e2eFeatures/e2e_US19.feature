@@ -1,7 +1,7 @@
 @E2E @US19
 Feature: The teacher should be able to create meetings with students feature
 
-  @UI
+  @US19_UI
   Scenario: The teacher should be able to create meetings with students.
     Given user navigates to "https://managementonschools.com/"
     And user clicks on login link
@@ -17,17 +17,18 @@ Feature: The teacher should be able to create meetings with students feature
     And enter Description
     And click submit button
 
-  @API
+  @US19_API @Api_teacher
   Scenario: The teacher should be able to create meetings with students.
     Given send post request for add meet
     Then verify meet could not created.
 
-  @DB
+  @US19_DB
   Scenario Outline:
     Given connect to database for DB
-    When get students
+    When get students via "<studentID>"
     Then validate studentID "<studentID>", date "<date of meet>", start time "<start time>", stop time "<stop time>", description "<description>" is edited
+    And close the connection for US19
     Examples:
       | studentID | date of meet | start time | stop time | description |
-      |   534     | 2026-09-01   | 10:19:00   | 11:30:00  | Test Results|
+      |   707     | 2023-12-16   | 15:10:00   | 16:10:00  | sinav toplantisi|
 
