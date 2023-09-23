@@ -84,7 +84,7 @@ public class US20_StepDefs {
 
     @And("select Date Of Meeting")
     public void selectDateOfMeeting() {
-        Faker faker = new Faker();
+
         // 2023 Ekim'den sonraki bir tarih üretebilmek için özelleştirilmiş bir tarih üretme işlevi
         Date randomDate = generateFutureDate(2023, 10);
 

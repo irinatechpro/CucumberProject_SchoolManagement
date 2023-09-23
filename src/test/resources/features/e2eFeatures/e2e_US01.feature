@@ -24,4 +24,12 @@ Feature:Prospective students should be able to register in the system
   Scenario:
 
   @DB
-  Scenario:
+  Scenario Outline: validate registered user on database
+    Given connect to database
+    When get guest user via username "<username>"
+    Then validate  username "<username>" date_of_birth "<date_of_birth>"   birth_place "<birth_place>"   name "<name>" phone_number "<phone_number>"  ssn_number "<ssn_number>" surname "<surname>"
+    And close the connection
+    Examples:
+      | username | date_of_birth | birth_place | name | phone_number | ssn_number  | surname |
+      | Raven    | 2000-01-01    | San Antonio | Anna | 522-463-4918 | 380-19-2132 | Timmy   |
+

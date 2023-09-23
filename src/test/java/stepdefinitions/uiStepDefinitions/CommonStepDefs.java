@@ -9,6 +9,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import pages.CommonLocator;
 import pages.LoginPage;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.assertTrue;
 
 public class CommonStepDefs {
@@ -16,6 +21,19 @@ public class CommonStepDefs {
     LoginPage loginPage = new LoginPage();
     CommonLocator commonLocator = new CommonLocator();
     Faker faker = new Faker();
+
+    public static String fakerName;
+    public static String fakerSurname;
+    public static String fakerBirthPlace;
+    public static String dateOfBirth;
+    public static String fakerDateOfBirth;
+
+    public static String reverseDateOfBirth;
+    public static String fakerPassword;
+    public static String fakeSsn;
+    public static String fakerFormattedPhoneNumber;
+    public static String fakerUsername;
+    public static String formattedDate;
 
     @Then("close the application")
     public void close_the_application() throws InterruptedException {
@@ -55,7 +73,42 @@ public class CommonStepDefs {
 
     @Then("enter date of birth")
     public void enter_date_of_birth() {
-       commonLocator.dateOfBirth.sendKeys("01/05/1990");
+        dateOfBirth = "01-05-1990";
+        reverseDateOfBirth = "1990-05-01";
+        commonLocator.dateOfBirth.sendKeys(dateOfBirth);
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            // Parse the original date into a Date object
+            Date date = inputDateFormat.parse(dateOfBirth);
+
+            // Create a new SimpleDateFormat object to format the date in "yyyy-MM-dd" format
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Format the date in the desired format
+            formattedDate = outputDateFormat.format(date);
+        } catch (ParseException e) {
+            // Handle any parsing errors here
+            e.printStackTrace();
+        }
+       fakerDateOfBirth = "01/05/1990";
+       commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
+
+//        SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        try {
+//            // Parse the original date into a Date object
+//            Date date = inputDateFormat.parse(dateOfBirth);
+//
+//            // Create a new SimpleDateFormat object to format the date in "yyyy-MM-dd" format
+//            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//            // Format the date in the desired format
+//            formattedDate = outputDateFormat.format(date);
+//        } catch (ParseException e) {
+//            // Handle any parsing errors here
+//            e.printStackTrace();
+//        }
+//       fakerDateOfBirth = "01/05/1990";
+//       commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
     }
     @Then("enter valid phone number")
     public void enter_valid_phone_number() {
@@ -63,22 +116,25 @@ public class CommonStepDefs {
         String phoneNumber = faker.phoneNumber().phoneNumber();
 
         // Format the phone number as XXX-XXX-XXXX
-        String formattedPhoneNumber = BrowserUtils.formatPhoneNumber(phoneNumber);
+        fakerFormattedPhoneNumber = BrowserUtils.formatPhoneNumber(phoneNumber);
 
         System.out.println("Generated Phone Number: " + phoneNumber);
-        System.out.println("Formatted Phone Number: " + formattedPhoneNumber);
+        System.out.println("Formatted Phone Number: " + fakerFormattedPhoneNumber);
 
-        commonLocator.phoneNumberField.sendKeys(formattedPhoneNumber);
+        commonLocator.phoneNumberField.sendKeys(fakerFormattedPhoneNumber);
     }
 
     @Then("enter valid SSN")
     public void enter_valid_ssn() {
-        commonLocator.ssnField.sendKeys(faker.idNumber().ssnValid().toString());
+        fakeSsn = faker.idNumber().ssnValid().toString();
+        commonLocator.ssnField.sendKeys(fakeSsn);
     }
 
     @Then("enter username")
     public void enter_username() {
-        commonLocator.usernameField.sendKeys(faker.name().username());
+        fakerUsername = faker.name().username();
+        commonLocator.usernameField.sendKeys(fakerUsername);
+        System.out.println("Faker Username: " + fakerUsername);
         WaitUtils.waitFor(2);
     }
 
@@ -90,25 +146,26 @@ public class CommonStepDefs {
 
     @Given("enter Name")
     public void enter_Name() {
-        commonLocator.name.sendKeys(faker.name().firstName());
+        fakerName = faker.name().firstName();
+        commonLocator.name.sendKeys(fakerName);
     }
 
     @Given("enter Surname")
     public void enter_Surname() {
-
-
-        commonLocator.surname.sendKeys(faker.name().lastName());
+        fakerSurname = faker.name().lastName();
+        commonLocator.surname.sendKeys(fakerSurname);
     }
 
     @Given("enter Birth Place")
     public void enter_Birth_Place() {
-        commonLocator.birthplace.sendKeys(faker.country().capital());
+        fakerBirthPlace = faker.country().capital();
+        commonLocator.birthplace.sendKeys(fakerBirthPlace);
     }
 
     @Given("select Male Gender")
     public void select_Gender_Male() {
         WaitUtils.waitFor(2);
-        commonLocator.genderMale.click();
+        JSUtils.clickWithTimeoutByJS(commonLocator.genderMale);
     }
 
     @Given("select Female Gender")
@@ -118,7 +175,8 @@ public class CommonStepDefs {
 
     @Given("enter password")
     public void enter_password() {
-        commonLocator.passwordField.sendKeys("Testpw12");
+        fakerPassword = "Testpw12";
+        commonLocator.passwordField.sendKeys(fakerPassword);
     }
 
     @Given("enter password with only seven chars")
@@ -266,10 +324,5 @@ public class CommonStepDefs {
     @Then("password less then 8 character error message appears")
     public void passwordLessThen8CharacterErrorMessageAppears() {
         BrowserUtils.verifyElementDisplayed(commonLocator.passwordLessCharErrorMessage);
-    }
-    @Then("verify submit fails with error message")
-    public void verify_submit_fails_with_error_message() {
-
-        BrowserUtils.verifyElementDisplayed(commonLocator.errorMessageAdvisorTeacher);
     }
 }

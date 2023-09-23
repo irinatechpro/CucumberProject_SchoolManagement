@@ -4,6 +4,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 public class JSUtils {
+
+//    public static void clickElementByJS(WebElement element) {
+//        Driver ReusableMethods;
+//        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", ReusableMethods.waitForVisibility(element,5));
+//        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", element);
+//    }
+
     /*
     JAVASCRIPT EXECUTOR METHODS
     @param WebElement

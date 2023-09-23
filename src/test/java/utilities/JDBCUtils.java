@@ -4,14 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBUtils {
+public class JDBCUtils {
 
-    private static Connection connection;
-    private static Statement statement;
-    public static ResultSet resultSet;
-    /**
-     * DBUtils.createConnection(); -> to connect to the database
-     */
 
     //This method establishes a connection with the ManagementOnSchool database and returns Connection data
     public static Connection connectToDatabase() {
