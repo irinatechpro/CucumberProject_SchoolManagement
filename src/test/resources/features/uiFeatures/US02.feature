@@ -1,10 +1,8 @@
-<<<<<<< HEAD
- @US02
-Feature:
-=======
+
+
 @US02
 Feature: f
->>>>>>> e2d57de2e3fd6fdadf76f65c1747e7c261b1bd13
+
 
   Background:
   Given user goes to url
@@ -26,6 +24,6 @@ Feature: f
     And Open the Main menu
     And Click on the Guest User
     And Open the Guest user List
-    And Click on Delet button
+    And Click on Delete button
     Then Verify if the user is deleted
 
