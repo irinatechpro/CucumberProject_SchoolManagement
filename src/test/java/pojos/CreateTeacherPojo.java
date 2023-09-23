@@ -130,7 +130,7 @@ public class CreateTeacherPojo {
     }
 
     /***********************************
-     *        GENERATE PAYLOAD
+     *      SET TEACHER FIELDS
      ***********************************/
     public void createTeacher() {
         faker = new Faker();
@@ -254,6 +254,14 @@ public class CreateTeacherPojo {
         setSocialSecurityNumber(buildSocialSecurityNumber.toString() );
     }
 
+    /*********************************************
+     * GENERATE TEACHER PAYLOAD FOR POST REQUEST
+     * -------------------------------------------
+     * NOTE: In rare occasions, if you get 400
+     * status code, rerun the post request.
+     * Rerunning will usually fix this issue.
+     *********************************************/
+
     public String createTeacherPayLoad() {
 
         StringBuilder buildPayLoad = new StringBuilder();
@@ -275,27 +283,4 @@ public class CreateTeacherPojo {
 
         return buildPayLoad.toString();
     }
-
-    /***********************************
-     *        EXAMPLE BODY RESPONSE
-     ***********************************/
-
-    /**
-     * {
-     *   "birthDay": "yyyy-MM-dd",
-     *   "birthPlace": "string",
-     *   "email": "string",
-     *   "gender": "MALE",
-     *   "isAdvisorTeacher": true,
-     *   "lessonsIdList": [
-     *     0
-     *   ],
-     *   "name": "string",
-     *   "password": "string",
-     *   "phoneNumber": "string",
-     *   "ssn": "string",
-     *   "surname": "string",
-     *   "username": "string"
-     * }
-     */
 }
