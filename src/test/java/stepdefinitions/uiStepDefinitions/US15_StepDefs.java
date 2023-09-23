@@ -121,7 +121,7 @@ public class US15_StepDefs {
         assertEquals(fakeSsn, actSsn);
         assertEquals(fakerName, actName);
         assertEquals(fakerSurname, actSurname);
-        assertEquals(formattedDate, actBirthDay);
+        assertEquals(fakerDateOfBirth, actBirthDay);
         assertEquals(fakerBirthPlace, actBirthPlace);
         assertEquals(fakerFormattedPhoneNumber, actPhoneNumber);
         assertEquals("MALE", actGender);
