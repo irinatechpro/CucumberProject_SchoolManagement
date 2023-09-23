@@ -28,6 +28,7 @@ public class CommonStepDefs {
     public static String dateOfBirth;
     public static String fakerDateOfBirth;
 
+    public static String reverseDateOfBirth;
     public static String fakerPassword;
     public static String fakeSsn;
     public static String fakerFormattedPhoneNumber;
@@ -73,6 +74,7 @@ public class CommonStepDefs {
     @Then("enter date of birth")
     public void enter_date_of_birth() {
         dateOfBirth = "01-05-1990";
+        reverseDateOfBirth = "1990-05-01";
         commonLocator.dateOfBirth.sendKeys(dateOfBirth);
         SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -91,6 +93,22 @@ public class CommonStepDefs {
        fakerDateOfBirth = "01/05/1990";
        commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
 
+//        SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+//        try {
+//            // Parse the original date into a Date object
+//            Date date = inputDateFormat.parse(dateOfBirth);
+//
+//            // Create a new SimpleDateFormat object to format the date in "yyyy-MM-dd" format
+//            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//
+//            // Format the date in the desired format
+//            formattedDate = outputDateFormat.format(date);
+//        } catch (ParseException e) {
+//            // Handle any parsing errors here
+//            e.printStackTrace();
+//        }
+//       fakerDateOfBirth = "01/05/1990";
+//       commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
     }
     @Then("enter valid phone number")
     public void enter_valid_phone_number() {
@@ -116,6 +134,7 @@ public class CommonStepDefs {
     public void enter_username() {
         fakerUsername = faker.name().username();
         commonLocator.usernameField.sendKeys(fakerUsername);
+        System.out.println("Faker Username: " + fakerUsername);
         WaitUtils.waitFor(2);
     }
 
@@ -146,7 +165,7 @@ public class CommonStepDefs {
     @Given("select Male Gender")
     public void select_Gender_Male() {
         WaitUtils.waitFor(2);
-        commonLocator.genderMale.click();
+        JSUtils.clickWithTimeoutByJS(commonLocator.genderMale);
     }
 
     @Given("select Female Gender")
