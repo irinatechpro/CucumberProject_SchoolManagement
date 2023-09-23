@@ -1,15 +1,13 @@
 package pojos;
 
 import com.github.javafaker.Faker;
-import com.google.gson.Gson;
-import org.testng.annotations.Test;
 
 public class CreateTeacherPojo {
 
     /***********************************
      *        LIBRARIES
      ***********************************/
-    Faker faker;
+    Faker faker = new Faker();
 
     /***********************************
      *        FIELDS
@@ -133,7 +131,43 @@ public class CreateTeacherPojo {
      *      SET TEACHER FIELDS
      ***********************************/
     public void createTeacher() {
-        faker = new Faker();
+
+        //Date of Birth
+        createBirthDate();
+
+        //Place of Birth
+        setBirthPlace(faker.country().name() );
+
+        createNameSurnameEmail();
+
+        //choose gender
+        createGender();
+
+        //set isAdvisorTeacher true or false
+        createIsAdvisorTeacherBoolean();
+
+        //provide a lesson id to match with a lesson name in lesson program
+        createLesson();
+
+        //set password - keep same for all teachers for purpose of testing
+        setPassword("Admin123");
+
+        //phoneNumber
+        createPhoneNumber();
+
+        //social Security Number
+        createSocialSecurityNumber();
+
+        //set a username
+        //combine first name character + 3 characters from surname + 3 numbers (can be random order)
+        createUsername();
+    }
+
+
+    /***********************************
+     *    GENERATE DATE OF BIRTH
+     ***********************************/
+    private void createBirthDate() {
 
         //number representation of birthdate
         int dayNumber = faker.number().numberBetween(1, 28);
@@ -144,7 +178,7 @@ public class CreateTeacherPojo {
         String month;
         String year = String.valueOf(faker.number().numberBetween(1950, 1999) );
 
-        /**
+        /*
          * Formatting day / month numbers if they fall below 10
          * This will add a zero digit in the beginning to properly format for API input
          */
@@ -165,9 +199,12 @@ public class CreateTeacherPojo {
 
         //Format Birthday
         setBirthday(year + "-" + month + "-" + day);
+    }
 
-        //Create BirthPlace
-        setBirthPlace(faker.country().name() );
+    /***********************************
+     *    NAME, SURNAME, EMAIL
+     ***********************************/
+    private void createNameSurnameEmail() {
 
         //Create name + surname + email
         setName(faker.name().firstName() );
@@ -192,35 +229,57 @@ public class CreateTeacherPojo {
         //convert SB to String to store for this object
         setEmail(buildEmail.toString() );
 
+    }
+
+    /***********************************
+     *      GENERATE GENDER
+     ***********************************/
+    private void createGender() {
+
         //Choose Gender
         String[] gender = new String[2];
         gender[0] = "MALE";
         gender[1] = "FEMALE";
 
         setGender(gender[faker.number().numberBetween(0, 2)] );
+    }
 
-        //set isAdvisorTeacher true or false
+    /***********************************
+     *    GENERATE ADVISOR TEACHER
+     ***********************************/
+    private void createIsAdvisorTeacherBoolean() {
+
         boolean[] isAdvisorTeacherBoolean = new boolean[2];
         isAdvisorTeacherBoolean[0] = false;
         isAdvisorTeacherBoolean[1] = true;
 
         setAdvisorTeacher(isAdvisorTeacherBoolean[faker.number().numberBetween(0, 2)] );
+    }
 
-        /**
+    /***********************************
+     *     GENERATE LESSON BY ID
+     ***********************************/
+    private void createLesson() {
+
+        /*
          * Lesson IDs
          * 5[Java], 6[JavaScript], 7[Selenium], 8[Roma Hukuku], 11[Psychology], 17[Fluid]
          */
 
-        //choose lesson for teacher
         int[] lessonId = {5, 6, 7, 8, 11, 17};
         setLessonId(lessonId[faker.number().numberBetween(0, 6)] );
+    }
 
-        //set password - keep same for all teachers for purpose of testing
-        setPassword("Admin123");
-
-        //set a username
-        //combine first name character + 3 characters from surname + 3 numbers (can be random order)
+    /***********************************
+     *      GENERATE USERNAME
+     ***********************************/
+    private void createUsername() {
         StringBuilder buildUsername = new StringBuilder();
+
+        //split name and surname + combine first two characters + add some numbers
+        String[] nameSplit = getName().split("");
+        String[] surnameSplit = getSurname().split("");
+
         buildUsername.append(nameSplit[0] );
 
         for (int i = 0; i <= 2; i++) {
@@ -232,6 +291,12 @@ public class CreateTeacherPojo {
             }
         }
         setUsername(buildUsername.toString() );
+    }
+
+    /***********************************
+     *      GENERATE PHONE NUMBER
+     ***********************************/
+    private void createPhoneNumber() {
 
         //phoneNumber XXX-XXX-XXXX
         StringBuilder buildPhoneNumber = new StringBuilder();
@@ -242,6 +307,12 @@ public class CreateTeacherPojo {
         buildPhoneNumber.append(faker.number().numberBetween(1000, 9999) );
 
         setPhoneNumber(buildPhoneNumber.toString() );
+    }
+
+    /***********************************
+     *      GENERATE SSN
+     ***********************************/
+    private void createSocialSecurityNumber() {
 
         //Social Security Number XXX-XX-XXXX
         StringBuilder buildSocialSecurityNumber = new StringBuilder();
