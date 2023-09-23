@@ -1,8 +1,11 @@
 package stepdefinitions.apiStepDefinitions;
 
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import pojos.CreateNewLessonPojo;
 
 import static base_url.BaseUrl.spec;
@@ -59,5 +62,24 @@ public class Api_US09 {
 
         //show what is stored for the lesson object
         System.out.println(newLesson.getLessonInfo() );
+    }
+
+    @And("delete the created lesson")
+    public void deleteTheCreatedLesson() {
+        //https://managementonschools.com/app/lessons/delete/{id}
+        response = given(spec)
+                .pathParams(
+                        "first", "lessons",
+                        "second", "delete",
+                        "third", lessonId)
+                .delete("{first}/{second}/{third}")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("message", equalTo("Lesson Deleted"))
+                .body("httpStatus", equalTo("OK"))
+                .extract().response();
+
+        response.prettyPrint();
     }
 }
