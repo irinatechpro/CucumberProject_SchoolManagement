@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class Db_US20 {
 
@@ -63,6 +63,36 @@ public class Db_US20 {
         assertEquals(stop_time, actualStop_time);
     }
 
+    @When("get updated meeting via description {string}")
+    public void getUpdatedMeetingViaDescription(String description) throws SQLException {
+
+        String query = "SELECT * FROM meet where description = 'Toplanti updated'";
+        resultSet = DBUtils.executeQuery(query);
+        resultSet.next();
+    }
+
+    @Then("validate  updateddescription {string}")
+    public void validateUpdateddescription(String description) throws SQLException {
+        String actualUpdatedDescription = resultSet.getString("description");
+        assertEquals(description, actualUpdatedDescription);
+
+    }
+
+    @When("get deleted meeting via description {string}")
+    public void getDeletedMeetingViaDescription(String description) throws SQLException {
+
+        String query = "SELECT * FROM meet where description = 'Delete meeting'";
+        resultSet = DBUtils.executeQuery(query);
+        resultSet.next();
+    }
+
+
+    @Then("validate  there is such meeting description  {string}")
+    public void validateThereIsSuchMeetingDescription(String description) throws SQLException {
+        assertFalse(resultSet.next());
+//        String actualDeletedDescription = resultSet.getString("description");
+//        assertNull(description, actualDeletedDescription);
+    }
 
 
 //    @Then("validate  description {string} date {string} start_time {string}   stop_time {string}")
