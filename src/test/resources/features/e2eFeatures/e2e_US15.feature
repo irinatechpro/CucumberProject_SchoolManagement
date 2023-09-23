@@ -1,4 +1,4 @@
-git switch
+@e2e_US15
 Feature: Vice Deans should be able to create a student
   @UI15
   Scenario: With_Valid_Credentials
