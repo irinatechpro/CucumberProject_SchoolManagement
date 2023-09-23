@@ -13,12 +13,13 @@ import utilities.Driver;
 
 import java.sql.*;
 
+import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.requestSpecification;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class DB_US17 extends BaseUrl {
+public class DB_US17  {
 
     LoginPage loginPage = new LoginPage();
     StudentInfoManagement studentInfoManagement = new StudentInfoManagement();
