@@ -1,7 +1,6 @@
 @e2e_US04
 Feature: Admin should be able to create a dean
 
-
   @UI04
   Scenario:user register successfully
     Given user navigates to "https://managementonschools.com/"
@@ -25,21 +24,24 @@ Feature: Admin should be able to create a dean
     Then close the application
 
 
-  @US04_DB
+      @US04_DB
   Scenario: Validate created dean on database
-    Given connect to DataBase
-    When get dean user via username "<username>"
-    Then validate the credentials for dean
+        Given connect to dean database
+        Given get dean Data by username
+        Then  validate dean created on db
+        Then close the connection
+#            Examples:
+#      | username | birth_day  | birth_place | gender | name | phone_number | ssn         | surname |
+#      | Wintheiser| 01 01 1001 | Izmir     | Female | Flavia | 257-418-4025 | 884-72-1449 | Wintheiser |
 
-  @US04_API @Api_Dean
+
+
+  @US04_API @Api_admin
   Scenario: Admin created dean on API
     Given send get All dean request on API
     Then validate that dean created
 
 
-#    Examples:
-#      | username | birth_day  | birth_place | gender | name | phone_number | ssn         | surname |
-#      | pepe     | 1998-01-01 | Hook        | Female | Pero | 395 285 1025 | 773-68-8290 | joe     |
 
 
 
