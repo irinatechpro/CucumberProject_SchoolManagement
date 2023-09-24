@@ -38,6 +38,8 @@ Feature: The teacher should be able to create meetings with students feature
       | rehberlk         | 2023-10-10                   | 08:20:00                | 09:20:00                  |
 
 
+
+
   @UI_TC02
   Scenario: Teacher can update meet
     And click on edit button
@@ -49,7 +51,14 @@ Feature: The teacher should be able to create meetings with students feature
   Scenario:
 
   @DB_TC02
-  Scenario:
+  Scenario Outline: validate created meeting updated
+    Given connect to database
+    When get updated meeting via description "<description>"
+    Then validate  updateddescription "<description>"
+    And close the connection
+    Examples:
+      | description         | date                        | start_time             | stop_time |
+      | Toplanti updated    | 2025-01-01                  | 10:00:00                | 11:00:00  |
 
   @UI_TC03
   Scenario: Teacher can delete meet
@@ -60,7 +69,14 @@ Feature: The teacher should be able to create meetings with students feature
   Scenario:
 
   @DB_TC03
-  Scenario:
+  Scenario Outline: validate created meeting updated
+    Given connect to database
+    When get deleted meeting via description "<description>"
+    Then validate  there is such meeting description  "<description>"
+    And close the connection
+    Examples:
+      | description         | date                        | start_time             | stop_time |
+      | Delete meeting      | 2023-12-14                  | 11:00:00                | 11:20:00  |
 
 
 
