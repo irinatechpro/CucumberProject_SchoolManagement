@@ -12,6 +12,7 @@ import pages.DeanManagementPage;
 import pages.LoginPage;
 import utilities.*;
 import static org.junit.Assert.*;
+import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerBirthPlace;
 import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerUsername;
 import static stepdefinitions.uiStepDefinitions.US13_StepDefs.birth_day;
 import static utilities.FakerUtils.faker;
@@ -304,6 +305,7 @@ public class US05_StepDefs {
 
     @Then("sees the the Deans information")
     public void seesTheTheDeansInformation() {
+        WaitUtils.waitFor(1);
         String nameOfCreatedDean = deanManagementPage.deanName.getText();
         JSUtils.scrollIntoViewJS(deanManagementPage.lastRowDeanList);
         String lastRow = deanManagementPage.lastRowDeanList.getText();
@@ -336,11 +338,11 @@ public class US05_StepDefs {
     String actualUsername = resultSet.getString("username");
         System.out.println("actualUsername = " + actualUsername);
 
-        assertEquals(name, actualName);
-    assertEquals(surname,actualSurname);
-    assertEquals(birth_place, actualBirth_place);
-    assertEquals(gender, actualGender);
-    assertEquals(birth_day, actualBirth_day);
+        assertEquals(fakeDeanName, actualName);
+    assertEquals(fakeDeanSurname,actualSurname);
+    assertEquals("Istanbul", actualBirth_place);
+    assertEquals("1", actualGender);
+    assertEquals("01/01/1001", actualBirth_day);
     assertEquals(formattedPhoneNumber, actualPhone_number);
     assertEquals(fakeSsn, actualSsn);
     assertEquals(fakeUsername, actualUsername);
@@ -375,7 +377,7 @@ public class US05_StepDefs {
         assertFalse(nameDeanUpdate, equals(actualUpdatedName));//fakeUsername will be generated on UI part and will be validated here
         assertFalse(surnameDeanUpdate,equals(actualUpdatedSurname));
         assertFalse("Istanbul", equals(actualUpdatedBirth_place));
-        assertFalse("Female", equals(actualUpdatedGender));
+        assertFalse("1", equals(actualUpdatedGender));
         assertFalse("11/11/1234", equals(actualUpdatedBirth_day));
         assertFalse(formattedUpdatedPhoneNumber, equals(actualUpdatedPhone_number));
         assertFalse(fakeUpdatedSsn, equals(actualUpdatedSsn));
