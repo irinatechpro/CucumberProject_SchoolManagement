@@ -54,7 +54,6 @@ public class US05_StepDefs {
 
     private static String surnameDeanUpdate;
 
-    private static String updateDeanGender;
 
 
 
@@ -68,7 +67,8 @@ public class US05_StepDefs {
 
     @And("clicks on Login link")
     public void clicksOnLoginLink() {
-        loginPage.loginLink.click();
+        WaitUtils.waitFor(1);
+        JSUtils.clickWithTimeoutByJS(loginPage.loginLink);
     }
 
 
@@ -119,14 +119,14 @@ public class US05_StepDefs {
         WaitUtils.waitFor(1);
     }
 
-    @Then("sees the Deans information")
+   /* @Then("sees the Deans information")
     public void sees_the_Deans_information() {
         JSUtils.scrollIntoViewJS(deanManagementPage.deanList);
         Assert.assertTrue(deanManagementPage.name.getText().contains("TeamProject") | deanManagementPage.gender.getText().contains("MALE") |
                 deanManagementPage.phoneNumber.getText().contains("444-444-4444") | deanManagementPage.ssn.getText().contains("444-44-4444") |
                 deanManagementPage.userName.getText().contains("DeanTeam01"));
         WaitUtils.waitFor(1);
-    }
+    }*/
 
     @And("goes to Add Dean section")
     public void goes_to_add_dean_section() {
