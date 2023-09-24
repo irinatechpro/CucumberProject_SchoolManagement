@@ -5,22 +5,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import pages.CommonLocator;
 import pages.CreateStudentPage;
 import pages.ViceDeanTeacherManagementPage;
 import utilities.*;
-
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import static base_url.BaseUrl.spec;
+import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -213,41 +210,26 @@ public class US13_StepDefs {
        }
     @Given("seng Get request to get teacher by getAll")
     public void sengGetRequestToGetTeacherByGetAll() {
-        https://managementonschools.com/app/teachers/getAll
-        spec.pathParams("first","teachers","second","getAll");
-        response= given(spec).get("{first}/{second}");
-        response.prettyPrint();
+        https://managementonschools.com/app/teachers/getSavedTeacherById/1295
+        spec.pathParams("first","teachers","second","getSavedTeacherById","third",1295);
+        response=given(spec).get("{first}/{second}/{third}");
+
     }
 
     @Then("validate that teacher is created")
-    public void validateThatTeacherIsCreated() throws ParseException {
-        JsonPath jsonPath=response.jsonPath();
-      String actName=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.name").get(0).toString();
-      String actSurname=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.surname").get(0).toString();
-      String actBirthDay=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthDay").get(0).toString();
-      String actSsn=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.ssn").get(0).toString();
-      String actBirthPlace=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthPlace").get(0).toString();
-      String actPhoneNumber=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.phoneNumber").get(0).toString();
-      String actGender=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.gender").get(0).toString();
-      String actEmail=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.email").get(0).toString();
-      String actAdvisorTeacher=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.advisorTeacher").get(0).toString();
-      String actUsername=  jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.username").get(0).toString();
-
-      assertEquals(200,response.statusCode());
-      assertEquals(fakeName,actName);
-      assertEquals(fakeSurname,actSurname);
-        SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
-        String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
-        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
-      assertEquals(formattedExpectedDate,formattedActualDate);
-      assertEquals(fakeSsn,actSsn);
-      assertEquals(fakeBirthPlace,actBirthPlace);
-      assertEquals(formattedPhoneNumber,actPhoneNumber);
-      assertEquals(genderAPI,actGender);
-      assertEquals(fakeEmail,actEmail);
-      assertTrue(actAdvisorTeacher,true);
-      assertEquals(fakeUsername,actUsername);
-
+    public void validateThatTeacherIsCreated(){
+                 response.then().statusCode(200)
+                .body("object.username",equalTo("TomJerry"))
+                .body("object.name",equalTo("Tom"))
+                .body("object.surname",equalTo("Jerry"))
+                .body("object.email",equalTo("jerry@tom.com"))
+                .body("object.gender",equalTo("MALE"))
+                .body("object.birthPlace",equalTo("Milano"))
+                .body("object.phoneNumber",equalTo("321-245-2561"))
+                .body("object.ssn",equalTo("215-25-2456"))
+                .body("object.birthDay",equalTo("1975-02-01"))
+                .body("object.isAdvisor",equalTo(true));
+        response.prettyPrint();
     }
 
 
