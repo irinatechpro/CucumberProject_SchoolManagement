@@ -9,6 +9,7 @@ import org.openqa.selenium.TakesScreenshot;
 import utilities.Driver;
 
 import static base_url.BaseUrl.*;
+import static base_url.BaseUrl.adminSetUp;
 
 public class Hooks {
     /*
@@ -18,8 +19,6 @@ public class Hooks {
     but conditional hooks can be used for running specific tags @Before("@smoke")
     Note : we should include this hooks class in the runner
      */
-    @Before("@Api_admin")
-    public void beforeApi_admin(){adminSetUp();}
     @Before("@Api_dean")
     public void beforeApi_dean(){ deanSetUp();}
     @Before("@Api_viceDean")
@@ -28,6 +27,16 @@ public class Hooks {
     public void beforeApi_teacher(){teacherSetUp();}
     @Before("@Api_student")
     public void beforeApi_student(){ studentSetUp(); }
+    @Before
+    public void setUpScenarios() {
+    }
+
+    @Before("@Api_admin")
+    //This will run before each @Api_admin
+    public void beforeApi_admin(){
+        adminSetUp();
+    }
+
     @After
     public void tearDown(Scenario scenario) {
         /*
