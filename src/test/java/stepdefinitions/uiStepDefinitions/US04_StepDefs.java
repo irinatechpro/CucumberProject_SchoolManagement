@@ -15,6 +15,8 @@ import utilities.JSUtils;
 import utilities.WaitUtils;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static base_url.BaseUrl.spec;
@@ -34,6 +36,8 @@ public class US04_StepDefs {
     ResultSet resultSet;
 
     Faker faker = new Faker();
+    public static String deanbirth_day;
+    public static String fakerdeanDateOfBirth;
     CommonLocator commonLocator = new CommonLocator();
 
     DeanCreatePage deanCreatePage = new DeanCreatePage();
@@ -41,6 +45,14 @@ public class US04_StepDefs {
     public US04_StepDefs() throws SQLException {
     }
 
+    @Then("enter dean date of birth")
+    public void enter_dean_date_of_birth() {
+
+        deanbirth_day = "25-05-1988";
+        commonLocator.dateOfBirth.sendKeys(deanbirth_day);
+
+        WaitUtils.waitFor(2);
+    }
 
     @Given("click Dean Management Link")
     public void click_Dean_Management_Link() {
@@ -64,6 +76,7 @@ public class US04_StepDefs {
 
     //DB
 
+
     @Given("connect to dean database")
     public void connect_to_dean_database() throws SQLException {
 
@@ -81,7 +94,7 @@ public class US04_StepDefs {
     }
 
     @Then("validate dean created on db")
-    public void validate_dean_created_on_db() throws SQLException {
+    public void validate_dean_created_on_db() throws SQLException, ParseException {
 
         String actualUsername = resultSet.getString("username");
         String actualSSN = resultSet.getString("ssn");
@@ -91,13 +104,16 @@ public class US04_StepDefs {
         String actualName = resultSet.getString("name");
         String actualSurname = resultSet.getString("surname");
         String actualPhoneNumber = resultSet.getString("phone_number");
+        SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
+        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actualBirth_day));
 
-
+        assertEquals(formattedExpectedDate, formattedActualDate);
         assertEquals(fakerUsername, actualUsername);
         assertEquals(fakeSsn, actualSSN);
         assertEquals(fakerName, actualName);
         assertEquals(fakerSurname, actualSurname);
-        assertEquals(formattedDate, actualBirth_day);
+        //assertEquals(formattedDate, actualBirth_day);
         assertEquals(fakerBirthPlace, actualBirth_place);
         assertEquals(fakerFormattedPhoneNumber, actualPhoneNumber);
         assertEquals("1", actualGender);
@@ -118,7 +134,7 @@ public class US04_StepDefs {
     }
 
     @Then("validate that dean created")
-    public void validate_that_dean_created() {
+    public void validate_that_dean_created() throws ParseException {
 
 
 //  JsonPath jsonPath = response.jsonPath();
@@ -135,17 +151,25 @@ public class US04_StepDefs {
         String actName = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.name").get(0).toString();
         String actSurname = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.surname").get(0).toString();
         String actBirthDay = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.birthDay").get(0).toString();
+          SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+          String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
+          String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
+
+
         String actBirthPlace = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.birthPlace").get(0).toString();
         String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.phoneNumber").get(0).toString();
         String actGender = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.gender").get(0).toString();
         String actSsn = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.ssn").get(0).toString();
 
+
+
         assertEquals(200, response.statusCode());
+        assertEquals(formattedExpectedDate, formattedActualDate);
         assertEquals(fakerUsername, actUsername);
         assertEquals(fakeSsn, actSsn);
         assertEquals(fakerName, actName);
         assertEquals(fakerSurname, actSurname);
-        assertEquals(formattedDate, actBirthDay);
+        //assertEquals(formattedDate, actBirthDay);
         assertEquals(fakerBirthPlace, actBirthPlace);
         assertEquals(fakerFormattedPhoneNumber, actPhoneNumber);
         assertEquals("FEMALE", actGender);

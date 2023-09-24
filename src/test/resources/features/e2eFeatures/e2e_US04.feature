@@ -14,7 +14,7 @@ Feature: Admin should be able to create a dean
     And enter Surname
     And enter Birth Place
     And select Female Gender
-    Then enter date of birth
+    Then enter dean date of birth
     And enter valid phone number
     And enter valid SSN
     And enter username

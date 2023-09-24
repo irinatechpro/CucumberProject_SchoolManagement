@@ -17,6 +17,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static base_url.BaseUrl.spec;
@@ -36,8 +38,18 @@ public class US23_StepDefs {
 
     Faker faker = new Faker();
     CommonLocator commonLocator = new CommonLocator();
+    public static String vicedeanbirth_day;
 
     CreateViceDeanPage createViceDeanPage=new CreateViceDeanPage();
+
+    @Then("enter vicedean date of birth")
+    public void enter_vice_dean_date_of_birth() {
+
+        vicedeanbirth_day = "25-05-1988";
+        commonLocator.dateOfBirth.sendKeys(vicedeanbirth_day);
+
+        WaitUtils.waitFor(2);
+    }
 
 
     @Given("click Vice Dean Management Link")
@@ -70,7 +82,7 @@ public class US23_StepDefs {
     }
 
     @Then("validate vicedean created on db")
-    public void validate_vice_dean_created_on_db() throws SQLException {
+    public void validate_vice_dean_created_on_db() throws SQLException, ParseException {
 
         String actualUsername = resultSet.getString("username");
         String actualSSN = resultSet.getString("ssn");
@@ -80,13 +92,16 @@ public class US23_StepDefs {
         String actualName = resultSet.getString("name");
         String actualSurname = resultSet.getString("surname");
         String actualPhoneNumber = resultSet.getString("phone_number");
+        SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
+        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actualBirth_day));
 
-
+        assertEquals(formattedExpectedDate, formattedActualDate);
         assertEquals(fakerUsername, actualUsername);
         assertEquals(fakeSsn, actualSSN);
         assertEquals(fakerName, actualName);
         assertEquals(fakerSurname, actualSurname);
-        assertEquals(formattedDate, actualBirth_day);
+        //assertEquals(formattedDate, actualBirth_day);
         assertEquals(fakerBirthPlace, actualBirth_place);
         assertEquals(fakerFormattedPhoneNumber, actualPhoneNumber);
         assertEquals("1", actualGender);
@@ -105,7 +120,7 @@ public class US23_StepDefs {
 
 
     @Then("validate that vicedean created")
-    public void validate_that_vice_dean_created() {
+    public void validate_that_vice_dean_created() throws ParseException {
 
 //        JsonPath jsonPath = response.jsonPath();
 //        List<String> vicedeanData = jsonPath.getList("findAll{it.username=='viceDeanKama'}");
@@ -124,13 +139,18 @@ public class US23_StepDefs {
         String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.phoneNumber").get(0).toString();
         String actGender = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.gender").get(0).toString();
         String actSsn = jsonPath.getList("findAll{it.username=='"+fakerUsername+"'}.ssn").get(0).toString();
+        SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
+        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
+
 
         assertEquals(200, response.statusCode());
+        assertEquals(formattedExpectedDate, formattedActualDate);
         assertEquals(fakerUsername, actUsername);
         assertEquals(fakeSsn, actSsn);
         assertEquals(fakerName, actName);
         assertEquals(fakerSurname, actSurname);
-        assertEquals(formattedDate, actBirthDay);
+       // assertEquals(formattedDate, actBirthDay);
         assertEquals(fakerBirthPlace, actBirthPlace);
         assertEquals(fakerFormattedPhoneNumber, actPhoneNumber);
         assertEquals("FEMALE", actGender);
