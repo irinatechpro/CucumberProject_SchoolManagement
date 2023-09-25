@@ -358,9 +358,7 @@ public class US05_StepDefs {
         resultSet = DBUtils.executeQuery(query1);
         resultSet.next();//To move the pointer to the records, we need to call next()
 
-
     }
-
 
     @Then("validate Dean's details are updated")
     public void validateDeanSDetailsAreUpdated() throws SQLException {
