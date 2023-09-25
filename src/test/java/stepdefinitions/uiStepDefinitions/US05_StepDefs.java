@@ -342,7 +342,7 @@ public class US05_StepDefs {
     assertEquals(fakeDeanSurname,actualSurname);
     assertEquals("Istanbul", actualBirth_place);
     assertEquals("1", actualGender);
-    assertEquals("01/01/1001", actualBirth_day);
+    assertEquals("1234-11-11", actualBirth_day);
     assertEquals(formattedPhoneNumber, actualPhone_number);
     assertEquals(fakeSsn, actualSsn);
     assertEquals(fakeUsername, actualUsername);
