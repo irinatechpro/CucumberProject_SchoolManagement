@@ -15,7 +15,6 @@ public class Db_US16 {
     //Connection connection;
    // Statement statement;
     ResultSet resultSet;
-
     @Given("connect to DB")
     public void connectToDB() throws SQLException {
        // connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");// connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "AdminJohn", "John.123");
@@ -60,14 +59,12 @@ public class Db_US16 {
     @Then("validate  if the message is deleted")
     public void validateIfTheMessageIsDeleted() throws SQLException {
         assertFalse(resultSet.next()); //Since the resultSet is empty, next() method must return false
-
     }
         @And("close the connection for US16")
         public void closeTheConnection() {
-
 //        resultSet.close();
 //        connection.close();
-            DBUtils.closeConnection();
+        DBUtils.closeConnection();
     }
 }
 

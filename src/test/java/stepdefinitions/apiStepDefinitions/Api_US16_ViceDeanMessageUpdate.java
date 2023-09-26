@@ -24,7 +24,6 @@ public class Api_US16_ViceDeanMessageUpdate {
   response = given(spec).get("{first}/{second}");
   //response.prettyPrint();
  }
-
  @Then("validate ID, date, email , message, name, subject by API")
  public void validate_id_date_email_message_name_subject_by_api() {
   assertEquals(200, response.statusCode());

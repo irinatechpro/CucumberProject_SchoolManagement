@@ -82,8 +82,5 @@ public class US08_StepDefs {
         System.out.println("Driver closed...");
     }
 
-    @Given("send post request for creating a lesson program")
-    public void sendPostRequestForCreatingALessonProgram() {
 
-    }
 }
