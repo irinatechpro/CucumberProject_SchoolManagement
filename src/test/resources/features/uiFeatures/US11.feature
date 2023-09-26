@@ -6,9 +6,6 @@ Feature:Vice Deans should be able to view the lesson schedule and make updates.
     When Management page loads up
     Then click Lesson Program
 
-    When Management page loads up
-    Then click Lesson Program
-
   @US11_TC01
  Scenario: Vice Dean should be able to view the Lesson, Day, Start Time and Stop Time created.
     Then scroll down until see Lesson Program
