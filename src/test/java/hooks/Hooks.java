@@ -25,6 +25,8 @@ public class Hooks {
     public void beforeApi_viceDean(){viceDeanSetUp();}
     @Before("@Api_teacher")
     public void beforeApi_teacher(){teacherSetUp();}
+    @Before("@Api_Annateacher")
+    public void beforeApi_Annateacher(){teacherAnnaSetUp();}
     @Before("@Api_student")
     public void beforeApi_student(){ studentSetUp(); }
     @Before

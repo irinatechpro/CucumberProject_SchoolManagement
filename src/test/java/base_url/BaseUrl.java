@@ -31,6 +31,13 @@ public class BaseUrl {
                 addHeader("Authorization",  generateTokenTeacher()).
                 setBaseUri(ConfigReader.getProperty("apiUrl")).build();
     }
+    public static void teacherAnnaSetUp() {
+        spec = new RequestSpecBuilder().
+                setContentType(ContentType.JSON).
+                addHeader("Authorization",  generateTokenTeacherAnna()).
+                setBaseUri(ConfigReader.getProperty("apiUrl")).build();
+    }
+
     public static void studentSetUp() {
         spec = new RequestSpecBuilder().
                 setContentType(ContentType.JSON).
