@@ -32,12 +32,12 @@ Feature: Admin should be able to add a student
     Then close the application
 
   @US25_DB
-  Scenario: Validate created student on database
+  Scenario: Validate student added on database
     Given get Student Data by username
     Then validate Student data
     Then close the connection
 
   @US25_API @Api_admin
-  Scenario: Validate created student on API
+  Scenario: Validate student added on API
     Given send get All Student request on API
     Then filter Student Data using username and validate
