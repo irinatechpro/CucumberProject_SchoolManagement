@@ -5,21 +5,30 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import pages.AdminManagementPage;
 import pages.DeanManagementPage;
 import pages.LoginPage;
 import utilities.*;
+
+import static base_url.BaseUrl.deanSetUp;
+import static base_url.BaseUrl.spec;
+import static io.restassured.RestAssured.given;
 import static org.junit.Assert.*;
-import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerBirthPlace;
-import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerUsername;
+import static stepdefinitions.uiStepDefinitions.CommonStepDefs.*;
+import static stepdefinitions.uiStepDefinitions.CommonStepDefs.fakerFormattedPhoneNumber;
 import static stepdefinitions.uiStepDefinitions.US13_StepDefs.birth_day;
 import static utilities.FakerUtils.faker;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 public class US05_StepDefs {
@@ -30,6 +39,7 @@ public class US05_StepDefs {
     DeanManagementPage deanManagementPage = new DeanManagementPage();
 
     Faker faker = new Faker();
+    Response response;
 
     ResultSet resultSet;
     ResultSet updatedResultSet;
@@ -381,6 +391,58 @@ public class US05_StepDefs {
         assertFalse(fakeUpdatedSsn, equals(actualUpdatedSsn));
         assertFalse(fakeUpdatedUsername, equals(actualUpdatedUsername));
 
+    }
+
+    @Given("send get request to get all dean users")
+    public void send_get_request_to_get_all_dean_users() {
+
+        //String url = "https://managementonschools.com/app/dean/getAll";
+
+        //deanSetUp();-->This method must be called b4 API test on Hooks class
+        spec.pathParams("first", "dean", "second", "getAll");
+        response = given(spec).get("{first}/{second}");
+        response.prettyPrint();
+
+    }
+
+
+    @Then("validate Dean's details are seen")
+    public void validate_dean_s_details_are_seen() throws ParseException {
+
+       /* JsonPath jsonPath = response.jsonPath();
+        List<String> deanData = jsonPath.getList("findAll{it.username=='ospa16'}");
+        String actualUsername = jsonPath.getList("findAll{it.username=='ospa16'}.username").get(0).toString();
+        System.out.println("actualUsername = " + actualUsername);*/
+
+        JsonPath jsonPath = response.jsonPath();
+        List<String> deanData = jsonPath.getList("findAll{it.username=='" + fakeUsername + "'}");
+        System.out.println("deanData = " + deanData);
+        String actUsername = jsonPath.getList("findAll{it.username=='" + fakeUsername + "'}.username").get(0).toString();
+        String actName = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.name").get(0).toString();
+        String actSurname = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.surname").get(0).toString();
+        String actBirthDay = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthDay").get(0).toString();
+
+        /*SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
+        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
+
+*/
+        String actBirthPlace = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthPlace").get(0).toString();
+        String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.phoneNumber").get(0).toString();
+        String actGender = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.gender").get(0).toString();
+        String actSsn = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.ssn").get(0).toString();
+
+
+        assertEquals(200, response.statusCode());
+        assertEquals("1234-11-11", actBirthDay);
+        assertEquals(fakeUsername, actUsername);
+        assertEquals(fakeSsn, actSsn);
+        assertEquals(fakeDeanName, actName);
+        assertEquals(fakeDeanSurname, actSurname);
+        //assertEquals(formattedDate, actBirthDay);
+        assertEquals("Istanbul", actBirthPlace);
+        assertEquals(formattedPhoneNumber, actPhoneNumber);
+        assertEquals("FEMALE", actGender);
     }
 
 

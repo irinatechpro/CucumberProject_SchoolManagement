@@ -20,7 +20,7 @@ public class Hooks {
     Note : we should include this hooks class in the runner
      */
     @Before("@Api_dean")
-    public void beforeApi_dean(){ deanSetUp();}
+    public void beforeApi_dean(){deanSetUp();}
     @Before("@Api_viceDean")
     public void beforeApi_viceDean(){viceDeanSetUp();}
     @Before("@Api_teacher")
