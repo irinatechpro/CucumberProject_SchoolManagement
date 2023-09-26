@@ -31,6 +31,17 @@ public class BaseUrl {
                 addHeader("Authorization",  generateTokenTeacher()).
                 setBaseUri(ConfigReader.getProperty("apiUrl")).build();
     }
+
+    /**
+     * Please do not delete dunkTeacherSetUp() -- required for US.
+     */
+    public static void dunkTeacherSetUp() {
+        spec = new RequestSpecBuilder().
+                setContentType(ContentType.JSON).
+                addHeader("Authorization", generateTokenDunkTeacher()).
+                setBaseUri(ConfigReader.getProperty("apiUrl")).build();
+    }
+
     public static void studentSetUp() {
         spec = new RequestSpecBuilder().
                 setContentType(ContentType.JSON).
