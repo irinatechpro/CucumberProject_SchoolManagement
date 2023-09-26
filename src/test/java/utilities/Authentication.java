@@ -40,6 +40,16 @@ public class Authentication {
         Response response = given().contentType(ContentType.JSON).body(body).post(url);
         return response.jsonPath().getString("token");
     }
+
+    //please do not delete generateTokenDunkTeacher()
+    public static String generateTokenDunkTeacher() {
+        Map<String, Object> body = new HashMap<>();
+        body.put("username", "w.dunk");
+        body.put("password", "!Teacher.123");
+        Response response = given().contentType(ContentType.JSON).body(body).post(url);
+        return response.jsonPath().getString("token");
+    }
+
     //student
     public static String generateTokenStudent(){
         Map<String, Object> body = new HashMap<>();

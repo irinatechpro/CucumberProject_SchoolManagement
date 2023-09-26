@@ -20,11 +20,18 @@ public class Hooks {
     Note : we should include this hooks class in the runner
      */
     @Before("@Api_dean")
-    public void beforeApi_dean(){ deanSetUp();}
+    public void beforeApi_dean(){deanSetUp();}
     @Before("@Api_viceDean")
     public void beforeApi_viceDean(){viceDeanSetUp();}
     @Before("@Api_teacher")
     public void beforeApi_teacher(){teacherSetUp();}
+
+    /**
+     * Please do not delete dunkTeacher - required for US.
+     */
+    @Before("@Api_dunkTeacher")
+    public void beforeApi_dunkTeacher(){dunkTeacherSetUp();}
+
     @Before("@Api_student")
     public void beforeApi_student(){ studentSetUp(); }
     @Before
