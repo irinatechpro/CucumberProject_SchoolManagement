@@ -2,9 +2,8 @@ package utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 public class ObjectMapperUtils {
-/*
+    /*
     This method will accept json as String and convert it into any data type
     <T> T -> represents any data type, its not an object. If it would an object,
             we would have to do a type casting. T is generally used for a generic class and
@@ -18,9 +17,10 @@ public class ObjectMapperUtils {
  */
     public static <T> T convertJsonToJava(String json, Class<T> tClass)  {//Generic Method -> will return any data type
         try {
-            return new ObjectMapper().readValue(json, tClass);
+            return new ObjectMapper().readValue(json,tClass);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 }
+

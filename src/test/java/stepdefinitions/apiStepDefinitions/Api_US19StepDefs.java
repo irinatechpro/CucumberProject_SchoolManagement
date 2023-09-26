@@ -6,7 +6,6 @@ import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
 import pojos.AddMeetExpectedPojo;
 import pojos.AddMeetResponsePojo;
-import pojos.ContactMessageResponsePojo;
 import utils.ObjectMapperUtils;
 
 import java.time.LocalDate;

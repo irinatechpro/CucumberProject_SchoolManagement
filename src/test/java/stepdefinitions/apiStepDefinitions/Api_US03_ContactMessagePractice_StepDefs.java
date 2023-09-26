@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pojos.ContactMessagePojo;
 import pojos.ContactMessageResponsePojo;
 import utils.ObjectMapperUtils;
+
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 

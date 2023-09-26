@@ -10,9 +10,7 @@ import pojos.CreateMeetStudentsPojo;
 import utils.ObjectMapperUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;

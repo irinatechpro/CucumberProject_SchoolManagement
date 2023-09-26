@@ -1,7 +1,6 @@
 package stepdefinitions.apiStepDefinitions;
 
 import base_url.BaseUrl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,6 +9,7 @@ import pojos.ContactMessagePojo;
 import pojos.ContactMessageResponsePojo;
 import utilities.FakerUtils;
 import utils.ObjectMapperUtils;
+
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 
