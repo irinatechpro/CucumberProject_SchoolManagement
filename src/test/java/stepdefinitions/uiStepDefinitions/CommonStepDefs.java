@@ -87,6 +87,12 @@ public class CommonStepDefs {
         commonLocator.menuButton.click();
     }
 
+    @Given("click logout button")
+    public void click_logout_button() {
+
+        commonLocator.logOutButton.click();
+        JSUtils.clickWithTimeoutByJS(commonLocator.yesButton);
+    }
 
     @Given("enter Name")
     public void enter_Name() {
