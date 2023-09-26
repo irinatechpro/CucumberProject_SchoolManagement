@@ -422,10 +422,9 @@ public class US05_StepDefs {
         String actSurname = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.surname").get(0).toString();
         String actBirthDay = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthDay").get(0).toString();
 
-        /*SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+       /* SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
         String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
         String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
-
 */
         String actBirthPlace = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthPlace").get(0).toString();
         String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.phoneNumber").get(0).toString();

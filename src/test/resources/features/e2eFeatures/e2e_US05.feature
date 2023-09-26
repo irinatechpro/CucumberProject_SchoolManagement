@@ -83,12 +83,21 @@ Feature: Admins should be able to see and update Deans
 
     @DB05_TC03
 
-    Scenario: TC03_Admin should be able to update Deans
+    Scenario: Admin should be able to update Deans
 
       Given connect to database
       When get updated Dean via username
       Then validate Dean's details are updated
       And close the connection
+
+    @API05-TC03 @Api_admin
+
+    Scenario: Validate Admins can update Deans
+
+      Given send get request to get all dean users
+      Then validate Dean's details are seen
+
+
 
 
 

@@ -1,6 +1,6 @@
 @e2e_US25
 
-Feature: Admin should be able to create a student
+Feature: Admin should be able to add a student
 
   @UI25
   Scenario: With_Valid_Credentials
@@ -36,3 +36,8 @@ Feature: Admin should be able to create a student
     Given get Student Data by username
     Then validate Student data
     Then close the connection
+
+  @US25_API @Api_admin
+  Scenario: Validate created student on API
+    Given send get All Student request on API
+    Then filter Student Data using username and validate
