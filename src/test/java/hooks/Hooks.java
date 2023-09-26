@@ -26,11 +26,16 @@ public class Hooks {
     @Before("@Api_teacher")
     public void beforeApi_teacher(){teacherSetUp();}
 
+
     /**
      * Please do not delete dunkTeacher - required for US.
      */
     @Before("@Api_dunkTeacher")
     public void beforeApi_dunkTeacher(){dunkTeacherSetUp();}
+
+
+    @Before("@Api_Annateacher")
+    public void beforeApi_Annateacher(){teacherAnnaSetUp();}
 
     @Before("@Api_student")
     public void beforeApi_student(){ studentSetUp(); }
