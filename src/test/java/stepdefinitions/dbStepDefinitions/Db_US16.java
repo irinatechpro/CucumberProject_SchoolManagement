@@ -64,7 +64,7 @@ public class Db_US16 {
         public void closeTheConnection() {
 //        resultSet.close();
 //        connection.close();
-        DBUtils.closeConnection();
+       DBUtils.closeConnection();
     }
 }
 
