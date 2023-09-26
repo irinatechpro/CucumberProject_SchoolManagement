@@ -90,8 +90,8 @@ public class CommonStepDefs {
             // Handle any parsing errors here
             e.printStackTrace();
         }
-       fakerDateOfBirth = "01/05/1990";
-       commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
+       fakerDateOfBirth = "1990-05-01";
+       //commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
 
 //        SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 //        try {
