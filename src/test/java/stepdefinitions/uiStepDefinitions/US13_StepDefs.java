@@ -216,6 +216,7 @@ public class US13_StepDefs {
         assertTrue(actIsAdvisor, true);
     }
 
+
     @Given("seng Get request to get teacher by getAll")
     public void sengGetRequestToGetTeacherByGetAll() {
         // https://managementonschools.com/app/teachers/getAll
@@ -223,60 +224,74 @@ public class US13_StepDefs {
         response = given(spec).get("{first}/{second}");
     }
 
-        @Given("create teacher with post request save")
-        public void create_teacher_with_post_request_save () {
-      // https://managementonschools.com/app/teachers/save
-            createTeacherPojo = new CreateTeacherPojo();
-            createTeacherPojo.createTeacher();
-            response = given(spec)
-                    .pathParams("first", "teachers", "second", "save")
-                    .body(createTeacherPojo.createTeacherPayLoad())
-                    .post("/{first}/{second}")
-                    .then()
-                    .statusCode(200)
-                    .body("object.username", equalTo(createTeacherPojo.getUsername()))
-                    .body("object.name", equalTo(createTeacherPojo.getName()))
-                    .body("object.surname", equalTo(createTeacherPojo.getSurname()))
-                    .body("object.email", equalTo(createTeacherPojo.getEmail()))
-                    .body("object.gender", equalTo(createTeacherPojo.getGender()))
-                    .body("object.birthPlace", equalTo(createTeacherPojo.getBirthPlace()))
-                    .body("object.phoneNumber", equalTo(createTeacherPojo.getPhoneNumber()))
-                    .body("object.ssn", equalTo(createTeacherPojo.getSocialSecurityNumber()))
-                    .body("object.birthDay", equalTo(createTeacherPojo.getBirthday()))
-                    .body("object.email", equalTo(createTeacherPojo.getEmail()))
-                    .body("message", equalTo("Teacher saved successfully"))
-                    .contentType(ContentType.JSON).extract().response();
+    @Given("create teacher with post request save")
+    public void create_teacher_with_post_request_save() {
 
-            response.prettyPrint();
+        // https://managementonschools.com/app/teachers/save
 
-            //Update userId field global scope
-            userId = response.jsonPath().getInt("object.userId");
-            System.out.println("userId: " + userId);
+//        https://managementonschools.com/app/teachers/save
 
-        }
+        createTeacherPojo = new CreateTeacherPojo();
+        createTeacherPojo.createTeacher();
+        response = given(spec)
+                .pathParams("first", "teachers", "second", "save")
+                .body(createTeacherPojo.createTeacherPayLoad())
+                .post("/{first}/{second}")
+                .then()
+                .statusCode(200)
+                .body("object.username", equalTo(createTeacherPojo.getUsername()))
+                .body("object.name", equalTo(createTeacherPojo.getName()))
+                .body("object.surname", equalTo(createTeacherPojo.getSurname()))
+                .body("object.email", equalTo(createTeacherPojo.getEmail()))
+                .body("object.gender", equalTo(createTeacherPojo.getGender()))
+                .body("object.birthPlace", equalTo(createTeacherPojo.getBirthPlace()))
+                .body("object.phoneNumber", equalTo(createTeacherPojo.getPhoneNumber()))
+                .body("object.ssn", equalTo(createTeacherPojo.getSocialSecurityNumber()))
+                .body("object.birthDay", equalTo(createTeacherPojo.getBirthday()))
+                .body("object.email", equalTo(createTeacherPojo.getEmail()))
+                .body("message", equalTo("Teacher saved successfully"))
+                .contentType(ContentType.JSON).extract().response();
 
-            @Then("validate with get request that Teacher is created")
-        public void validate_with_get_request_that_teacher_is_created() {
-            https:
+        response.prettyPrint();
+
+        //Update userId field global scope
+        userId = response.jsonPath().getInt("object.userId");
+        System.out.println("userId: " + userId);
+
+    }
+    @Then("validate with get request that teacher is created")
+    public void validate_with_get_request_that_teacher_is_created () {
+
+        https:
 //managementonschools.com/app/teachers/getSavedTeacherById/1295
-            spec.pathParams("first", "teachers", "second", "getSavedTeacherById", "third", userId);
-            response = given(spec).get("{first}/{second}/{third}");
-            response.then().statusCode(200)
-                    .body("object.username", equalTo(createTeacherPojo.getUsername()))
-                    .body("object.name", equalTo(createTeacherPojo.getName()))
-                    .body("object.surname", equalTo(createTeacherPojo.getSurname()))
-                    .body("object.email", equalTo(createTeacherPojo.getEmail()))
-                    .body("object.gender", equalTo(createTeacherPojo.getGender()))
-                    .body("object.birthPlace", equalTo(createTeacherPojo.getBirthPlace()))
-                    .body("object.phoneNumber", equalTo(createTeacherPojo.getPhoneNumber()))
-                    .body("object.ssn", equalTo(createTeacherPojo.getSocialSecurityNumber()))
-                    .body("object.birthDay", equalTo(createTeacherPojo.getBirthday()))
-                    .body("message", equalTo("Teacher successfully found"));
+        spec.pathParams("first", "teachers", "second", "getSavedTeacherById", "third", userId);
+        response = given(spec).get("{first}/{second}/{third}");
+        response.then().statusCode(200)
+                .body("object.username", equalTo(createTeacherPojo.getUsername()))
+                .body("object.name", equalTo(createTeacherPojo.getName()))
+                .body("object.surname", equalTo(createTeacherPojo.getSurname()))
+                .body("object.email", equalTo(createTeacherPojo.getEmail()))
+                .body("object.gender", equalTo(createTeacherPojo.getGender()))
+                .body("object.birthPlace", equalTo(createTeacherPojo.getBirthPlace()))
+                .body("object.phoneNumber", equalTo(createTeacherPojo.getPhoneNumber()))
+                .body("object.ssn", equalTo(createTeacherPojo.getSocialSecurityNumber()))
+                .body("object.birthDay", equalTo(createTeacherPojo.getBirthday()))
+                .body("message", equalTo("Teacher successfully found"));
 
-            response.prettyPrint();
-        }
+        response.prettyPrint();
+
+
 
 
     }
+
+
+
+        }
+
+
+
+
+
 
 
