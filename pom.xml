@@ -113,7 +113,14 @@
             <version>2.14.2</version>
         </dependency>
 
-           </dependencies>
+
+    <!-- this library handle some issues related to objectMapper, and serialization-deserialization-->
+    <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-mapper-asl</artifactId>
+        <version>1.9.13</version>
+    </dependency>
+    </dependencies>
 
     <build>
         <plugins>
