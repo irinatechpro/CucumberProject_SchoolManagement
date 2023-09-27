@@ -215,7 +215,7 @@ public class US13_StepDefs {
             assertEquals(fakeEmail, actEmail);
             assertTrue(actIsAdvisor, true);
        }
-    @Given("create teacher with post request save")
+    @Given("create Teacher with post request save")
     public void create_teacher_with_post_request_save() {
 //        https://managementonschools.com/app/teachers/save
         createTeacherPojo =new CreateTeacherPojo();
@@ -246,7 +246,7 @@ public class US13_StepDefs {
         System.out.println("userId: " + userId);
 
     }
-    @Then("validate with get request that teacher is created")
+    @Then("validate with get request that Teacher is created")
     public void validate_with_get_request_that_teacher_is_created() {
         https://managementonschools.com/app/teachers/getSavedTeacherById/1295
         spec.pathParams("first","teachers","second","getSavedTeacherById","third",userId);
