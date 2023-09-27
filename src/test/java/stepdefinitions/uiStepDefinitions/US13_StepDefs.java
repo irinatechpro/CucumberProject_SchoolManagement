@@ -180,6 +180,7 @@ public class US13_StepDefs {
         String sqlQuery = "select * from \"public\".teacher where username='"+fakeUsername+"'";
         System.out.println(sqlQuery);
         resultSet=statement.executeQuery(sqlQuery);
+
     }
 
     @Then("validate the credentials for teacher")
@@ -213,7 +214,7 @@ public class US13_StepDefs {
        }
     @Given("seng Get request to get teacher by getAll")
     public void sengGetRequestToGetTeacherByGetAll() {
-        https://managementonschools.com/app/teachers/getAll
+       // https://managementonschools.com/app/teachers/getAll
         spec.pathParams("first","teachers","second","getAll");
         response= given(spec).get("{first}/{second}");
         response.prettyPrint();

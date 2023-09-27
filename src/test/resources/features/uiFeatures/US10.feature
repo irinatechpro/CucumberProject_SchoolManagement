@@ -1,6 +1,6 @@
 @US10
-Feature: "Vice Deans should be able to create a lesson schedule.
-  (Lesson Program - Add Lesson Program)"
+Feature: Vice Deans should be able to create a lesson schedule
+
 
   Background:
 
@@ -20,7 +20,7 @@ Feature: "Vice Deans should be able to create a lesson schedule.
     Then verify lesson is created
 
     @US10_TC02
-    Scenario: Start and Stop time field blanc
+    Scenario: Start and Stop time field blanck
       And click menu button
       And click lesson management
       And click lesson program
