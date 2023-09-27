@@ -45,6 +45,7 @@ public class Api_US08 {
         response.then()
                 .contentType(ContentType.JSON)
                 .body("object.lessonId", equalTo(469))
+                .body("object.lessonName", equalTo("BioInformatics"))
                 .body("object.lessonName", equalTo(lessonName))
                 .body("object.creditScore", equalTo(60))
                 .body("object.compulsory", equalTo(true));
@@ -63,6 +64,10 @@ public class Api_US08 {
                 .queryParam("lessonId", lessonId)
                 .get("/{first}/{second}");
 
+        //validate that lesson id matches with correct lessonName and credit score + compulsory
+
+        response.prettyPrint();
+
         response.prettyPrint();
 
         //validate that lesson id matches with correct lessonName and credit score + compulsory
@@ -72,5 +77,8 @@ public class Api_US08 {
                         "creditScore", hasItem(60),
                         "compulsory", hasItem(true)
                 );
+
+        System.out.println(response.headers());
+
     }
 }

@@ -217,3 +217,4 @@ Feature: Admin should be able to add an admin
     And click submit button
     Then verify submit fails
     Then close the application
+

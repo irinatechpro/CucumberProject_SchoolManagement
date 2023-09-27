@@ -77,6 +77,27 @@ public class DeanManagementPage {
     @FindBy(xpath = "(//input[@id='name'])[2]")
     public WebElement updateDeanName;
 
+    @FindBy(xpath = "(//input[@id='surname'])[2]")
+    public WebElement updateDeanSurname;
+
+    @FindBy(xpath = "(//input[@id='birthPlace'])[2]")
+    public WebElement updateBirthPlace;
+
+    @FindBy(xpath = "(//input[@value='MALE'])[2]")
+    public WebElement updateDeanGender;
+
+    @FindBy(xpath = "(//input[@id='birthDay'])[2]")
+    public WebElement updateDeanbirthday;
+
+    @FindBy(xpath = "(//input[@id='phoneNumber'])[2]")
+    public WebElement updateDeanPhoneNumber;
+
+    @FindBy(xpath = "(//input[@id='ssn'])[2]")
+    public WebElement updateDeanSsn;
+
+    @FindBy(xpath = "(//input[@id='username'])[2]")
+    public WebElement updateDeanUsername;
+
     @FindBy(xpath = "(//input[@id='password'])[2]")
     public WebElement deanPasswordEditBox;
 
