@@ -116,10 +116,10 @@ public class US13_StepDefs {
     @Given("enter Teacher valid phone number")
     public void enter_teacher_valid_phone_number() {
         // Generate a fake phone number as a string
-       String fakePhoneNumber = faker.phoneNumber().phoneNumber();
+        String fakePhoneNumber = faker.phoneNumber().phoneNumber();
 
         // Format the phone number as XXX-XXX-XXXX
-         formattedPhoneNumber = BrowserUtils.formatPhoneNumber(fakePhoneNumber);
+        formattedPhoneNumber = BrowserUtils.formatPhoneNumber(fakePhoneNumber);
 
         commonLocator.phoneNumberField.sendKeys(formattedPhoneNumber);
         WaitUtils.waitFor(3);
@@ -127,8 +127,8 @@ public class US13_StepDefs {
 
     @Given("select Teacher Male Gender")
     public void select_teacher_male_gender() {
-        genderDB= "0";
-        genderAPI="MALE";
+        genderDB = "0";
+        genderAPI = "MALE";
         commonLocator.genderMale.click();
         WaitUtils.waitFor(2);
 
@@ -181,9 +181,9 @@ public class US13_StepDefs {
         String sqlQuery = "select * from \"public\".teacher where username='" + fakeUsername + "'";
 
 
-
         System.out.println(sqlQuery);
-        resultSet=statement.executeQuery(sqlQuery);
+        resultSet = statement.executeQuery(sqlQuery);
+
     }
 
     @Then("validate the credentials for teacher")
@@ -191,20 +191,21 @@ public class US13_StepDefs {
 
 
         resultSet.next();
-            String actUsername = resultSet.getString("username");
-            String actBirthDay=resultSet.getString("birth_day");
-            String actBirth_place = resultSet.getString("birth_place");
-            String actGender = resultSet.getString("gender");
-            String actName = resultSet.getString("name");
-            String actPhone_number = resultSet.getString("phone_number");
-            String actSsn = resultSet.getString("ssn");
-            String actSurname = resultSet.getString("surname");
-            String actEmail = resultSet.getString("email");
-            String actIsAdvisor = resultSet.getString("is_advisor");
-           SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        String actUsername = resultSet.getString("username");
+        String actBirthDay = resultSet.getString("birth_day");
+        String actBirth_place = resultSet.getString("birth_place");
+        String actGender = resultSet.getString("gender");
+        String actName = resultSet.getString("name");
+        String actPhone_number = resultSet.getString("phone_number");
+        String actSsn = resultSet.getString("ssn");
+        String actSurname = resultSet.getString("surname");
+        String actEmail = resultSet.getString("email");
+        String actIsAdvisor = resultSet.getString("is_advisor");
+        SimpleDateFormat expectedDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
-        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
+        String formattedActualDate = new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
         assertEquals(formattedExpectedDate, formattedActualDate);
+
             assertEquals(fakeBirthPlace, actBirth_place);
             assertEquals(genderDB, actGender);
             assertEquals(fakeName, actName);
@@ -219,28 +220,44 @@ public class US13_StepDefs {
     public void closeTheConnectionOnDataBase() {
         DBUtils.closeConnection();
     }
-    @Given("create Teacher with post request save")
+
+
+
+
+    @Given("seng Get request to get teacher by getAll")
+    public void sengGetRequestToGetTeacherByGetAll() {
+        // https://managementonschools.com/app/teachers/getAll
+        spec.pathParams("first", "teachers", "second", "getAll");
+        response = given(spec).get("{first}/{second}");
+    }
+
+    @Given("create teacher with post request save")
+
     public void create_teacher_with_post_request_save() {
+
+        // https://managementonschools.com/app/teachers/save
+
 //        https://managementonschools.com/app/teachers/save
-        createTeacherPojo =new CreateTeacherPojo();
+
+        createTeacherPojo = new CreateTeacherPojo();
         createTeacherPojo.createTeacher();
         response = given(spec)
                 .pathParams("first", "teachers", "second", "save")
-                .body(createTeacherPojo.createTeacherPayLoad() )
+                .body(createTeacherPojo.createTeacherPayLoad())
                 .post("/{first}/{second}")
                 .then()
                 .statusCode(200)
-                .body("object.username", equalTo(createTeacherPojo.getUsername() ) )
-                .body("object.name", equalTo(createTeacherPojo.getName() ) )
-                .body("object.surname", equalTo(createTeacherPojo.getSurname() ) )
-                .body("object.email", equalTo(createTeacherPojo.getEmail() ) )
-                .body("object.gender", equalTo(createTeacherPojo.getGender() ) )
-                .body("object.birthPlace", equalTo(createTeacherPojo.getBirthPlace() ) )
-                .body("object.phoneNumber", equalTo(createTeacherPojo.getPhoneNumber() ) )
-                .body("object.ssn", equalTo(createTeacherPojo.getSocialSecurityNumber() ) )
-                .body("object.birthDay", equalTo(createTeacherPojo.getBirthday() ) )
-                .body("object.email", equalTo(createTeacherPojo.getEmail() ) )
-                .body("message", equalTo("Teacher saved successfully") )
+                .body("object.username", equalTo(createTeacherPojo.getUsername()))
+                .body("object.name", equalTo(createTeacherPojo.getName()))
+                .body("object.surname", equalTo(createTeacherPojo.getSurname()))
+                .body("object.email", equalTo(createTeacherPojo.getEmail()))
+                .body("object.gender", equalTo(createTeacherPojo.getGender()))
+                .body("object.birthPlace", equalTo(createTeacherPojo.getBirthPlace()))
+                .body("object.phoneNumber", equalTo(createTeacherPojo.getPhoneNumber()))
+                .body("object.ssn", equalTo(createTeacherPojo.getSocialSecurityNumber()))
+                .body("object.birthDay", equalTo(createTeacherPojo.getBirthday()))
+                .body("object.email", equalTo(createTeacherPojo.getEmail()))
+                .body("message", equalTo("Teacher saved successfully"))
                 .contentType(ContentType.JSON).extract().response();
 
         response.prettyPrint();
@@ -250,26 +267,32 @@ public class US13_StepDefs {
         System.out.println("userId: " + userId);
 
     }
-    @Then("validate with get request that Teacher is created")
-    public void validate_with_get_request_that_teacher_is_created() {
-        https://managementonschools.com/app/teachers/getSavedTeacherById/1295
-        spec.pathParams("first","teachers","second","getSavedTeacherById","third",userId);
-        response=given(spec).get("{first}/{second}/{third}");
+    @Then("validate with get request that teacher is created")
+    public void validate_with_get_request_that_teacher_is_created () {
+
+        https:
+//managementonschools.com/app/teachers/getSavedTeacherById/1295
+        spec.pathParams("first", "teachers", "second", "getSavedTeacherById", "third", userId);
+        response = given(spec).get("{first}/{second}/{third}");
         response.then().statusCode(200)
-                .body("object.username",equalTo(createTeacherPojo.getUsername()))
-                .body("object.name",equalTo(createTeacherPojo.getName()))
-                .body("object.surname",equalTo(createTeacherPojo.getSurname()))
-                .body("object.email",equalTo(createTeacherPojo.getEmail()))
-                .body("object.gender",equalTo(createTeacherPojo.getGender()))
-                .body("object.birthPlace",equalTo(createTeacherPojo.getBirthPlace()))
-                .body("object.phoneNumber",equalTo(createTeacherPojo.getPhoneNumber()))
-                .body("object.ssn",equalTo(createTeacherPojo.getSocialSecurityNumber()))
-                .body("object.birthDay",equalTo(createTeacherPojo.getBirthday()))
-                .body("message", equalTo("Teacher successfully found") );
+                .body("object.username", equalTo(createTeacherPojo.getUsername()))
+                .body("object.name", equalTo(createTeacherPojo.getName()))
+                .body("object.surname", equalTo(createTeacherPojo.getSurname()))
+                .body("object.email", equalTo(createTeacherPojo.getEmail()))
+                .body("object.gender", equalTo(createTeacherPojo.getGender()))
+                .body("object.birthPlace", equalTo(createTeacherPojo.getBirthPlace()))
+                .body("object.phoneNumber", equalTo(createTeacherPojo.getPhoneNumber()))
+                .body("object.ssn", equalTo(createTeacherPojo.getSocialSecurityNumber()))
+                .body("object.birthDay", equalTo(createTeacherPojo.getBirthday()))
+                .body("message", equalTo("Teacher successfully found"));
+
         response.prettyPrint();
+
+
+
+
     }
 
-
-
 }
+
 

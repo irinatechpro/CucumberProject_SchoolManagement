@@ -1,24 +1,19 @@
 package stepdefinitions.uiStepDefinitions;
 
 import com.github.javafaker.Faker;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.junit.Assert;
 import pages.CommonLocator;
 import pages.DeanCreatePage;
-import utilities.DBUtils;
 import utilities.JSUtils;
 import utilities.WaitUtils;
-
+import utilities.DBUtils;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
