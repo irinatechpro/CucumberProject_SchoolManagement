@@ -215,6 +215,10 @@ public class US13_StepDefs {
             assertEquals(fakeEmail, actEmail);
             assertTrue(actIsAdvisor, true);
        }
+    @And("close the connection on dataBase")
+    public void closeTheConnectionOnDataBase() {
+        DBUtils.closeConnection();
+    }
     @Given("create Teacher with post request save")
     public void create_teacher_with_post_request_save() {
 //        https://managementonschools.com/app/teachers/save
@@ -264,7 +268,6 @@ public class US13_StepDefs {
                 .body("message", equalTo("Teacher successfully found") );
         response.prettyPrint();
     }
-
 
 
 

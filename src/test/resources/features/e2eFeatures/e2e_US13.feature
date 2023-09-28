@@ -29,7 +29,7 @@ Feature: Vice Deans should be able to create a teacher
       Given connect to DataBase
       When get teacher user via username "<username>"
       Then validate the credentials for teacher
-      And close the connection
+      And close the connection on dataBase
 
       @US13_API @Api_viceDean
       Scenario: Validate created teacher on API
