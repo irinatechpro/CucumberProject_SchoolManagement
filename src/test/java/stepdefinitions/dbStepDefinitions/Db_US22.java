@@ -1,11 +1,9 @@
 package stepdefinitions.dbStepDefinitions;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import utilities.DBUtils;
-import utilities.JDBCUtils;
-import utilities.JSUtils;
+
 
 
 import java.sql.*;
@@ -13,7 +11,6 @@ import java.sql.*;
 import static org.junit.Assert.assertEquals;
 import static stepdefinitions.uiStepDefinitions.CommonStepDefs.*;
 
-import static stepdefinitions.uiStepDefinitions.CommonStepDefs.*;
 
 
 public class Db_US22 {
@@ -30,7 +27,6 @@ public class Db_US22 {
         resultSet = DBUtils.executeQuery(query);
         resultSet.next();//To move the pointer to the records, we need to call next()
     }
-
 
 
     @Then("validate username name phone_number ssn surname birth_place date_of_birth password")
@@ -58,3 +54,4 @@ public class Db_US22 {
         assertEquals(fakerSurname, actualSurname);
     }
 }
+
