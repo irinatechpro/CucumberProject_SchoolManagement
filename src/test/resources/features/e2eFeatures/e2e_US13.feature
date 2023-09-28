@@ -33,8 +33,9 @@ Feature: Vice Deans should be able to create a teacher
 
       @US13_API @Api_viceDean
       Scenario: Validate created teacher on API
-        Given seng Get request to get teacher by getAll
-        Then validate that teacher is created
+        Given create Teacher with post request save
+        Then validate with get request that Teacher is created
+
 
 
 
