@@ -89,6 +89,7 @@ public class US15_StepDefs {
         spec.pathParams("first", "students", "second", "getAll");
         response = given(spec).get("{first}/{second}");
     }
+
     @Then("filter Student Data using username and validate")
     public void filter_Student_Data_using_username_and_validate(){
         JsonPath jsonPath = response.jsonPath();
