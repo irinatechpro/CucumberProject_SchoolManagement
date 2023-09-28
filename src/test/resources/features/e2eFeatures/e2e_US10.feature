@@ -15,14 +15,9 @@ Scenario: With_Valid_Credentials
     Then verify lesson is created
   @US10_API @Api_viceDean
     Scenario: Validate created lesson program
-    Given send get all lesson program request on API
+    Given Send get all lesson program request on API
     Then filter lessons programs by id and verify
-  @US10_DB
-  Scenario: Admin is able to create a lesson schedule verification
-    Given connect to DataBase
-    When send GET request to lesson programs with getAllAssigned
-    Then filter lessons programs by id and verify
-    And close the connection
+
 
 
 

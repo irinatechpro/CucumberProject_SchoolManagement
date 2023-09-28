@@ -9,9 +9,11 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import static io.restassured.RestAssured.given;
 import io.restassured.response.Response;
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import pages.*;
+import pojos.CreateTeacherPojo;
 import utilities.ActionUtils;
 import utilities.JSUtils;
 import utilities.WaitUtils;
@@ -24,6 +26,7 @@ import static base_url.BaseUrl.spec;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -48,7 +51,8 @@ public class US24_StepDefs {
     public Statement statement;
     Response response;
     ResultSet resultSet;
-
+    CreateTeacherPojo createTeacherPojo;
+    int userId;
 
     @Given("click Teacher Management Link")
     public void click_teacher_management_link() {
@@ -126,29 +130,76 @@ public class US24_StepDefs {
 
     }
 
-    @Given("send Get request to get teacher by getAll on API")
-    public void send_Get_request_to_get_teacher_by_getAll_on_API() {
-        https://managementonschools.com/app/teachers/getSavedTeacherById/1295
-        spec.pathParams("first", "teachers", "second", "getSavedTeacherById", "third", 1295);
-        response = given(spec).get("{first}/{second}/{third}")
+    @Given("create teacher post request save")
+    public void create_teacher_post_request_save() {
+
+        // https://managementonschools.com/app/teachers/save
+
+//        https://managementonschools.com/app/teachers/save
+
+        createTeacherPojo = new CreateTeacherPojo();
+        createTeacherPojo.createTeacher();
+        response = given(spec)
+                .pathParams("first", "teachers", "second", "save")
+                .body(createTeacherPojo.createTeacherPayLoad())
+                .post("/{first}/{second}")
                 .then()
                 .statusCode(200)
-                .contentType(ContentType.JSON)
-                .body("teachers.size()", greaterThan(0)).extract().response();
-         response.prettyPrint();
+                .body("object.username", Matchers.equalTo(createTeacherPojo.getUsername()))
+                .body("object.name", Matchers.equalTo(createTeacherPojo.getName()))
+                .body("object.surname", Matchers.equalTo(createTeacherPojo.getSurname()))
+                .body("object.email", Matchers.equalTo(createTeacherPojo.getEmail()))
+                .body("object.gender", Matchers.equalTo(createTeacherPojo.getGender()))
+                .body("object.birthPlace", Matchers.equalTo(createTeacherPojo.getBirthPlace()))
+                .body("object.phoneNumber", Matchers.equalTo(createTeacherPojo.getPhoneNumber()))
+                .body("object.ssn", Matchers.equalTo(createTeacherPojo.getSocialSecurityNumber()))
+                .body("object.birthDay", Matchers.equalTo(createTeacherPojo.getBirthday()))
+                .body("object.email", Matchers.equalTo(createTeacherPojo.getEmail()))
+                .body("message", Matchers.equalTo("Teacher saved successfully"))
+                .contentType(ContentType.JSON).extract().response();
 
+        response.prettyPrint();
 
-        }
-    @Then("Validate teacher is created")
-    public void Validate_teacher_is_created () {
+        //Update userId field global scope
+        userId = response.jsonPath().getInt("object.userId");
+        System.out.println("userId: " + userId);
+
+    }
+
+    @Then("Validate teacher is created by post id")
+    public void validate_teacher_is_created_by_post_id() {
+
+        https:
+//managementonschools.com/app/teachers/getSavedTeacherById/1295
+        spec.pathParams("first", "teachers", "second", "getSavedTeacherById", "third", userId);
+        response = given(spec).get("{first}/{second}/{third}");
         response.then().statusCode(200)
-                .body("object.username", equalTo("TedBaker01"))
+                .body("object.username", Matchers.equalTo(createTeacherPojo.getUsername()))
+                .body("object.name", Matchers.equalTo(createTeacherPojo.getName()))
+                .body("object.surname", Matchers.equalTo(createTeacherPojo.getSurname()))
+                .body("object.email", Matchers.equalTo(createTeacherPojo.getEmail()))
+                .body("object.gender", Matchers.equalTo(createTeacherPojo.getGender()))
+                .body("object.birthPlace", Matchers.equalTo(createTeacherPojo.getBirthPlace()))
+                .body("object.phoneNumber", Matchers.equalTo(createTeacherPojo.getPhoneNumber()))
+                .body("object.ssn", Matchers.equalTo(createTeacherPojo.getSocialSecurityNumber()))
+                .body("object.birthDay", Matchers.equalTo(createTeacherPojo.getBirthday()))
+                .body("message", Matchers.equalTo("Teacher successfully found"));
+
+        response.prettyPrint();
+
+
+    }
+
+    @Then("validate that teacher is created")
+    public void validateThatTeacherIsCreated() {
+        response.then().statusCode(200)
+                .body("object.username", equalTo("Ted Baker"))
                 .body("object.name", equalTo("Ted"))
                 .body("object.surname", equalTo("Baker"))
                 .body("object.email", equalTo("TedBaker@gmail.com"))
                 .body("object.gender", equalTo("MALE"))
                 .body("object.birthPlace", equalTo("London"))
-                .body("object.phoneNumber", equalTo("963-66-9999"))
+                .body("object.phoneNumber", equalTo("666-999-3333"))
                 .body("object.ssn", equalTo("315-25-2456"))
                 .body("object.birthDay", equalTo("2000-02-21"))
                 .body("object.isAdvisor", equalTo(true));

@@ -107,38 +107,35 @@ public class US10_StepDef {
         viceDeanLessonManagementPage.getSelectionChooseLesson.sendKeys("EmillyLesson" + Keys.ENTER);
         WaitUtils.waitFor(2);
     }
-    @Given("send get all lesson program request on API")
-    public void send_get_all_lesson_program_request_on_api() {
+    @Given("Send get all lesson program request on API")
+    public void Send_get_all_lesson_program_request_on_api() {
         //https://managementonschools.com/app/lessonPrograms/getAll
-    spec.pathParams("first","lessonPrograms","second","getAll");
+        spec.pathParams("first","lessonPrograms","second","getAll");
         response = given(spec).get("{first}/{second}")
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("lessonPrograms.size()", greaterThan(0)).extract().response();
-       // response.prettyPrint();
+        // response.prettyPrint();
     }
     @Then("filter lessons programs by id and verify")
     public void filter_lessons_programs_by_id_and_verify() {
         //lessonPrograms/getById/{id}
-       response= given(spec).pathParams(
-                "first",
-                "lessonPrograms",
-                "second",
-                "getById",
-                "third",
-                "1081").get("/{first}/{second}/{third}")
-                       .then()
-               .statusCode(200)
-               .body("startTime",equalTo("13:00:00"))//when is out of Array we will use equalTo()
-               .body("stopTime",equalTo("14:00:00"))
-               .body("lessonName.lessonName",hasItem("EmillyLesson"))//when is in the Array we will use hasItem()
-               .body("day",equalTo("MONDAY"))
-                               .extract().response();
-       // We use .extract().response() to make the response object accept the assertions we make
+        response= given(spec).pathParams(
+                        "first",
+                        "lessonPrograms",
+                        "second",
+                        "getById",
+                        "third",
+                        "1081").get("/{first}/{second}/{third}")
+                .then()
+                .statusCode(200)
+                .body("startTime",equalTo("13:00:00"))//when is out of Array we will use equalTo()
+                .body("stopTime",equalTo("14:00:00"))
+                .body("lessonName.lessonName",hasItem("EmillyLesson"))//when is in the Array we will use hasItem()
+                .body("day",equalTo("MONDAY"))
+                .extract().response();
+        // We use .extract().response() to make the response object accept the assertions we make
         response.prettyPrint();
     }
 }
-
-
-

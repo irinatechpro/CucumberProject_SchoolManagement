@@ -1,4 +1,4 @@
-@e2e_U24
+@e2e_US24
 Feature: Admin should be able to create a teacher
   @US24_UI
   Scenario: With_Valid_Credentials
@@ -31,12 +31,9 @@ Feature: Admin should be able to create a teacher
     Then validate the credentials for teacher
    And close the connection
 
-   @US24_API @Api_Admin
-    Scenario: Validate created teacher on API
-    Given send Get request to get teacher by getAll on API
-    Then Validate teacher is created
-    And close the connection
-
-
+  @US24_API @Api_admin
+  Scenario: Validate created teacher on API
+    Given create teacher with post request save
+    Then validate with get request that teacher is created
 
 

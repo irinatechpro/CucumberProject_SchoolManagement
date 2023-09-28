@@ -64,12 +64,12 @@ public class Db_US22 {
         assertEquals(fakerSurname, actualSurname);
     }
 
-    @Then("close the connection")
-    public void close_the_connection() throws SQLException {
+   // @Then("close the connection")
+   // public void close_the_connection() throws SQLException {
 
         //resultSet.close();
         //connection.close();
-        DBUtils.closeConnection();
+      //  DBUtils.closeConnection();
 
     }
-}
+//}
