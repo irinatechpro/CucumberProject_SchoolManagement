@@ -24,19 +24,20 @@ Feature: giving grades to the student
     Given connect to the database
     When get student_info via username "<username>"
     Then validate Lesson "<Lesson>" Student "<Student>" Education_Term "<Education_Term>" absentee "<absentee>" midterm_exam "<midterm_exam>" final_exam "<final_exam>" info_note "<info_note>"
-    And close the connection
+    And closes the connection
     Examples:
       | username | Lesson | Student   | Education_Term  | absentee | midterm_exam | final_exam |    info_note     |
       | philips | Cypress | Adil Sert | SPRING_SEMESTER |    17    |      90      |      93    | Completed lesson |
 
 
-  @Api_Test
-  Scenario Outline: Validate adding Info to the student on API
+  @Api_Test @Api_teacher
+  Scenario: Validate adding Info to the student on API
      Given send get request to get student info
-     Then validate lessonName "<lessonName>" Student "<Student>" Education_Term "<Education_Term>" absentee "<absentee>" midterm_exam "<midterm_exam>" final_exam "<final_exam>" info_note "<info_note>" by API
-    Examples:
-      | lessonName | Student | Education_Term | absentee | midterm_exam | final_exam |    info_note     |
-      |   Cypress  |Adil Sert| SPRING_SEMESTER |    17   |      90      |     93     | Completed lesson |
+     Then Assert teacher can see all student info
+
+
+
+
 
 
 
