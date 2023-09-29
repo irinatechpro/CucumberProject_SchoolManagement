@@ -26,8 +26,8 @@ public class US06_StepDefs {
     Response response;
     JsonPath jsonPath;
     List<Object>actualData;
-    private String userId;
-    private String actUsername;
+    private static Integer userId;
+    private static String actUsername;
     private static String actName;
     private static String actSurname;
     private static String actSSN;
@@ -38,16 +38,16 @@ public class US06_StepDefs {
 
 
 
-//    @Then("verify Vice Dean created successfully confirmation message")
+    //    @Then("verify Vice Dean created successfully confirmation message")
 //    public void verifyViceDeanCreatedSuccessfullyConfirmationMessage() {
 //        WaitUtils.waitForVisibility(commonLocator.confirmationMessage, 5);
 //        assertTrue(commonLocator.confirmationMessage.getText().contains("Vice dean Saved"));
 //    }
-     @Then("enter date of Birth")
-     public void enterDateOfBirth() {
-         dateOfBirth = "01-05-1990";
+    @Then("enter date of Birth")
+    public void enterDateOfBirth() {
+        dateOfBirth = "01-05-1990";
         reverseDateOfBirth = "1990-05-01";
-                 SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
             // Parse the original date into a Date object
             Date date = inputDateFormat.parse(dateOfBirth);
@@ -61,10 +61,10 @@ public class US06_StepDefs {
             // Handle any parsing errors here
             e.printStackTrace();
         }
-       fakerDateOfBirth = "01/05/1990";
-       commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
+        fakerDateOfBirth = "01/05/1990";
+        commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
 
-     }
+    }
 
     @Then("verify user name should contains at least four characters")
     public void verifyUserNameShouldContainsAtLeastFourCharacters() {
@@ -85,7 +85,6 @@ public class US06_StepDefs {
     public void sendGetViceDeanRequestOnAPI() {
         spec.pathParams("first","vicedean","second","getAll");
         response=given(spec).get("{first}/{second}");
-        //response.prettyPrint();
     }
 
     @Then("filter ViceDean Data using username and validate")
@@ -93,7 +92,6 @@ public class US06_StepDefs {
         String gender="MALE";
         jsonPath = response.jsonPath();
         List<String> viceDeanData = jsonPath.getList("findAll{it.ssn=='" + fakeSsn + "'}");
-        System.out.println("viceDeanData = " + viceDeanData);
 
         actUsername = jsonPath.getList("findAll{it.ssn=='" + fakeSsn + "'}.username").get(0).toString();
         actName = jsonPath.getList("findAll{it.ssn=='" + fakeSsn+ "'}.name").get(0).toString();
@@ -104,10 +102,8 @@ public class US06_StepDefs {
         actGender = jsonPath.getList("findAll{it.ssn=='" + fakeSsn + "'}.gender").get(0).toString();
 
         actualData=jsonPath.getList("findAll{it.ssn=='" + fakeSsn + "'}");
-        System.out.println("actualData = " + actualData);
 
-        userId= jsonPath.getList("findAll{it.ssn=='" + fakeSsn + "'}.userId").get(0).toString();
-        System.out.println("userId = " + userId);
+        userId= Integer.parseInt(jsonPath.getList("findAll{it.ssn=='" + fakeSsn + "'}.userId").get(0).toString());
 
         assertEquals(200, response.statusCode());
         assertEquals(fakerUsername, actUsername);
@@ -121,14 +117,15 @@ public class US06_StepDefs {
 
     @Given("send A  ViceDean Delete request with username on API")
     public void sendAViceDeanDeleteRequestWithUsernameOnAPI() {
-         spec.pathParams("first","vicedean","second","delete","third",userId);
-         response=given(spec).delete("{first}/{second}/{third}");
+        spec.pathParams("first","vicedean","second","delete","third",userId);
+        response=given(spec).delete("{first}/{second}/{third}");
+        response.prettyPrint();
     }
 
     @Then("body must be empty with non existing username")
     public void bodyMustBeEmptyWithNonExistingUsername() {
-        assertNull(actUsername);
-        assertNull(actualData);
+        assertEquals(200,response.statusCode());
+        assertTrue(response.getBody().asString().contains("Vice dean Deleted"));
     }
 
     @Given("get Vice_Dean Data by username")
@@ -162,10 +159,6 @@ public class US06_StepDefs {
 
     @And("close the database connection")
     public void closeTheDatabaseConnection() {
-         DBUtils.closeConnection();
+        DBUtils.closeConnection();
     }
 }
-
-
-
-
