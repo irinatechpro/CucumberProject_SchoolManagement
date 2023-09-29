@@ -45,7 +45,7 @@ public class US05_StepDefs {
     ResultSet updatedResultSet;
 
     private String nameDean;
-    private String nameDeanUpdate;
+    private static String nameDeanUpdate;
 
     private static String formattedPhoneNumber;
 
@@ -429,15 +429,15 @@ public class US05_StepDefs {
 
 
         assertEquals(200, response.statusCode());
-        assertEquals("1234-11-11", actBirthDay);
-        assertEquals(fakeUsername, actUsername);
-        assertEquals(fakeSsn, actSsn);
-        assertEquals(fakeDeanName, actName);
-        assertEquals(fakeDeanSurname, actSurname);
+        assertEquals("1001-01-01", actBirthDay);
+        assertEquals(fakeUpdatedUsername, actUsername);
+        assertEquals(fakeUpdatedSsn, actSsn);
+        assertEquals(nameDeanUpdate, actName);
+        assertEquals(surnameDeanUpdate, actSurname);
         //assertEquals(formattedDate, actBirthDay);
-        assertEquals("Istanbul", actBirthPlace);
-        assertEquals(formattedPhoneNumber, actPhoneNumber);
-        assertEquals("FEMALE", actGender);
+        assertEquals("Izmir", actBirthPlace);
+        assertEquals(formattedUpdatedPhoneNumber, actPhoneNumber);
+        assertEquals("MALE", actGender);
     }
 
 
