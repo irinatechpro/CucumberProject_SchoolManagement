@@ -1,4 +1,4 @@
-package stepdefinitions.apiStepDefinitions;
+package stepdefinitions.dbStepDefinitions;
 
 import base_url.BaseUrl;
 import io.cucumber.java.en.Given;
