@@ -1,8 +1,6 @@
 
-
 @US02
 Feature: f
-
 
   Background:
   Given user goes to url

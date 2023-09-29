@@ -4,6 +4,8 @@ import base_url.BaseUrl;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import pages.CommonLocator;
 import pages.LoginPage;
@@ -12,13 +14,20 @@ import utilities.*;
 import utilities.Driver;
 
 import java.sql.*;
+import java.util.List;
+
+import static base_url.BaseUrl.spec;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.requestSpecification;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static stepdefinitions.uiStepDefinitions.CommonStepDefs.*;
 
-public class DB_US17 extends BaseUrl {
+public class DB_US17  {
+    Response response;
 
     LoginPage loginPage = new LoginPage();
     StudentInfoManagement studentInfoManagement = new StudentInfoManagement();
@@ -142,26 +151,65 @@ public class DB_US17 extends BaseUrl {
         //assertEquals(education_term,actualEducationTerm);
 
     }
-    @Then("close the connection")
-    public void close_the_connection() throws SQLException {
+    @Then("closes the connection")
+    public void closes_the_connection() throws SQLException {
         DBUtils.closeConnection();
 
     }
 
     @Given("send get request to get student info")
     public void send_get_request_to_get_student_info() {
-       //String Url = "https://managementonschools.com/app/studentInfo/getAllForTeacher?page=0&size=10000";
+       //String Url = "https://managementonschools.com/app/studentInfo/get/2947";
 
-        spec.pathParams("first","studentInfo","second","getAllForTeacher").queryParams("size","10000");
-        Response response = given(spec)
-                .header("Authorization","Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwaGlsaXBzIiwiaWF0IjoxNjk1NDY0MjQyLCJleHAiOjE2OTU0NzI4ODJ9.z-ae5x0PiGcs4VBbLiWUsJW93gUfjNjy1LjL9djU7fSz7uwYO7VK3Gxg8R8o8SF4YevoFEmXTN1DeUHwSVjGGA")
-                .get("{first}/{second}");
+        spec.pathParams("first","studentInfo","second","get","third",2947);
+        response = given(spec).get("{first}/{second}/{third}");
         response.prettyPrint();
 
     }
-    @Then("validate lessonName {string} Student {string} Education_Term {string} absentee {string} midterm_exam {string} final_exam {string} info_note {string} by API")
-    public void validate_lesson_name_student_education_term_absentee_midterm_exam_final_exam_info_note_by_api(String string, String string2, String string3, String string4, String string5, String string6, String string7) {
+//    @Then("validate id {string} lessonName {string} name {string} surname {string} Education_Term {string} absentee {string} midterm_exam {string} final_exam {string} info_note {string} by API")
+//    public void validate_lesson_id_name_surname_education_term_absentee_midterm_exam_final_exam_info_note_by_api(String id , String lessonName, String name, String surname, String Education_Term, String absentee, String midterm_exam, String final_exam, String info_note) {
+
+
+
+//        JsonPath jsonPath = response.jsonPath();
+//        List<String> studentData = jsonPath.getList("content.findAll{it.id=='" + id + "'}");
+//        System.out.println("studentData = " + studentData);
+
+//        String actlessonName = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.lessonName").get(0).toString();
+//        String actname = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.name").get(0).toString();
+//        String actsurname = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.surname").get(0).toString();
+//        String actEducation_Term = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.Education_Term").get(0).toString();
+//        String actabsentee = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.absentee").get(0).toString();
+//        String actmidterm_exam = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.midterm_exam").get(0).toString();
+//        String actfinal_exam = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.final_exam").get(0).toString();
+//        String actinfo_note = jsonPath.getList("content.studentResponse.findAll{it.name=='" + name + "'}.info_note").get(0).toString();
+
+//        assertEquals(200, response.statusCode());
+//        assertEquals("Cypress", actlessonName);
+//        assertEquals("Adil", actname);
+//        assertEquals("Sert", actsurname);
+//        assertEquals("SPRING_SEMESTER", actEducation_Term);
+//        assertEquals("17", actabsentee);
+//        assertEquals("90", actmidterm_exam);
+//        assertEquals("93", actfinal_exam);
+//        assertEquals("Completed lesson" , actinfo_note);
+
+
+//    {
+    @Then("Assert teacher can see all student info")
+    public void assertTeacherCanSeeAllStudentInfo() {
+        response.then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("id", equalTo(2947))
+                .body("midtermExam", equalTo(90.0F))
+                .body("finalExam", equalTo(93.0F))
+                .body("absentee", equalTo(17))
+                .body("infoNote", equalTo("Completed lesson"))
+                .body("lessonName", equalTo("Cypress"))
+                .body("studentResponse.name", equalTo("Adil"))
+                .body("studentResponse.surname", equalTo("Sert"));
+
 
     }
-
 }
