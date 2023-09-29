@@ -94,8 +94,8 @@ Feature: Admins should be able to see and update Deans
 
     Scenario: Validate Admins can update Deans
 
-      Given send get request to get all dean users
-      Then validate Dean's details are seen
+      Given send get request to get all dean users for API test
+      Then validate Dean's details are updated by API
 
 
 
