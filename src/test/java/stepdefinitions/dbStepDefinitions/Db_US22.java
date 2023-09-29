@@ -19,6 +19,14 @@ public class Db_US22 {
     Statement statement;
     ResultSet resultSet;
 
+
+//    @Given("connect to database")
+//    public void  connect_to_database() throws SQLException {
+//        //connection = DriverManager.getConnection("jdbc:postgresql://managementonschools.com:5432/school_management", "select_user", "43w5ijfso");
+//        //The connection will be created when we call executeQuery() method from JDBCUtils class.
+//    }
+
+
     @When("get admin user via username")
     public void get_admin_user_via_username() throws SQLException {
 
@@ -53,5 +61,16 @@ public class Db_US22 {
         assertEquals(fakeSsn, actualSsn);
         assertEquals(fakerSurname, actualSurname);
     }
+
+
+//    @Then("close the connection")
+//    public void close_the_connection() throws SQLException {
+//
+//        //resultSet.close();
+//        //connection.close();
+//        DBUtils.closeConnection();
+//
+//    }
+
 }
 

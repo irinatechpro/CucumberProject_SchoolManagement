@@ -205,16 +205,23 @@ public class US13_StepDefs {
         String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
         String formattedActualDate = new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
         assertEquals(formattedExpectedDate, formattedActualDate);
-        assertEquals(fakeBirthPlace, actBirth_place);
-        assertEquals(genderDB, actGender);
-        assertEquals(fakeName, actName);
-        assertEquals(formattedPhoneNumber, actPhone_number);
-        assertEquals(fakeSsn, actSsn);
-        assertEquals(fakeSurname, actSurname);
-        assertEquals(fakeUsername, actUsername);
-        assertEquals(fakeEmail, actEmail);
-        assertTrue(actIsAdvisor, true);
+
+            assertEquals(fakeBirthPlace, actBirth_place);
+            assertEquals(genderDB, actGender);
+            assertEquals(fakeName, actName);
+            assertEquals(formattedPhoneNumber, actPhone_number);
+            assertEquals(fakeSsn, actSsn);
+            assertEquals(fakeSurname, actSurname);
+            assertEquals(fakeUsername, actUsername);
+            assertEquals(fakeEmail, actEmail);
+            assertTrue(actIsAdvisor, true);
+       }
+    @And("close the connection on dataBase")
+    public void closeTheConnectionOnDataBase() {
+        DBUtils.closeConnection();
     }
+
+
 
 
     @Given("seng Get request to get teacher by getAll")
@@ -225,6 +232,7 @@ public class US13_StepDefs {
     }
 
     @Given("create teacher with post request save")
+
     public void create_teacher_with_post_request_save() {
 
         // https://managementonschools.com/app/teachers/save
@@ -285,13 +293,6 @@ public class US13_StepDefs {
 
     }
 
-
-
-        }
-
-
-
-
-
+}
 
 
