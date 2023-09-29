@@ -395,14 +395,10 @@ public class US05_StepDefs {
 
     @Given("send get request to get all dean users")
     public void send_get_request_to_get_all_dean_users() {
-
-        //String url = "https://managementonschools.com/app/dean/getAll";
-
-        //deanSetUp();-->This method must be called b4 API test on Hooks class
+        https://managementonschools.com/app/dean/getAll
         spec.pathParams("first", "dean", "second", "getAll");
         response = given(spec).get("{first}/{second}");
         response.prettyPrint();
-
     }
 
 
