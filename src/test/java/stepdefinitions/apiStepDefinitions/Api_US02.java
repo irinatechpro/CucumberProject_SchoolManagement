@@ -145,13 +145,13 @@ public class Api_US02 {
         assertTrue(commonLocator.guestUserList.getText().contains("Guest User List"));
     }
 
-    @Given("send get request to get all guest users")
-    public void send_get_request_to_get_all_guest_users() {
-        spec.pathParams("first", "guestUser",
-                "second", "getAll").queryParam("size", "10000");
-        response = given(spec).get("{first}/{second}");
-        response.prettyPrint();
-    }
+    //@Given("send get request to get all guest users")
+    //public void send_get_request_to_get_all_guest_users() {
+    //    spec.pathParams("first", "guestUser",
+    //            "second", "getAll").queryParam("size", "10000");
+    //    response = given(spec).get("{first}/{second}");
+    //    response.prettyPrint();
+    //}
     @Then("validate  username {string} name {string} phone_number {string}  ssn {string}  by API")
     public void validate_username_name_phone_number_ssn_by_api(String username, String ssn, String name, String phoneNumber) {
 

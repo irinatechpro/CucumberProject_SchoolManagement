@@ -411,21 +411,21 @@ public class US05_StepDefs {
         System.out.println("actualUsername = " + actualUsername);*/
 
         JsonPath jsonPath = response.jsonPath();
-        List<String> deanData = jsonPath.getList("findAll{it.username=='" + fakeUsername + "'}");
+        List<String> deanData = jsonPath.getList("findAll{it.username=='" + fakeUpdatedUsername + "'}");
         System.out.println("deanData = " + deanData);
-        String actUsername = jsonPath.getList("findAll{it.username=='" + fakeUsername + "'}.username").get(0).toString();
-        String actName = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.name").get(0).toString();
-        String actSurname = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.surname").get(0).toString();
-        String actBirthDay = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthDay").get(0).toString();
+        String actUsername = jsonPath.getList("findAll{it.username=='" + fakeUpdatedUsername + "'}.username").get(0).toString();
+        String actName = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.name").get(0).toString();
+        String actSurname = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.surname").get(0).toString();
+        String actBirthDay = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.birthDay").get(0).toString();
 
        /* SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
         String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
         String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
 */
-        String actBirthPlace = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthPlace").get(0).toString();
-        String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.phoneNumber").get(0).toString();
-        String actGender = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.gender").get(0).toString();
-        String actSsn = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.ssn").get(0).toString();
+        String actBirthPlace = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.birthPlace").get(0).toString();
+        String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.phoneNumber").get(0).toString();
+        String actGender = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.gender").get(0).toString();
+        String actSsn = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.ssn").get(0).toString();
 
 
         assertEquals(200, response.statusCode());
