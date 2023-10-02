@@ -1,4 +1,4 @@
-package stepdefinitions.dbStepDefininitions;
+package stepdefinitions.dbStepDefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,8 +14,8 @@ public class US21_DBStepDefs {
 
     ResultSet resultSet;
 
-    @Given("connect to database")
-    public void connect_to_database() {}
+    @Given("connect to DB")
+    public void connect_to_DB() {}
 
     @When("get selected course via student name {string}")
     public void get_selected_course_via_student_name(String name) throws SQLException {
@@ -43,8 +43,8 @@ public class US21_DBStepDefs {
         assertEquals(start_time, actualStartTime);
         assertEquals(stop_time, actualStopTime);
     }
-    @Then("close the connection")
-    public void close_the_connection() {
+    @Then("close the connection to DB")
+    public void close_the_connection_to_DB() {
         DBUtils.closeConnection();
     }
 }
