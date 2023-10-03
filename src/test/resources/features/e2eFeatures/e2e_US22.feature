@@ -39,4 +39,3 @@ Feature: Admins should be able to be registered in the system
     Then get adminID from API
     Then delete admin using adminID
     And validate admin data deleted
-
