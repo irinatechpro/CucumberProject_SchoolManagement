@@ -27,13 +27,13 @@ public class CommonStepDefs {
     public static String fakerBirthPlace;
     public static String dateOfBirth;
     public static String fakerDateOfBirth;
+
     public static String reverseDateOfBirth;
     public static String fakerPassword;
     public static String fakeSsn;
     public static String fakerFormattedPhoneNumber;
     public static String fakerUsername;
     public static String formattedDate;
-
 
     @Then("close the application")
     public void close_the_application() throws InterruptedException {
@@ -76,6 +76,23 @@ public class CommonStepDefs {
         dateOfBirth = "01-05-1990";
         reverseDateOfBirth = "1990-05-01";
         commonLocator.dateOfBirth.sendKeys(dateOfBirth);
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            // Parse the original date into a Date object
+            Date date = inputDateFormat.parse(dateOfBirth);
+
+            // Create a new SimpleDateFormat object to format the date in "yyyy-MM-dd" format
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            // Format the date in the desired format
+            formattedDate = outputDateFormat.format(date);
+        } catch (ParseException e) {
+            // Handle any parsing errors here
+            e.printStackTrace();
+        }
+       fakerDateOfBirth = "01/05/1990";
+       commonLocator.dateOfBirth.sendKeys(fakerDateOfBirth);
+
 //        SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 //        try {
 //            // Parse the original date into a Date object

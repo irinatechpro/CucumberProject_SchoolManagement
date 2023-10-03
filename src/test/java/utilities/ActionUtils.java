@@ -41,4 +41,11 @@ public class ActionUtils {
     public static void dragAndDropActions(WebElement source, int x, int y) {
         new Actions(Driver.getDriver()).dragAndDropBy(source,x,y).perform();
     }
+
+    //ACTIONS_TRIPLE_CLICK
+    public static void tripleClick(WebElement element) {
+        new Actions(Driver.getDriver()).click(element).click(element).click(element).build().perform();
+    }
+
+
 }
