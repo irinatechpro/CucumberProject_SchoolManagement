@@ -14,8 +14,8 @@ public class US21_DBStepDefs {
 
     ResultSet resultSet;
 
-    @Given("connect to DB")
-    public void connect_to_DB() {}
+    @Given("connect to Data Base")
+    public void connect_to_Data_Base() {}
 
     @When("get selected course via student name {string}")
     public void get_selected_course_via_student_name(String name) throws SQLException {
