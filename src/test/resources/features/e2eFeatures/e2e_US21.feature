@@ -14,7 +14,7 @@ Feature: student choose lesson from management panel(Api)
 
   @US21_DB
   Scenario Outline:Validate selected lesson on database
-    Given connect to DB
+    Given connect to Data Base
     When get selected course via student name "<name>"
     Then validate course lesson title "<lesson_name>" day "<day>" start_time "<start_time>" stop_time "<stop_time>"
     And close the connection to DB
