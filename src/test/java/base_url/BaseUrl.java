@@ -55,3 +55,4 @@ public class BaseUrl {
                     setBaseUri(ConfigReader.getProperty("apiUrl")).build();
         }
     }
+

@@ -45,7 +45,7 @@ public class US05_StepDefs {
     ResultSet updatedResultSet;
 
     private String nameDean;
-    private String nameDeanUpdate;
+    private static String nameDeanUpdate;
 
     private static String formattedPhoneNumber;
 
@@ -395,14 +395,10 @@ public class US05_StepDefs {
 
     @Given("send get request to get all dean users")
     public void send_get_request_to_get_all_dean_users() {
-
-        //String url = "https://managementonschools.com/app/dean/getAll";
-
-        //deanSetUp();-->This method must be called b4 API test on Hooks class
+        https://managementonschools.com/app/dean/getAll
         spec.pathParams("first", "dean", "second", "getAll");
         response = given(spec).get("{first}/{second}");
         response.prettyPrint();
-
     }
 
 
@@ -418,14 +414,9 @@ public class US05_StepDefs {
         List<String> deanData = jsonPath.getList("findAll{it.username=='" + fakeUsername + "'}");
         System.out.println("deanData = " + deanData);
         String actUsername = jsonPath.getList("findAll{it.username=='" + fakeUsername + "'}.username").get(0).toString();
-        String actName = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.name").get(0).toString();
-        String actSurname = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.surname").get(0).toString();
-        String actBirthDay = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthDay").get(0).toString();
-
-       /* SimpleDateFormat expectedDateFormat= new SimpleDateFormat("dd-MM-yyyy");
-        String formattedExpectedDate = expectedDateFormat.format(expectedDateFormat.parse("25-05-1988"));
-        String formattedActualDate= new SimpleDateFormat("dd-MM-yyyy").format(new SimpleDateFormat("yyyy-MM-dd").parse(actBirthDay));
-*/
+        String actName = jsonPath.getList("findAll{it.username=='"+ fakeUsername +"'}.name").get(0).toString();
+        String actSurname = jsonPath.getList("findAll{it.username=='"+ fakeUsername +"'}.surname").get(0).toString();
+        String actBirthDay = jsonPath.getList("findAll{it.username=='"+ fakeUsername +"'}.birthDay").get(0).toString();
         String actBirthPlace = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.birthPlace").get(0).toString();
         String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.phoneNumber").get(0).toString();
         String actGender = jsonPath.getList("findAll{it.username=='"+fakeUsername+"'}.gender").get(0).toString();
@@ -445,6 +436,37 @@ public class US05_StepDefs {
     }
 
 
+    @Given("send get request to get all dean users for API test")
+    public void sendGetRequestToGetAllDeanUsersForAPITest() {
+        spec.pathParams("first", "dean", "second", "getAll");
+        response = given(spec).get("{first}/{second}");
+        response.prettyPrint();
+    }
+
+    @Then("validate Dean's details are updated by API")
+    public void validateDeanSDetailsAreUpdatedByAPI() {
+
+        JsonPath jsonPath = response.jsonPath();
+        List<String> deanData = jsonPath.getList("findAll{it.username=='" + fakeUpdatedUsername + "'}");
+        System.out.println("deanData = " + deanData);
+        String actUsername = jsonPath.getList("findAll{it.username=='" + fakeUpdatedUsername + "'}.username").get(0).toString();
+        String actName = jsonPath.getList("findAll{it.username=='"+ fakeUpdatedUsername +"'}.name").get(0).toString();
+        String actSurname = jsonPath.getList("findAll{it.username=='"+ fakeUpdatedUsername +"'}.surname").get(0).toString();
+        String actBirthDay = jsonPath.getList("findAll{it.username=='"+ fakeUpdatedUsername +"'}.birthDay").get(0).toString();
+        String actBirthPlace = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.birthPlace").get(0).toString();
+        String actPhoneNumber = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.phoneNumber").get(0).toString();
+        String actGender = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.gender").get(0).toString();
+        String actSsn = jsonPath.getList("findAll{it.username=='"+fakeUpdatedUsername+"'}.ssn").get(0).toString();
 
 
+        assertEquals(200, response.statusCode());
+        assertEquals("1001-01-01", actBirthDay);
+        assertEquals(fakeUpdatedUsername, actUsername);
+        assertEquals(fakeUpdatedSsn, actSsn);
+        assertEquals(nameDeanUpdate, actName);
+        assertEquals(surnameDeanUpdate, actSurname);
+        assertEquals("Izmir", actBirthPlace);
+        assertEquals(formattedUpdatedPhoneNumber, actPhoneNumber);
+        assertEquals("MALE", actGender);
+    }
 }
